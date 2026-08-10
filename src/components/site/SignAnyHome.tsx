@@ -200,9 +200,9 @@ function Permissions() {
         />
         <div className="grid gap-6 lg:grid-cols-2">
           {permissionSets.map((p) => (
-            <article key={p.name} className="card-soft p-8">
-              <div className="flex items-center gap-4">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
+            <article key={p.name} className="card-soft p-6 sm:p-8">
+              <div className="flex items-start sm:items-center gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
                   <Icon name={p.icon} size={22} />
                 </span>
                 <div>
@@ -267,12 +267,14 @@ function ApiSection() {
                   </li>
                 ))}
               </ul>
-              <a
-                href={`mailto:${SITE.email}?subject=SignAny%202.0%20API%20access`}
-                className="mt-7 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-px"
-              >
-                Request API access <ArrowRight size={15} />
-              </a>
+              <div className="mt-7 flex justify-center">
+                <a
+                  href={`mailto:${SITE.email}?subject=SignAny%202.0%20API%20access`}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-px w-full sm:w-auto text-center"
+                >
+                  Request API access <ArrowRight size={15} />
+                </a>
+              </div>
             </div>
           </div>
         </div>

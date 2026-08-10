@@ -10,31 +10,37 @@ import screen6 from "@/assets/Multi-Signer Workflow.jpeg";
 const screens = [
   {
     title: "Compliances & Acts",
+    shortTitle: "Compliances",
     desc: "Ensure every agreement is legally sound with our built-in compliance checks.",
     image: screen1,
   },
   {
     title: "Smart Field Configuration",
+    shortTitle: "Smart Fields",
     desc: "Automatically detect and map fields for any document. Save time with AI-driven field placement.",
     image: screen2,
   },
   {
     title: "Salesforce Integration",
+    shortTitle: "Salesforce",
     desc: "Seamlessly send documents for signature directly from Salesforce objects.",
     image: screen3,
   },
   {
     title: "Mobile Signing Experience",
+    shortTitle: "Mobile Sign",
     desc: "Give your signers a premium, mobile-first experience. Sign documents on the go with speed and ease.",
     image: screen4,
   },
   {
     title: "Signature Pad",
+    shortTitle: "Signature Pad",
     desc: "Modern, intuitive signing pad. Choose from draw, type, or upload modes with a responsive stroke.",
     image: screen5,
   },
   {
     title: "Multi-Signer Workflow",
+    shortTitle: "Multi-Signer",
     desc: "Manage complex signing orders and multiple parties and track real-time progress for every signer.",
     image: screen6,
   },
@@ -94,7 +100,7 @@ export const ProductCarousel = () => {
               </div>
             </div>
 
-            <div className="relative z-10 bg-muted/20 rounded-[20px] overflow-hidden border border-border/60 shadow-xl p-2 md:p-7 flex items-center justify-center min-h-[280px] md:min-h-[460px]">
+            <div className="relative z-10 bg-muted/20 rounded-[20px] overflow-hidden border border-border/60 shadow-xl sm:p-3 md:p-7 flex items-center justify-center min-h-0 md:min-h-[460px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}
@@ -114,12 +120,12 @@ export const ProductCarousel = () => {
               </AnimatePresence>
             </div>
 
-            <div className="relative z-10 flex justify-center flex-wrap gap-2.5 sm:gap-4 mt-6">
+            <div className="relative z-10 grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-2.5 sm:gap-4 mt-6">
               {screens.map((screen, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`group relative flex items-center gap-2.5 px-3 sm:px-4 py-2 rounded-xl transition-all duration-300 ${
+                  className={`group relative flex items-center justify-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-xl transition-all duration-300 w-full sm:w-auto ${
                     i === current 
                       ? 'border-primary/40 shadow-sm bg-primary/10' 
                       : 'bg-muted/50 border-transparent hover:bg-muted'
@@ -137,13 +143,14 @@ export const ProductCarousel = () => {
                     />
                   )}
 
-                  <div className={`relative z-10 w-2 h-2 rounded-full transition-all duration-300 ${
+                  <div className={`relative z-10 w-2 h-2 shrink-0 rounded-full transition-all duration-300 ${
                     i === current ? 'bg-primary scale-110' : 'bg-muted-foreground/40 group-hover:bg-muted-foreground/60'
                   }`} />
-                  <span className={`relative z-10 text-[10px] sm:text-xs font-bold tracking-wider uppercase transition-colors duration-300 ${
+                  <span className={`relative z-10 text-[11px] sm:text-xs font-bold tracking-wider uppercase transition-colors duration-300 truncate ${
                     i === current ? 'text-primary' : 'text-muted-foreground'
                   }`}>
-                    {screen.title.split(' ')[0]}
+                    <span className="sm:hidden">{screen.shortTitle}</span>
+                    <span className="hidden sm:inline">{screen.title.split(' ')[0]}</span>
                   </span>
                 </button>
               ))}

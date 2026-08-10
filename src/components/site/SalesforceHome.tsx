@@ -143,13 +143,15 @@ export function SalesforceHome() {
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
-              onClick={() => setMode("signany")}
-              className="mt-7 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-px"
-            >
-              Explore SignAny 2.0 <ArrowRight size={15} />
-            </button>
+            <div className="mt-7 flex justify-center sm:justify-start">
+              <button
+                type="button"
+                onClick={() => setMode("signany")}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-px w-full sm:w-auto text-center"
+              >
+                Explore SignAny 2.0 <ArrowRight size={15} />
+              </button>
+            </div>
           </div>
         </div>
       </section>

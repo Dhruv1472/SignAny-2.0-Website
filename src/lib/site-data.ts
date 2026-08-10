@@ -113,7 +113,7 @@ export const permissionSets = [
   },
   {
     name: "Member",
-    icon: "UserCircle2",
+    icon: "UserCheck",
     summary:
       "Everything needed to prepare, send and track documents — without workspace-level settings.",
     points: [

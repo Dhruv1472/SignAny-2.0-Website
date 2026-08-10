@@ -38,6 +38,17 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   const nav = isSalesforce ? salesforceNav : signanyNav;
   const signUpLink = isSalesforce? SITE.salesforcePackageLink : SITE.appLink;
 
@@ -46,8 +57,8 @@ export function Header() {
     if (pathname !== "/") navigate({ to: "/" });
   };
 
-  const ModeSwitch = ({ id }: { id: string }) => (
-    <div className="flex items-center gap-2.5 rounded-full border border-border bg-muted/60 px-3 py-1.5">
+  const ModeSwitch = ({ id, className = "" }: { id: string; className?: string }) => (
+    <div className={`flex items-center gap-2.5 rounded-full border border-border bg-muted/60 px-3.5 py-2 ${className}`}>
       <label
         htmlFor={id}
         className="cursor-pointer text-xs font-semibold tracking-tight text-muted-foreground"
@@ -127,7 +138,7 @@ export function Header() {
               </a>
             ))}
             <div className="py-3">
-              <ModeSwitch id="mode-mobile" />
+              <ModeSwitch id="mode-mobile" className="w-full justify-between px-4 py-2.5" />
             </div>
             <a
               href="#book-demo"
