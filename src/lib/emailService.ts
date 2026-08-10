@@ -43,7 +43,6 @@ export const sendDemoRequest = async (formData: {
     });
 
     if (response.ok) {
-      console.log("Email sent successfully via FormSubmit");
       return true;
     } else {
       console.error("FormSubmit error:", await response.text());

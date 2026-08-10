@@ -162,10 +162,10 @@ export const integrations = [
 export const compliances = [
   { name: "ESIGN Act", country: "USA" },
   { name: "UETA", country: "USA" },
-  { name: "eIDAS (up to AES Level 2)", country: "Europe" },
+  { name: "eIDAS (AES)", country: "Europe" },
   { name: "GDPR", country: "Europe, UK" },
   { name: "GLBA", country: "US, Europe, UK" },
-  { name: "UK ECA 2000", country: "United Kingdom" },
+  { name: "UK ECA 2000", country: "UK" },
   { name: "ETA", country: "Singapore" },
   { name: "PDPA", country: "Singapore" },
   { name: "ETA 1999", country: "Australia" },
@@ -185,10 +185,10 @@ export const salesforceCompliances = [
   { name: "ESIGN Act", country: "USA" },
   { name: "UETA", country: "USA" },
   { name: "GLBA", country: "USA, Europe, UK" },
-  { name: "eIDAS (AES) (Level 2)", country: "Europe" },
-  { name: "Singapore’s ETA(Electronic Transition Act)", country: "Singapore" },
+  { name: "eIDAS (AES)", country: "Europe" },
+  { name: "Singapore’s ETA", country: "Singapore" },
   { name: "AU Electronic Transactions Act 1999", country: "Australia" },
-  { name: "Electronic Communications Act 2000 (UK)", country: "United Kingdom" },
+  { name: "Electronic Communications Act 2000", country: "UK" },
 ];
 
 

@@ -253,7 +253,7 @@
 }
 
 @utility animate-marquee {
-  animation: marquee-x 38s linear infinite;
+  animation: marquee-x 90s linear infinite;
 }
 
 @keyframes rise-in {

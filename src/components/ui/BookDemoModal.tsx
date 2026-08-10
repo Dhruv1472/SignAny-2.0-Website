@@ -335,7 +335,7 @@ const BookDemoModal = ({ open, onOpenChange }: BookDemoModalProps) => {
             </DialogTitle>
             <p className="text-muted-foreground max-w-sm">
               Thank you for your interest in SignAny 2.0. Our team will reach
-              out to you within 1-2 business days.
+              out to you soon.
             </p>
             <Button className="mt-4" onClick={() => handleClose(false)}>
               Close

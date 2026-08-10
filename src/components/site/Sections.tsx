@@ -1,7 +1,17 @@
-import { Check, Sparkles, Clock3, Mail, ArrowRight } from "lucide-react";
+import { Check, Sparkles, Clock3, Mail, ArrowRight, ShieldCheck, Lock, FileText, Globe, Scale, Landmark, BookOpen, FileCheck } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { compliances, salesforceCompliances, uaePass, plans, faqs, SITE } from "@/lib/site-data";
 import { useProductMode } from "@/lib/product-mode";
+
+const marqueeBadges = [
+  { name: "ESIGN Act", desc: "US Federal Law", icon: FileCheck },
+  { name: "UETA", desc: "State Compliance", icon: Scale },
+  { name: "GLBA", desc: "Financial Security", icon: ShieldCheck },
+  { name: "eIDAS (AES)", desc: "EU Trust Services", icon: Globe },
+  { name: "Singapore's ETA", desc: "Electronic Transition Act", icon: Landmark },
+  { name: "AU ETA 1999", desc: "Australia IT Law", icon: BookOpen },
+  { name: "UK ECA 2000", desc: "UK Digital Signatures", icon: FileCheck },
+];
 
 export function SectionHeading({
   eyebrow,
@@ -23,14 +33,15 @@ export function SectionHeading({
           className={`mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold tracking-wide uppercase ${
             light
               ? "border-ink-foreground/15 bg-ink-foreground/5 text-ink-muted"
-              : "border-border bg-background text-muted-foreground"
+              : "border-primary/20 bg-primary/5 text-primary"
           }`}
         >
+          <Sparkles size={13} />
           {eyebrow}
         </span>
       )}
       <h2
-        className={`text-3xl font-bold text-balance md:text-4xl lg:text-[2.75rem] ${
+        className={`text-3xl font-bold tracking-tight text-balance md:text-5xl ${
           light ? "text-ink-foreground" : "text-foreground"
         }`}
       >
@@ -52,75 +63,135 @@ export function SectionHeading({
 export function ComplianceSection() {
   const { isSalesforce } = useProductMode();
   const currentCompliances = isSalesforce ? salesforceCompliances : compliances;
-  const loop = isSalesforce
-    ? [...salesforceCompliances, ...salesforceCompliances, ...salesforceCompliances, ...salesforceCompliances]
-    : [...compliances, ...compliances];
+  const marqueeLoop = [...marqueeBadges, ...marqueeBadges, ...marqueeBadges];
 
   return (
     <section id="compliance" className="relative overflow-hidden bg-cloud py-20 md:py-28">
+      {/* Background Ambient Glows */}
+      <div className="glow-orb top-10 left-[10%] h-72 w-72 bg-primary/10" />
+      <div className="glow-orb bottom-10 right-[10%] h-80 w-80 bg-brand/10" />
+
       <div className="section-shell relative z-10">
         <SectionHeading
-          eyebrow="Compliance & Acts"
+          eyebrow="Compliance & Global Acts"
           title="Legally binding signatures across"
-          highlight={isSalesforce ? "global frameworks" : "20+ frameworks"}
+          highlight={isSalesforce ? "global frameworks" : "20+ compliance acts"}
           desc={
             isSalesforce
-              ? "The SignAny Salesforce edition aligns with key electronic transaction laws and compliance frameworks globally."
-              : "SignAny 2.0 is engineered against the electronic transaction laws and data protection acts that govern your market — so every signed document holds up where it matters."
+              ? "The SignAny Salesforce edition adheres to global electronic transaction acts and strict enterprise data protection standards."
+              : "SignAny 2.0 is engineered against the electronic transaction laws and data protection acts that govern your market — ensuring every signature holds full court-admissible validity."
           }
         />
       </div>
 
-      <div className="relative mb-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-        <div className="animate-marquee flex w-max gap-4">
-          {loop.map((c, i) => (
+      {/* Auto-scrolling Marquee like reference project */}
+      <div className="relative mb-14 overflow-hidden">
+        {/* Left fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-28 bg-gradient-to-r from-cloud to-transparent z-10 pointer-events-none" />
+        {/* Right fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-28 bg-gradient-to-l from-cloud to-transparent z-10 pointer-events-none" />
+
+        <div className="animate-marquee hover:[animation-play-state:paused] flex w-max gap-5 py-2 cursor-pointer">
+          {marqueeLoop.map((b, i) => {
+            const IconCmp = b.icon;
+            return (
+              <div
+                key={`m-${b.name}-${i}`}
+                className="group flex flex-col items-center text-center px-6 py-6 rounded-2xl bg-card border border-border/70 shadow-sm hover:shadow-lg hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 cursor-default min-w-[170px] md:min-w-[190px] relative"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-3 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all duration-300">
+                  <IconCmp size={22} strokeWidth={1.5} className="text-primary" />
+                </div>
+                <h3 className="text-[15px] font-bold text-foreground mb-1 leading-tight">
+                  {b.name}
+                </h3>
+                <p className="text-[12px] text-muted-foreground leading-relaxed">
+                  {b.desc}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="section-shell relative z-10 max-w-5xl mx-auto">
+        {/* UAE PASS Highlight Box (Web App Mode) */}
+        {!isSalesforce && (
+          <div className="relative mb-12 overflow-hidden rounded-3xl border border-border/80 bg-card p-6 sm:p-8 md:p-10 shadow-md">
+            <div className="glow-orb -top-10 right-0 h-48 w-48 bg-primary/10" />
+            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
+              <div className="flex items-start gap-4 max-w-3xl">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20">
+                  <Clock3 size={20} />
+                </span>
+                <div>
+                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-primary">{uaePass.name} Authentication</h3>
+                    <span className="rounded-full bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 text-xs font-bold uppercase tracking-wider dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/50">
+                      {uaePass.status}
+                    </span>
+                  </div>
+                  <p className="text-sm leading-relaxed text-foreground/90 font-medium">
+                    {uaePass.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Structured Grid of Compliance Frameworks */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {currentCompliances.map((c) => (
             <div
-              key={`${c.name}-${i}`}
-              className="flex min-w-56 items-center gap-3 rounded-2xl border border-border bg-card px-5 py-4 shadow-sm"
+              key={c.name}
+              className="group relative flex h-20 items-center justify-between gap-3 rounded-2xl border border-border/80 bg-card px-5 py-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                <Check size={16} />
-              </span>
-              <span>
-                <span className="block text-sm font-semibold text-foreground">{c.name}</span>
-                <span className="block text-xs text-muted-foreground">{c.country}</span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 text-primary text-[11px] font-bold mb-1">
+                  <Check size={13} strokeWidth={2.5} /> Legally Enforceable
+                </div>
+                <h4 className="text-sm font-bold text-foreground truncate group-hover:text-primary transition-colors">
+                  {c.name}
+                </h4>
+              </div>
+              <span className="shrink-0 rounded-md border border-border bg-muted/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                {c.country}
               </span>
             </div>
           ))}
         </div>
-      </div>
 
-      <div className="section-shell">
-        {!isSalesforce && (
-          <div className="card-soft mx-auto mb-8 flex max-w-4xl flex-col items-start gap-5 p-7 md:flex-row md:items-center md:p-9">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent text-accent-foreground">
-              <Clock3 size={24} />
+        {/* Security & Audit Guarantee Banner */}
+        <div className="mt-12 grid gap-4 sm:grid-cols-3 rounded-2xl border border-border/70 bg-card/60 p-6 backdrop-blur-sm">
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <ShieldCheck size={20} />
             </span>
             <div>
-              <div className="flex flex-wrap items-center gap-3">
-                <h3 className="text-xl font-semibold text-foreground">{uaePass.name}</h3>
-                <span className="rounded-full bg-warning/15 px-3 py-1 text-xs font-semibold text-foreground">
-                  {uaePass.status}
-                </span>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{uaePass.desc}</p>
+              <h5 className="text-xs font-bold text-foreground uppercase tracking-wider">Audit Trail</h5>
+              <p className="text-xs text-muted-foreground">Tamper-evident SHA-256 logs</p>
             </div>
           </div>
-        )}
-        <ul className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {currentCompliances.map((c) => (
-            <li
-              key={c.name}
-              className="flex items-start gap-2 rounded-xl border border-border/70 bg-card px-4 py-3 text-sm"
-            >
-              <Check size={15} className="mt-0.5 shrink-0 text-primary" />
-              <span>
-                <span className="font-medium text-foreground">{c.name}</span>
-                <span className="block text-xs text-muted-foreground">{c.country}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <Lock size={20} />
+            </span>
+            <div>
+              <h5 className="text-xs font-bold text-foreground uppercase tracking-wider">256-Bit Encryption</h5>
+              <p className="text-xs text-muted-foreground">AES at rest & TLS 1.3 in transit</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <FileText size={20} />
+            </span>
+            <div>
+              <h5 className="text-xs font-bold text-foreground uppercase tracking-wider">Court-Admissible</h5>
+              <p className="text-xs text-muted-foreground">Certificates of Completion</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
