@@ -1,0 +1,292 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * SignAny 2.0 design system.
+ * Brand: deep midnight navy + electric indigo/violet.
+ * All colors are oklch semantic tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
+  --color-cloud: var(--cloud);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  --background: oklch(0.995 0.002 280);
+  --foreground: oklch(0.22 0.055 275);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.055 275);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.055 275);
+
+  /* deep midnight navy — brand base */
+  --ink: oklch(0.205 0.062 274);
+  --ink-foreground: oklch(0.98 0.005 280);
+  --ink-muted: oklch(0.74 0.03 280);
+
+  /* electric indigo — brand accent */
+  --brand: oklch(0.585 0.208 285);
+  --brand-foreground: oklch(0.99 0.004 280);
+  --brand-soft: oklch(0.72 0.13 288);
+
+  --primary: oklch(0.585 0.208 285);
+  --primary-foreground: oklch(0.99 0.004 280);
+  --secondary: oklch(0.96 0.012 280);
+  --secondary-foreground: oklch(0.24 0.055 275);
+
+  --muted: oklch(0.966 0.01 282);
+  --muted-foreground: oklch(0.53 0.033 277);
+  --accent: oklch(0.955 0.024 288);
+  --accent-foreground: oklch(0.3 0.09 283);
+
+  --cloud: oklch(0.977 0.009 283);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0.004 280);
+  --success: oklch(0.62 0.14 158);
+  --warning: oklch(0.75 0.15 75);
+
+  --border: oklch(0.918 0.012 282);
+  --input: oklch(0.918 0.012 282);
+  --ring: oklch(0.585 0.208 285);
+
+  --chart-1: oklch(0.585 0.208 285);
+  --chart-2: oklch(0.72 0.13 288);
+  --chart-3: oklch(0.62 0.14 158);
+  --chart-4: oklch(0.75 0.15 75);
+  --chart-5: oklch(0.42 0.1 278);
+
+  --sidebar: oklch(0.977 0.009 283);
+  --sidebar-foreground: oklch(0.22 0.055 275);
+  --sidebar-primary: oklch(0.585 0.208 285);
+  --sidebar-primary-foreground: oklch(0.99 0.004 280);
+  --sidebar-accent: oklch(0.955 0.024 288);
+  --sidebar-accent-foreground: oklch(0.3 0.09 283);
+  --sidebar-border: oklch(0.918 0.012 282);
+  --sidebar-ring: oklch(0.585 0.208 285);
+
+  --gradient-brand: linear-gradient(120deg, oklch(0.585 0.208 285), oklch(0.72 0.13 288));
+  --gradient-ink: linear-gradient(160deg, oklch(0.205 0.062 274), oklch(0.28 0.09 280));
+  --shadow-soft: 0 1px 2px oklch(0.205 0.062 274 / 0.06), 0 12px 32px -18px oklch(0.205 0.062 274 / 0.28);
+  --shadow-lift: 0 24px 60px -28px oklch(0.585 0.208 285 / 0.45);
+}
+
+.dark {
+  --background: oklch(0.17 0.05 274);
+  --foreground: oklch(0.98 0.005 280);
+  --card: oklch(0.225 0.055 275);
+  --card-foreground: oklch(0.98 0.005 280);
+  --popover: oklch(0.225 0.055 275);
+  --popover-foreground: oklch(0.98 0.005 280);
+  --ink: oklch(0.15 0.05 274);
+  --ink-foreground: oklch(0.98 0.005 280);
+  --ink-muted: oklch(0.7 0.03 280);
+  --primary: oklch(0.68 0.18 287);
+  --primary-foreground: oklch(0.16 0.05 274);
+  --secondary: oklch(0.27 0.05 276);
+  --secondary-foreground: oklch(0.98 0.005 280);
+  --muted: oklch(0.27 0.05 276);
+  --muted-foreground: oklch(0.74 0.03 280);
+  --accent: oklch(0.3 0.07 282);
+  --accent-foreground: oklch(0.98 0.005 280);
+  --cloud: oklch(0.22 0.05 275);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.68 0.18 287);
+  --sidebar: oklch(0.2 0.05 275);
+  --sidebar-foreground: oklch(0.98 0.005 280);
+  --sidebar-primary: oklch(0.68 0.18 287);
+  --sidebar-primary-foreground: oklch(0.16 0.05 274);
+  --sidebar-accent: oklch(0.3 0.07 282);
+  --sidebar-accent-foreground: oklch(0.98 0.005 280);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.68 0.18 287);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+  }
+}
+
+@utility section-shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+}
+
+@utility text-gradient-brand {
+  background-image: var(--gradient-brand);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility surface-ink {
+  background-image: var(--gradient-ink);
+  color: var(--color-ink-foreground);
+}
+
+@utility card-soft {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-3xl);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+@utility card-soft-hover {
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--color-brand) 35%, transparent);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+@utility glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@utility mesh-bg {
+  background-image:
+    radial-gradient(60rem 32rem at 12% -10%, color-mix(in oklab, var(--color-brand) 16%, transparent), transparent 60%),
+    radial-gradient(48rem 28rem at 92% 8%, color-mix(in oklab, var(--color-brand-soft) 18%, transparent), transparent 62%);
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-border) 70%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-border) 70%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee-x 38s linear infinite;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise {
+  animation: rise-in 0.7s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+@keyframes draw-sign {
+  0% {
+    stroke-dashoffset: 1400;
+  }
+  55% {
+    stroke-dashoffset: 0;
+  }
+  90% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 1400;
+  }
+}
+
+@utility animate-sign {
+  stroke-dasharray: 1400;
+  animation: draw-sign 7s ease-in-out infinite;
+}
