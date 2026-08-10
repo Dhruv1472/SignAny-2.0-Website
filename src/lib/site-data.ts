@@ -18,7 +18,7 @@ export type Feature = {
 /* ---------------- SignAny 2.0 (new web app) ---------------- */
 
 export const heroStats = [
-  { value: "20+", label: "Global compliance frameworks & acts" },
+  { value: "15+", label: "Global compliance frameworks & acts" },
   { value: "5", label: "Signers per document with smart routing" },
   { value: "90 days", label: "Configurable expiry & auto reminders" },
   { value: "REST API", label: "Plug into any CRM, ERP or portal" },
@@ -72,7 +72,7 @@ export const workspaceFeatures: Feature[] = [
   {
     icon: "Table2",
     title: "All Documents workspace",
-    desc: "Search by Doc ID, name, sender or email, filter by status and date, and export every record — filters included — straight to CSV.",
+    desc: "Search by Doc ID, name, sender or email, filter by status and date, and export every record straight to CSV.",
   },
   {
     icon: "Activity",
@@ -343,7 +343,7 @@ export const salesforce = {
   ],
   steps: [
     { title: "Install the package", desc: "Add the SignAny managed package to your sandbox or production org." },
-    { title: "Assign permissions", desc: "Grant the Admin or Member permission set to the right Salesforce users." },
+    { title: "Complete Prerequisites", desc: "Configure your Connected App and initial org settings." },
     { title: "Add the action", desc: "Drop the Send for Signature action onto the objects your team works from." },
     { title: "Send and track", desc: "Send, monitor signer status and receive the signed file back on the record." },
   ],

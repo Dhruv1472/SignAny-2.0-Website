@@ -2,6 +2,7 @@ import { ArrowRight, Info, Check } from "lucide-react";
 import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/Sections";
 import { SignaturePath } from "@/components/site/spinner";
+import { ProductCarousel } from "@/components/site/ProductCarousel";
 import { salesforce, SITE } from "@/lib/site-data";
 import { useProductMode } from "@/lib/product-mode";
 
@@ -86,6 +87,8 @@ export function SalesforceHome() {
           </div>
         </div>
       </section>
+
+      <ProductCarousel />
 
       <section id="sf-features" className="bg-cloud py-20 md:py-28">
         <div className="section-shell">

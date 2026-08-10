@@ -182,7 +182,11 @@ export function PricingSection() {
   );
 }
 
+import { Link } from "@tanstack/react-router";
+
 export function FAQSection() {
+  const displayedFaqs = faqs.slice(0, 4);
+
   return (
     <section id="faqs" className="bg-cloud py-20 md:py-28">
       <div className="section-shell">
@@ -194,7 +198,7 @@ export function FAQSection() {
         />
         <div className="mx-auto max-w-3xl">
           <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((f, i) => (
+            {displayedFaqs.map((f, i) => (
               <AccordionItem
                 key={f.q}
                 value={`item-${i}`}
@@ -209,6 +213,15 @@ export function FAQSection() {
               </AccordionItem>
             ))}
           </Accordion>
+
+          <div className="mt-8 text-center">
+            <Link
+              to="/faqs"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 shadow-sm hover:shadow-md"
+            >
+              View All FAQs <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

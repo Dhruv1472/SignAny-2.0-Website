@@ -3,6 +3,7 @@ import { ArrowRight, ShieldCheck, Check, Sparkles } from "lucide-react";
 import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/Sections";
 import { SignaturePath } from "@/components/site/spinner";
+import { ProductCarousel } from "@/components/site/ProductCarousel";
 import {
   heroStats,
   keyFeatures,
@@ -17,6 +18,7 @@ export function SignAnyHome() {
   return (
     <>
       <Hero />
+      <ProductCarousel />
       <KeyFeatures />
       <Workspace />
       <Permissions />
@@ -81,9 +83,9 @@ function Hero() {
             </div>
             <div className="mt-5 space-y-3">
               {[
-                { name: "Aisha Rahman", role: "Signer 1", state: "Signed" },
+                { name: "John Doe", role: "Signer 1", state: "Signed" },
                 { name: "Daniel Okafor", role: "Signer 2", state: "Signed" },
-                { name: "Priya Nair", role: "Signer 3", state: "Pending" },
+                { name: "Marco Sphere", role: "Signer 3", state: "Pending" },
               ].map((s) => (
                 <div
                   key={s.name}
