@@ -127,6 +127,12 @@ function VerifyHashPage() {
     setVerificationResult(null);
   };
 
+  const handleAlgoChange = (newAlgo: "256" | "128") => {
+    if (algorithm === newAlgo) return;
+    setAlgorithm(newAlgo);
+    handleReset();
+  };
+
   return (
     <ProductModeProvider>
       <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
@@ -162,7 +168,7 @@ function VerifyHashPage() {
 
                 <div className="flex gap-2 bg-muted p-1 rounded-xl">
                   <button
-                    onClick={() => setAlgorithm("256")}
+                    onClick={() => handleAlgoChange("256")}
                     className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
                       algorithm === "256"
                         ? "bg-card text-primary shadow-sm ring-1 ring-border"
@@ -172,7 +178,7 @@ function VerifyHashPage() {
                     AES-256 (Default)
                   </button>
                   <button
-                    onClick={() => setAlgorithm("128")}
+                    onClick={() => handleAlgoChange("128")}
                     className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
                       algorithm === "128"
                         ? "bg-card text-primary shadow-sm ring-1 ring-border"
