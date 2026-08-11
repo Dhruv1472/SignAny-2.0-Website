@@ -105,6 +105,7 @@ export function Footer() {
               <Link to="/verifyHash" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Verify Document Hash</Link>
               <Link to="/blog" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Blog & Insights</Link>
               <Link to="/faqs" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Full FAQs</Link>
+              <Link to="/lifecycle" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Document Lifecycle</Link>
             </div>
           </div>
 

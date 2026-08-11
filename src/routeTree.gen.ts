@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as LifecycleRouteImport } from './routes/lifecycle'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
@@ -37,6 +38,11 @@ const BlogRoute = BlogRouteImport.update({
 const FaqsRoute = FaqsRouteImport.update({
   id: '/faqs',
   path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LifecycleRoute = LifecycleRouteImport.update({
+  id: '/lifecycle',
+  path: '/lifecycle',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
   '/faqs': typeof FaqsRoute
+  '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
   '/faqs': typeof FaqsRoute
+  '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
   '/faqs': typeof FaqsRoute
+  '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/blog'
     | '/faqs'
+    | '/lifecycle'
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-conditions'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/blog'
     | '/faqs'
+    | '/lifecycle'
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-conditions'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/blog'
     | '/faqs'
+    | '/lifecycle'
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-conditions'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   BlogRoute: typeof BlogRoute
   FaqsRoute: typeof FaqsRoute
+  LifecycleRoute: typeof LifecycleRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/faqs'
       fullPath: '/faqs'
       preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lifecycle': {
+      id: '/lifecycle'
+      path: '/lifecycle'
+      fullPath: '/lifecycle'
+      preLoaderRoute: typeof LifecycleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   BlogRoute: BlogRoute,
   FaqsRoute: FaqsRoute,
+  LifecycleRoute: LifecycleRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,

@@ -132,6 +132,7 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 import BookDemoHandler from "../components/ui/BookDemoHandler";
+import { FloatingLifecycleButton } from "../components/site/FloatingLifecycleButton";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -141,6 +142,7 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <BookDemoHandler />
+      <FloatingLifecycleButton />
     </QueryClientProvider>
   );
 }
