@@ -60,26 +60,26 @@ export function SalesforceHome() {
             </div>
           </div>
 
-          <div className="relative animate-rise">
-            <div className="relative card-soft rounded-[28px] p-4 md:p-6 overflow-hidden">
+          <div className="relative animate-rise max-w-full">
+            <div className="relative card-soft rounded-[28px] p-3 sm:p-5 md:p-6 overflow-hidden">
               <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-r from-primary/10 via-transparent to-brand/10" />
 
-              <div className="relative rounded-[22px] border border-border/60 bg-background/95 p-5 md:p-6 shadow-sm">
-                <div className="flex items-center justify-between mb-5">
-                  <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-2xl bg-muted flex items-center justify-center">
-                      <div className="w-5 h-6 rounded-sm bg-primary/30" />
+              <div className="relative rounded-[22px] border border-border/60 bg-background/95 p-3.5 sm:p-5 md:p-6 shadow-sm overflow-hidden">
+                <div className="flex items-center justify-between gap-2 mb-5 flex-wrap sm:flex-nowrap">
+                  <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-muted flex items-center justify-center shrink-0">
+                      <div className="w-4 h-5 sm:w-5 sm:h-6 rounded-sm bg-primary/30" />
                     </div>
-                    <div>
-                      <div className="text-sm font-semibold text-foreground">MSA_Enterprise_2026.pdf</div>
-                      <div className="text-xs text-muted-foreground">5 pages · 4 approval steps</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs sm:text-sm font-semibold text-foreground truncate">MSA_Enterprise_2026.pdf</div>
+                      <div className="text-[11px] sm:text-xs text-muted-foreground truncate">5 pages · 4 approval steps</div>
                     </div>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">In Review</span>
+                  <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[11px] sm:text-xs font-semibold shrink-0">In Review</span>
                 </div>
 
-                <div className="grid grid-cols-[1fr_auto] gap-4 mb-5">
-                  <div className="space-y-3">
+                <div className="grid grid-cols-[1fr_auto] gap-3 sm:gap-4 mb-5">
+                  <div className="space-y-3 min-w-0">
                     {[100, 84, 92, 70, 76, 62].map((w, i) => (
                       <div key={i} className="h-2 rounded-full bg-muted overflow-hidden">
                         <motion.div
@@ -105,24 +105,24 @@ export function SalesforceHome() {
                 </div>
 
                 <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-4 items-start">
-                  <div className="rounded-2xl border-2 border-dashed border-primary/25 p-4 bg-muted/40">
-                    <div className="text-xs text-muted-foreground mb-2 font-medium">Secure signature pad</div>
-                    <div className="h-24 md:h-28">
-                      <SignaturePath />
+                  <div className="rounded-2xl border-2 border-dashed border-primary/25 p-3 sm:p-4 bg-muted/40 overflow-hidden">
+                    <div className="text-xs text-muted-foreground mb-1 font-medium">Secure signature pad</div>
+                    <div className="h-24 sm:h-28 flex items-center justify-center overflow-hidden">
+                      <SignaturePath className="h-full w-auto max-w-full text-primary" />
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <div className="rounded-2xl border border-border/80 bg-muted/30 p-4">
+                    <div className="rounded-2xl border border-border/80 bg-muted/30 p-3.5 sm:p-4">
                       <div className="flex items-center gap-2 mb-2 text-foreground text-sm font-semibold">
-                        <Shield size={16} className="text-primary" />
+                        <Shield size={16} className="text-primary shrink-0" />
                         Verification Layer
                       </div>
                       <div className="text-xs text-muted-foreground leading-relaxed">Identity checks, audit logs, and tamper-proof timestamps attached to each signature event.</div>
                     </div>
-                    <div className="rounded-2xl border border-border/80 bg-muted/30 p-4">
+                    <div className="rounded-2xl border border-border/80 bg-muted/30 p-3.5 sm:p-4">
                       <div className="flex items-center gap-2 mb-2 text-foreground text-sm font-semibold">
-                        <Zap size={16} className="text-primary" />
+                        <Zap size={16} className="text-primary shrink-0" />
                         Workflow Speed
                       </div>
                       <div className="text-xs text-muted-foreground leading-relaxed">Auto reminders and smart routing reduce delays across high-stakes approvals.</div>
@@ -135,17 +135,17 @@ export function SalesforceHome() {
                     href={SITE.appLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold text-center shadow-sm hover:opacity-90 transition-opacity"
+                    className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground text-xs sm:text-sm font-semibold text-center shadow-sm hover:opacity-90 transition-opacity"
                   >
                     Sign & Complete
                   </a>
-                  <div className="py-3 px-4 rounded-xl border border-border text-sm font-medium text-muted-foreground text-center bg-background">Review</div>
+                  <div className="py-3 px-3 sm:px-4 rounded-xl border border-border text-xs sm:text-sm font-medium text-muted-foreground text-center bg-background">Review</div>
                 </div>
               </div>
             </div>
 
             <motion.div
-              className="absolute -left-8 top-[66.5%] hidden lg:block z-20"
+              className="absolute -left-8 top-[66.5%] hidden xl:block z-20"
               initial={{ opacity: 0, x: -14 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
@@ -170,7 +170,7 @@ export function SalesforceHome() {
             </motion.div>
 
             <motion.div
-              className="absolute -right-5 top-10 hidden lg:block z-20"
+              className="absolute -right-5 top-10 hidden xl:block z-20"
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.1, duration: 0.6 }}

@@ -9,18 +9,18 @@ const DOT_PATH =
   "M128.22 92.5434L128.846 92.04L129.471 92.5434L128.846 93.0469L128.22 92.5434Z";
 
 export const SignaturePath = ({
-  className = "h-28 w-full text-primary",
+  className = "h-24 w-auto max-w-full text-primary",
 }: {
   className?: string;
 }) => {
   return (
-    <div className="flex items-center justify-center w-full py-1">
+    <div className="flex items-center justify-center w-full h-full overflow-hidden">
       <svg
         viewBox="0 0 270 190"
         className={className}
         fill="none"
         aria-hidden="true"
-        style={{ transform: "rotate(-8deg)", transformOrigin: "center" }}
+        style={{ transform: "rotate(-8deg) scale(0.9)", transformOrigin: "center" }}
       >
         {/* MAIN SIGNATURE (continuous animated stroke) */}
         <motion.path

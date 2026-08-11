@@ -295,11 +295,13 @@ export function BlogSection() {
           desc="Stay up to date with the latest in digital signatures, enterprise security, and document workflow automation."
         />
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {homeBlogs.map((b) => (
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {homeBlogs.map((b, idx) => (
             <article
               key={b.id}
-              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+              className={`group relative flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg ${
+                idx === 2 ? "hidden lg:flex" : "flex"
+              }`}
             >
               <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
                 <img

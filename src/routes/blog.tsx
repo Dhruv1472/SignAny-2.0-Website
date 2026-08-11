@@ -81,8 +81,8 @@ function BlogPage() {
               /* Featured Article Showcase */
               <div className="mb-16">
                 <div className="group relative overflow-hidden rounded-[32px] border border-border/80 bg-card p-3 shadow-md hover:border-primary/40 transition-all duration-300">
-                  <div className="grid md:grid-cols-2 gap-8 items-center">
-                    <div className="h-64 md:h-96 rounded-[24px] overflow-hidden relative">
+                  <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                    <div className="h-64 sm:h-80 lg:h-96 rounded-[24px] overflow-hidden relative">
                       <img
                         src={featuredBlog.image}
                         alt={featuredBlog.title}
@@ -93,18 +93,18 @@ function BlogPage() {
                         Featured Article
                       </span>
                     </div>
-                    <div className="p-4 md:p-8">
-                      <div className="flex items-center gap-3 mb-4 text-xs text-muted-foreground">
+                    <div className="p-4 sm:p-6 lg:p-8">
+                      <div className="flex items-center gap-3 mb-3 sm:mb-4 text-xs text-muted-foreground">
                         <span className="font-bold text-primary uppercase tracking-wider text-[11px]">{featuredBlog.category}</span>
                         <span>•</span>
                         <span>{featuredBlog.date}</span>
                         <span>•</span>
                         <span className="flex items-center gap-1 font-medium"><Clock size={12} /> {featuredBlog.readTime}</span>
                       </div>
-                      <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors leading-tight">
+                      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4 group-hover:text-primary transition-colors leading-tight">
                         {featuredBlog.title}
                       </h2>
-                      <p className="text-muted-foreground mb-8 text-sm md:text-base leading-relaxed">
+                      <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
                         {featuredBlog.excerpt}
                       </p>
                       <div className="flex items-center justify-between pt-4 border-t border-border/60">
