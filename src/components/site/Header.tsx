@@ -13,16 +13,18 @@ const signanyNav = [
   { name: "API", href: "/#api" },
   { name: "Compliance", href: "/#compliance" },
   { name: "Pricing", href: "/#pricing" },
-  { name: "FAQs", href: "/#faqs" },
+  { name: "Blogs", href: "/#blog" },
+  { name: "FAQs", href: "/faqs" },
 ];
 
 const salesforceNav = [
   { name: "Overview", href: "/#sf-overview" },
   { name: "Capabilities", href: "/#sf-features" },
-  { name: "How it works", href: "/#sf-steps" },
+  // { name: "How it works", href: "/#sf-steps" },
   { name: "Compliance", href: "/#compliance" },
   { name: "Pricing", href: "/#pricing" },
-  { name: "FAQs", href: "/#faqs" },
+  { name: "Blogs", href: "/#blog" },
+  { name: "FAQs", href: "/faqs" },
 ];
 
 export function Header() {
@@ -51,10 +53,12 @@ export function Header() {
 
   const nav = isSalesforce ? salesforceNav : signanyNav;
   const signUpLink = isSalesforce? SITE.salesforcePackageLink : SITE.appLink;
+  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/faqs") || pathname.startsWith("/privacy") || pathname.startsWith("/terms");
 
   const handleToggle = (checked: boolean) => {
     setMode(checked ? "salesforce" : "signany");
     if (pathname !== "/") navigate({ to: "/" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const ModeSwitch = ({ id, className = "" }: { id: string; className?: string }) => (
@@ -77,7 +81,7 @@ export function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 backdrop-blur-md transition-all duration-300 ${
-        scrolled ? "border-b border-border bg-background/85 shadow-sm" : "bg-background/60"
+        scrolled || isSubPage ? "border-b border-border bg-card/95 shadow-sm text-foreground" : "bg-background/60"
       }`}
     >
       <div className="section-shell flex h-16 items-center justify-between gap-4 md:h-20">

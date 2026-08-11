@@ -1,6 +1,6 @@
-import { Check, Sparkles, Clock3, Mail, ArrowRight, ShieldCheck, Lock, FileText, Globe, Scale, Landmark, BookOpen, FileCheck } from "lucide-react";
+import { Check, Sparkles, Clock3, Mail, ArrowRight, ShieldCheck, Lock, FileText, Globe, Scale, Landmark, BookOpen, FileCheck, Newspaper, Clock, User } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { compliances, salesforceCompliances, uaePass, plans, faqs, SITE } from "@/lib/site-data";
+import { compliances, salesforceCompliances, uaePass, plans, faqs, blogs, SITE } from "@/lib/site-data";
 import { useProductMode } from "@/lib/product-mode";
 
 const marqueeBadges = [
@@ -75,7 +75,7 @@ export function ComplianceSection() {
         <SectionHeading
           eyebrow="Compliance & Global Acts"
           title="Legally binding signatures across"
-          highlight={isSalesforce ? "global frameworks" : "20+ compliance acts"}
+          highlight={isSalesforce ? "global frameworks" : "15+ compliance acts"}
           desc={
             isSalesforce
               ? "The SignAny Salesforce edition adheres to global electronic transaction acts and strict enterprise data protection standards."
@@ -117,21 +117,20 @@ export function ComplianceSection() {
       <div className="section-shell relative z-10 max-w-5xl mx-auto">
         {/* UAE PASS Highlight Box (Web App Mode) */}
         {!isSalesforce && (
-          <div className="relative mb-12 overflow-hidden rounded-3xl border border-border/80 bg-card p-6 sm:p-8 md:p-10 shadow-md">
-            <div className="glow-orb -top-10 right-0 h-48 w-48 bg-primary/10" />
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
-              <div className="flex items-start gap-4 max-w-3xl">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20">
-                  <Clock3 size={20} />
+          <div className="relative mb-12 overflow-hidden rounded-3xl border border-border/80 bg-card p-6 shadow-md">
+            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 justify-between w-full">
+              <div className="flex items-start gap-4">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20">
+                  <Clock3 size={18} />
                 </span>
                 <div>
                   <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <h3 className="text-xl md:text-2xl font-bold text-primary">{uaePass.name} Authentication</h3>
-                    <span className="rounded-full bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 text-xs font-bold uppercase tracking-wider dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/50">
+                    <h3 className="text-xl font-bold text-primary">{uaePass.name} Authentication</h3>
+                    <span className="rounded-full bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 text-xs font-bold uppercase tracking-wider dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/50 self-bottom">
                       {uaePass.status}
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed text-foreground/90 font-medium">
+                  <p className="text-xs leading-relaxed text-foreground/90 font-medium">
                     {uaePass.desc}
                   </p>
                 </div>
@@ -139,28 +138,6 @@ export function ComplianceSection() {
             </div>
           </div>
         )}
-
-        {/* Structured Grid of Compliance Frameworks */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {currentCompliances.map((c) => (
-            <div
-              key={c.name}
-              className="group relative flex h-20 items-center justify-between gap-3 rounded-2xl border border-border/80 bg-card px-5 py-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-            >
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5 text-primary text-[11px] font-bold mb-1">
-                  <Check size={13} strokeWidth={2.5} /> Legally Enforceable
-                </div>
-                <h4 className="text-sm font-bold text-foreground truncate group-hover:text-primary transition-colors">
-                  {c.name}
-                </h4>
-              </div>
-              <span className="shrink-0 rounded-md border border-border bg-muted/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                {c.country}
-              </span>
-            </div>
-          ))}
-        </div>
 
         {/* Security & Audit Guarantee Banner */}
         <div className="mt-12 grid gap-4 sm:grid-cols-3 rounded-2xl border border-border/70 bg-card/60 p-6 backdrop-blur-sm">
@@ -198,6 +175,9 @@ export function ComplianceSection() {
 }
 
 export function PricingSection() {
+  const { isSalesforce } = useProductMode();
+  const signUpLink = isSalesforce ? SITE.salesforcePackageLink : SITE.appLink;
+
   return (
     <section id="pricing" className="relative py-20 md:py-28">
       <div className="section-shell">
@@ -236,7 +216,9 @@ export function PricingSection() {
                 ))}
               </ul>
               <a
-                href={p.name === "Enterprise" ? "#book-demo" : SITE.appLink}
+                href={p.name === "Enterprise" ? "#book-demo" : signUpLink}
+                target={p.name === "Enterprise" ? undefined : "_blank"}
+                rel={p.name === "Enterprise" ? undefined : "noopener noreferrer"}
                 className={`mt-7 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all hover:-translate-y-px ${
                   p.featured
                     ? "bg-primary text-primary-foreground shadow-sm hover:shadow-lg"
@@ -263,9 +245,9 @@ export function FAQSection() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="FAQs"
-          title="Answers before you"
-          highlight="sign up"
-          desc="Everything teams usually ask about plans, permissions, integrations and compliance."
+          title="Frequently Asked"
+          highlight="Questions"
+          desc="Get quick answers to common questions about features, security, pricing, and how Sign Any 2.0 helps you sign and manage documents with ease."
         />
         <div className="mx-auto max-w-3xl">
           <Accordion type="single" collapsible className="space-y-3">
@@ -288,12 +270,92 @@ export function FAQSection() {
           <div className="mt-8 text-center">
             <Link
               to="/faqs"
-              className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 shadow-sm hover:shadow-md"
+              className="inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground"
             >
               View All FAQs <ArrowRight size={16} />
             </Link>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+export function BlogSection() {
+  const homeBlogs = blogs.slice(0, 3);
+  const hasMore = blogs.length > 3;
+
+  return (
+    <section id="blog" className="py-20 md:py-28 relative overflow-hidden bg-background">
+      <div className="section-shell">
+        <SectionHeading
+          eyebrow="Insights & Updates"
+          title="Latest from our"
+          highlight="blog"
+          desc="Stay up to date with the latest in digital signatures, enterprise security, and document workflow automation."
+        />
+
+        <div className="grid gap-8 md:grid-cols-3">
+          {homeBlogs.map((b) => (
+            <article
+              key={b.id}
+              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+            >
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
+                <img
+                  src={b.image}
+                  alt={b.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
+                  {b.category}
+                </span>
+              </div>
+
+              <div className="flex flex-1 flex-col p-5">
+                <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                  <span className="flex items-center gap-1 font-medium">
+                    <Clock size={12} /> {b.readTime}
+                  </span>
+                  <span>•</span>
+                  <span>{b.date}</span>
+                </div>
+
+                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
+                  {b.title}
+                </h3>
+                <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
+                  {b.excerpt}
+                </p>
+
+                <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
+                  <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                    <User size={13} /> {b.author}
+                  </div>
+                  <Link
+                    to="/blog/$slug"
+                    params={{ slug: b.slug }}
+                    className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline underline-offset-4"
+                  >
+                    Read Article <ArrowRight size={13} />
+                  </Link>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {hasMore && (
+          <div className="mt-12 text-center">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-6 py-3.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground shadow-sm hover:shadow-md"
+            >
+              View More Articles <ArrowRight size={16} />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

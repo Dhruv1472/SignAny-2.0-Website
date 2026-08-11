@@ -5,13 +5,13 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { SignAnyHome } from "@/components/site/SignAnyHome";
 import { SalesforceHome } from "@/components/site/SalesforceHome";
-import { ComplianceSection, PricingSection, FAQSection, DemoCTA } from "@/components/site/Sections";
+import { ComplianceSection, PricingSection, FAQSection, BlogSection, DemoCTA } from "@/components/site/Sections";
 import { ProductModeProvider, useProductMode } from "@/lib/product-mode";
 import { faqs, plans } from "@/lib/site-data";
 
 const title = "SignAny 2.0 | Secure eSignature Software for Teams & Salesforce";
 const description =
-  "Send, sign and track legally binding documents with SignAny 2.0. Smart fields, 5 signers, audit trails, REST API, Salesforce app and 20+ compliance frameworks. Free plan available.";
+  "Send, sign and track legally binding documents with SignAny 2.0. Smart fields, 5 signers, audit trails, REST API, Salesforce app and 15+ compliance frameworks. Free plan available.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -94,6 +94,7 @@ function HomeContent() {
         {isSalesforce ? <SalesforceHome /> : <SignAnyHome />}
         <ComplianceSection />
         <PricingSection />
+        <BlogSection />
         <FAQSection />
         <DemoCTA />
       </main>

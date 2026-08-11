@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 import logo from "@/assets/SignAnyDarkLogo.png";
 import mvLogo from "@/assets/mvclouds-logo.webp";
+import { useProductMode } from "@/lib/product-mode";
 
 const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -17,13 +18,36 @@ const socialLinks = [
   { name: "Facebook", href: "https://www.facebook.com/people/Esignany20/61577536805628/", icon: Facebook },
 ];
 
+const IndiaFlag = () => (
+  <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-0.5 border border-white/30 mt-0.5">
+    <svg className="w-full h-full rounded-full object-cover" viewBox="0 0 640 480">
+      <path fill="#f93" d="M0 0h640v160H0z"/>
+      <path fill="#fff" d="M0 160h640v160H0z"/>
+      <path fill="#128807" d="M0 320h640v160H0z"/>
+      <circle cx="320" cy="240" r="60" fill="none" stroke="#000080" strokeWidth="15"/>
+    </svg>
+  </span>
+);
+
+const UAEFlag = () => (
+  <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-0.5 border border-white/30 mt-0.5">
+    <svg className="w-full h-full rounded-full object-cover" viewBox="0 0 640 480">
+      <path fill="#00732f" d="M0 0h640v160H0z"/>
+      <path fill="#fff" d="M0 160h640v160H0z"/>
+      <path fill="#000" d="M0 320h640v160H0z"/>
+      <path fill="#f00" d="M0 0h200v480H0z"/>
+    </svg>
+  </span>
+);
+
 export function Footer() {
+  const { setMode } = useProductMode();
   return (
     <footer className="bg-[#0e172a] text-white border-t border-white/10">
       <div className="section-shell py-20">
         <div className="grid sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand & Social */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <Link 
               to="/" 
               className="rounded-lg inline-block mb-6 hover:shadow-md transition-shadow"
@@ -34,7 +58,7 @@ export function Footer() {
                 className="h-8" 
               />
             </Link>
-            <p className="text-sm text-white/60 leading-relaxed mb-8 max-w-sm">
+            <p className="text-xs md:text-sm text-white/60 leading-relaxed mb-8">
               The next generation eSignature platform for modern teams. Built for security, speed, and seamless integration across global enterprise workflows.
             </p>
             
@@ -68,24 +92,36 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links Consolidation */}
-          <div className="lg:col-span-4">
-            <h4 className="font-bold text-sm mb-6 uppercase tracking-widest text-[#806cf0]">Quick Links</h4>
+          {/* Column 2: SignAny 2.0 Web Links */}
+          <div className="lg:col-span-3">
+            <h4 className="font-bold text-sm mb-6 uppercase tracking-widest text-[#806cf0]">SignAny 2.0</h4>
             <div className="flex flex-col gap-3 text-sm text-white/60">
-              <a href="/#home" className="hover:text-white transition-colors">Return to Home</a>
-              <a href="/#how-it-works" className="hover:text-white transition-colors">How it Works</a>
-              <a href="/#features" className="hover:text-white transition-colors">Core Features</a>
-              <a href="/#advanced" className="hover:text-white transition-colors">Advanced Tools</a>
-              <a href="/#compliance" className="hover:text-white transition-colors">Trust & Compliance</a>
-              <a href="/#why-us" className="hover:text-white transition-colors">Why SignAny?</a>
-              <a href="/#pricing" className="hover:text-white transition-colors">Pricing Plans</a>
-              <a href="/#faqs" className="hover:text-white transition-colors">In-Page FAQs</a>
-              <Link to="/faqs" className="hover:text-white transition-colors font-semibold text-white/80">Full FAQs</Link>
+              <a href="/#features" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Core Features</a>
+              <a href="/#workspace" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Workspace & Audit</a>
+              <a href="/#permissions" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Role Permissions</a>
+              <a href="/#api" onClick={() => setMode("signany")} className="hover:text-white transition-colors">REST API Docs</a>
+              <a href="/#compliance" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Trust & Compliance</a>
+              <a href="/#pricing" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Pricing Plans</a>
+              <Link to="/blog" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Blog & Insights</Link>
+              <Link to="/faqs" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Full FAQs</Link>
             </div>
           </div>
 
-          {/* Global Offices & Support */}
-          <div className="lg:col-span-4">
+          {/* Column 3: Salesforce App Links */}
+          <div className="lg:col-span-3">
+            <h4 className="font-bold text-sm mb-6 uppercase tracking-widest text-[#806cf0]">SignAny Salesforce</h4>
+            <div className="flex flex-col gap-3 text-sm text-white/60">
+              <a href="/#sf-overview" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">Salesforce Overview</a>
+              <a href="/#sf-features" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">App Capabilities</a>
+              <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tdL000000SLsj" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Install AppExchange Package</a>
+              <a href="/#compliance" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">Salesforce Security</a>
+              <a href="/#pricing" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">Enterprise Pricing</a>
+              <a href="#book-demo" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors font-semibold text-white/80">Book a Demo</a>
+            </div>
+          </div>
+
+          {/* Column 4: Global Offices & Support */}
+          <div className="lg:col-span-3">
             <h4 className="font-bold text-sm mb-6 uppercase tracking-widest text-[#806cf0]">Support & Offices</h4>
             <ul className="space-y-6 text-sm text-white/60">
               <li className="flex items-center gap-3 group">
@@ -98,14 +134,14 @@ export function Footer() {
               </li>
               <li className="pt-4 border-t border-white/5 space-y-4">
                 <div className="flex items-start gap-3">
-                  <MapPin size={16} className="mt-1 flex-shrink-0 text-[#806cf0]" />
+                  <IndiaFlag />
                   <div className="leading-relaxed">
                     <span className="block font-bold text-white/90 text-[11px] mb-1">India (Headquarter)</span>
                     <span className="text-xs">D-404, The First Synthesis, B/H Keshavbaug Party Plot, Ahmedabad-380015</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <MapPin size={16} className="mt-1 flex-shrink-0 text-[#806cf0]" />
+                  <UAEFlag />
                   <div className="leading-relaxed">
                     <span className="block font-bold text-white/90 text-[11px] mb-1">U.A.E. Office</span>
                     <span className="text-xs">Meydan Grandstand, 6th floor, Nad Al Sheba, Dubai, U.A.E.</span>

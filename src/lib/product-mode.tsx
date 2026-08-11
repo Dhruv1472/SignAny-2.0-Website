@@ -24,6 +24,7 @@ export function ProductModeProvider({ children }: { children: ReactNode }) {
   const setMode = (m: ProductMode) => {
     setModeState(m);
     window.localStorage.setItem(STORAGE_KEY, m);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

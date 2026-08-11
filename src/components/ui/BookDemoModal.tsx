@@ -111,7 +111,7 @@ const getCaptchaSettingsValue = () =>
     ts: String(Date.now()),
   });
 
-const BookDemoModal = ({ open, onOpenChange }: BookDemoModalProps) => {
+const BookDemoModal = ({ open, onOpenChange, initialEmail }: BookDemoModalProps) => {
   const [form, setForm] = useState(initialForm);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -121,6 +121,16 @@ const BookDemoModal = ({ open, onOpenChange }: BookDemoModalProps) => {
   const [captchaSettings, setCaptchaSettings] = useState(getCaptchaSettingsValue());
   const recaptchaRef = useRef<HTMLDivElement>(null);
   const recaptchaWidgetId = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (open) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const emailParam = urlParams.get("email") || initialEmail;
+      if (emailParam) {
+        setForm((prev) => ({ ...prev, email: emailParam }));
+      }
+    }
+  }, [open, initialEmail]);
 
   useEffect(() => {
     if (!open) return;

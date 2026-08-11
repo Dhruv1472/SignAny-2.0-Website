@@ -1,4 +1,5 @@
-import { ArrowRight, Info, Check } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Info, Check, Shield, Zap } from "lucide-react";
 import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/Sections";
 import { SignaturePath } from "@/components/site/spinner";
@@ -59,31 +60,136 @@ export function SalesforceHome() {
             </div>
           </div>
 
-          <div className="card-soft animate-rise p-6 md:p-8">
-            <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-              Salesforce record
-            </p>
-            <p className="text-sm font-semibold text-foreground">Opportunity — Acme Renewal</p>
-            <div className="mt-5 space-y-3">
-              {[
-                "Send for Signature action",
-                "Signer details pulled from Contact",
-                "Signed PDF attached to record",
-                "Audit certificate stored in Files",
-              ].map((row) => (
-                <div
-                  key={row}
-                  className="flex items-center gap-3 rounded-2xl border border-border/70 bg-muted/40 px-4 py-3 text-sm text-foreground"
-                >
-                  <Check size={16} className="text-primary" />
-                  {row}
+          <div className="relative animate-rise">
+            <div className="relative card-soft rounded-[28px] p-4 md:p-6 overflow-hidden">
+              <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-r from-primary/10 via-transparent to-brand/10" />
+
+              <div className="relative rounded-[22px] border border-border/60 bg-background/95 p-5 md:p-6 shadow-sm">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-2xl bg-muted flex items-center justify-center">
+                      <div className="w-5 h-6 rounded-sm bg-primary/30" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-foreground">MSA_Enterprise_2026.pdf</div>
+                      <div className="text-xs text-muted-foreground">5 pages · 4 approval steps</div>
+                    </div>
+                  </div>
+                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">In Review</span>
                 </div>
-              ))}
+
+                <div className="grid grid-cols-[1fr_auto] gap-4 mb-5">
+                  <div className="space-y-3">
+                    {[100, 84, 92, 70, 76, 62].map((w, i) => (
+                      <div key={i} className="h-2 rounded-full bg-muted overflow-hidden">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-primary/20 to-brand/20"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${w}%` }}
+                          transition={{ delay: 0.7 + i * 0.08, duration: 0.6 }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="hidden md:flex flex-col gap-2">
+                    {[
+                      { label: "Legal", active: true },
+                      { label: "Ops", active: true },
+                      { label: "CFO", active: false },
+                    ].map((step) => (
+                      <div key={step.label} className="rounded-xl border border-border px-3 py-2 text-xs font-medium bg-background min-w-[88px]">
+                        <span className={step.active ? "text-primary font-bold" : "text-muted-foreground"}>{step.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-4 items-start">
+                  <div className="rounded-2xl border-2 border-dashed border-primary/25 p-4 bg-muted/40">
+                    <div className="text-xs text-muted-foreground mb-2 font-medium">Secure signature pad</div>
+                    <div className="h-24 md:h-28">
+                      <SignaturePath />
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="rounded-2xl border border-border/80 bg-muted/30 p-4">
+                      <div className="flex items-center gap-2 mb-2 text-foreground text-sm font-semibold">
+                        <Shield size={16} className="text-primary" />
+                        Verification Layer
+                      </div>
+                      <div className="text-xs text-muted-foreground leading-relaxed">Identity checks, audit logs, and tamper-proof timestamps attached to each signature event.</div>
+                    </div>
+                    <div className="rounded-2xl border border-border/80 bg-muted/30 p-4">
+                      <div className="flex items-center gap-2 mb-2 text-foreground text-sm font-semibold">
+                        <Zap size={16} className="text-primary" />
+                        Workflow Speed
+                      </div>
+                      <div className="text-xs text-muted-foreground leading-relaxed">Auto reminders and smart routing reduce delays across high-stakes approvals.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 mt-5">
+                  <a
+                    href={SITE.appLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold text-center shadow-sm hover:opacity-90 transition-opacity"
+                  >
+                    Sign & Complete
+                  </a>
+                  <div className="py-3 px-4 rounded-xl border border-border text-sm font-medium text-muted-foreground text-center bg-background">Review</div>
+                </div>
+              </div>
             </div>
-            <div className="mt-5 rounded-2xl border border-dashed border-primary/40 bg-accent/40 p-5">
-              <p className="text-xs font-medium text-muted-foreground">Signature field</p>
-              <SignaturePath />
-            </div>
+
+            <motion.div
+              className="absolute -left-8 top-[66.5%] hidden lg:block z-20"
+              initial={{ opacity: 0, x: -14 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <motion.div
+                className="rounded-2xl border border-border/80 bg-card p-4 w-40 shadow-lg will-change-transform transform-gpu"
+                style={{ backfaceVisibility: "hidden" }}
+                animate={{ y: [-8, 8, -8] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              >
+                <div className="text-xs text-muted-foreground mb-2">Signer status</div>
+                <div className="text-lg font-bold text-foreground">4/5 complete</div>
+                <div className="mt-3 h-2 rounded-full bg-muted overflow-hidden">
+                  <motion.div 
+                    className="h-full rounded-full bg-gradient-to-r from-primary to-brand"
+                    initial={{ width: 0 }}
+                    animate={{ width: "80%" }}
+                    transition={{ delay: 1.2, duration: 1 }}
+                  />
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="absolute -right-5 top-10 hidden lg:block z-20"
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+            >
+              <motion.div
+                className="rounded-2xl border border-border/80 bg-card px-4 py-3 flex items-center gap-3 shadow-lg will-change-transform transform-gpu"
+                style={{ backfaceVisibility: "hidden" }}
+                animate={{ y: [-6, 6, -6] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              >
+                <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Shield size={16} className="text-primary" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-foreground">Audit trail active</div>
+                  <div className="text-[10px] text-muted-foreground">Every action is recorded</div>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>

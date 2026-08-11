@@ -44,7 +44,7 @@ function Hero() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted-foreground">
             SignAny 2.0 is an electronic signature platform for teams that need speed and proof.
             Prepare documents with smart fields, route up to five signers, automate reminders, and
-            keep a complete audit trail — with 20+ global compliance frameworks behind every
+            keep a complete audit trail — with 15+ global compliance frameworks behind every
             signature.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
