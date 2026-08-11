@@ -67,7 +67,7 @@ const lifecycleStages = [
     icon: PenTool,
     badge: "Draw, Type & Upload",
     color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/30",
-    desc: "Recipients open the document on any device, draw or type signatures, auto-fill empty fields, and authenticate via UAE PASS or Mobile OTP.",
+    desc: "Recipients open the document on any device, draw or type signatures, auto-fill empty fields, and authenticate via UAE PASS.",
   },
   {
     id: "tracking",
@@ -111,7 +111,7 @@ function LifecyclePage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveStage((prev) => (prev + 1) % 4);
-    }, 4500);
+    }, 9000);
     return () => clearInterval(interval);
   }, []);
 
@@ -766,7 +766,7 @@ function Stage4AuditVisual() {
           <button
             type="button"
             onClick={() => setReportType("attached")}
-            className={`px-2.5 py-0.5 rounded text-[10px] font-bold transition-all ${
+            className={`px-2.5 py-0.5 rounded-2xl text-[10px] font-bold transition-all ${
               reportType === "attached"
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground"
@@ -777,7 +777,7 @@ function Stage4AuditVisual() {
           <button
             type="button"
             onClick={() => setReportType("separate")}
-            className={`px-2.5 py-0.5 rounded text-[10px] font-bold transition-all ${
+            className={`px-2.5 py-0.5 rounded-2xl text-[10px] font-bold transition-all ${
               reportType === "separate"
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground"
