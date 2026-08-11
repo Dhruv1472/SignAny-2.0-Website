@@ -68,7 +68,7 @@ export function Header() {
         htmlFor={id}
         className="cursor-pointer text-xs font-semibold tracking-tight text-muted-foreground"
       >
-        Native Salesforce App
+        Salesforce App
       </label>
       <Switch
         id={id}
