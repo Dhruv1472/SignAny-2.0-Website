@@ -8,8 +8,9 @@ import { Switch } from "@/components/ui/switch";
 
 const signanyNav = [
   { name: "Features", href: "/#features" },
+  { name: "Use Cases", href: "/#use-cases" },
   { name: "Workspace", href: "/#workspace" },
-  { name: "Permissions", href: "/#permissions" },
+  // { name: "Permissions", href: "/#permissions" },
   { name: "API", href: "/#api" },
   { name: "Compliance", href: "/#compliance" },
   { name: "Pricing", href: "/#pricing" },
@@ -54,7 +55,7 @@ export function Header() {
 
   const nav = isSalesforce ? salesforceNav : signanyNav;
   const signUpLink = isSalesforce? SITE.salesforcePackageLink : SITE.appLink;
-  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/faqs") || pathname.startsWith("/lifecycle") || pathname.startsWith("/verify") || pathname.startsWith("/privacy") || pathname.startsWith("/terms");
+  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/use-cases") || pathname.startsWith("/faqs") || pathname.startsWith("/lifecycle") || pathname.startsWith("/verify") || pathname.startsWith("/privacy") || pathname.startsWith("/terms");
 
   const handleToggle = (checked: boolean) => {
     setMode(checked ? "salesforce" : "signany");
