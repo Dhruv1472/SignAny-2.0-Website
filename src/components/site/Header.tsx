@@ -54,7 +54,7 @@ export function Header() {
 
   const nav = isSalesforce ? salesforceNav : signanyNav;
   const signUpLink = isSalesforce? SITE.salesforcePackageLink : SITE.appLink;
-  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/faqs") || pathname.startsWith("/privacy") || pathname.startsWith("/terms");
+  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/faqs") || pathname.startsWith("/lifecycle") || pathname.startsWith("/verify") || pathname.startsWith("/privacy") || pathname.startsWith("/terms");
 
   const handleToggle = (checked: boolean) => {
     setMode(checked ? "salesforce" : "signany");

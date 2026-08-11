@@ -102,6 +102,7 @@ export function Footer() {
               <a href="/#api" onClick={() => setMode("signany")} className="hover:text-white transition-colors">REST API Docs</a>
               <a href="/#compliance" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Trust & Compliance</a>
               <a href="/#pricing" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Pricing Plans</a>
+              <Link to="/verifyHash" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Verify Document Hash</Link>
               <Link to="/blog" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Blog & Insights</Link>
               <Link to="/faqs" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Full FAQs</Link>
             </div>
