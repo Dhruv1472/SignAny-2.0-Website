@@ -17,8 +17,10 @@ import { Route as LifecycleRouteImport } from './routes/lifecycle'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
+import { Route as UseCasesRouteImport } from './routes/use-cases'
 import { Route as VerifyHashRouteImport } from './routes/verifyHash'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as UseCasesIdRouteImport } from './routes/use-cases_.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -60,6 +62,11 @@ const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   path: '/terms-and-conditions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UseCasesRoute = UseCasesRouteImport.update({
+  id: '/use-cases',
+  path: '/use-cases',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VerifyHashRoute = VerifyHashRouteImport.update({
   id: '/verifyHash',
   path: '/verifyHash',
@@ -68,6 +75,11 @@ const VerifyHashRoute = VerifyHashRouteImport.update({
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog_/$slug',
   path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UseCasesIdRoute = UseCasesIdRouteImport.update({
+  id: '/use-cases_/$id',
+  path: '/use-cases/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -80,8 +92,10 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/use-cases': typeof UseCasesRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/use-cases/$id': typeof UseCasesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -92,8 +106,10 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/use-cases': typeof UseCasesRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/use-cases/$id': typeof UseCasesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -105,8 +121,10 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/use-cases': typeof UseCasesRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog_/$slug': typeof BlogSlugRoute
+  '/use-cases_/$id': typeof UseCasesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -119,8 +137,10 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/use-cases'
     | '/verifyHash'
     | '/blog/$slug'
+    | '/use-cases/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -131,8 +151,10 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/use-cases'
     | '/verifyHash'
     | '/blog/$slug'
+    | '/use-cases/$id'
   id:
     | '__root__'
     | '/'
@@ -143,8 +165,10 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/use-cases'
     | '/verifyHash'
     | '/blog_/$slug'
+    | '/use-cases_/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -156,8 +180,10 @@ export interface RootRouteChildren {
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
+  UseCasesRoute: typeof UseCasesRoute
   VerifyHashRoute: typeof VerifyHashRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  UseCasesIdRoute: typeof UseCasesIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -218,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsAndConditionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/use-cases': {
+      id: '/use-cases'
+      path: '/use-cases'
+      fullPath: '/use-cases'
+      preLoaderRoute: typeof UseCasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verifyHash': {
       id: '/verifyHash'
       path: '/verifyHash'
@@ -232,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/use-cases_/$id': {
+      id: '/use-cases_/$id'
+      path: '/use-cases/$id'
+      fullPath: '/use-cases/$id'
+      preLoaderRoute: typeof UseCasesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -244,8 +284,10 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
+  UseCasesRoute: UseCasesRoute,
   VerifyHashRoute: VerifyHashRoute,
   BlogSlugRoute: BlogSlugRoute,
+  UseCasesIdRoute: UseCasesIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

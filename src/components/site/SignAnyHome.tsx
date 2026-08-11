@@ -4,6 +4,7 @@ import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/Sections";
 import { SignaturePath } from "@/components/site/spinner";
 import { ProductCarousel } from "@/components/site/ProductCarousel";
+import { IndustriesSection } from "@/components/site/IndustriesSection";
 import {
   heroStats,
   keyFeatures,
@@ -20,6 +21,7 @@ export function SignAnyHome() {
       <Hero />
       <ProductCarousel />
       <KeyFeatures />
+      <IndustriesSection />
       <Workspace />
       <Permissions />
       <ApiSection />
