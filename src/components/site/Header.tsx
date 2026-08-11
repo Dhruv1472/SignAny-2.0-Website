@@ -33,6 +33,7 @@ export function Header() {
   const { isSalesforce, setMode } = useProductMode();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const buttonLabel = isSalesforce ? "Start Free Trial" : "SignUp";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -114,7 +115,7 @@ export function Header() {
             target="_blank"
             className="inline-flex items-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:-translate-y-px hover:shadow-lg active:scale-[0.98]"
           >
-            SignUp
+            {buttonLabel}
           </a>
         </div>
 
@@ -155,7 +156,7 @@ export function Header() {
               href={SITE.appLink}
               className="mt-2 inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
             >
-              SignUp
+              {buttonLabel}
             </a>
           </nav>
         </div>
