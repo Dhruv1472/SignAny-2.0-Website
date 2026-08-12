@@ -4,6 +4,8 @@ import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/Sections";
 import { SignaturePath } from "@/components/site/spinner";
 import { ProductCarousel } from "@/components/site/ProductCarousel";
+import { Link } from "@tanstack/react-router";
+import { signanyFeatures } from "@/lib/features-data";
 import {
   heroStats,
   keyFeatures,
@@ -128,7 +130,6 @@ function Hero() {
     </section>
   );
 }
-
 function KeyFeatures() {
   return (
     <section id="features" className="bg-cloud py-20 md:py-28">
@@ -140,21 +141,38 @@ function KeyFeatures() {
           desc="From upload to signed and archived — SignAny 2.0 removes the manual steps between you and a completed agreement."
         />
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {keyFeatures.map((f) => (
-            <article key={f.title} className="card-soft card-soft-hover group p-7">
-              <div className="mb-7 flex items-start justify-between gap-4">
-                <span className="flex h-13 w-13 items-center justify-center rounded-2xl bg-accent p-3.5 text-accent-foreground transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <Icon name={f.icon} size={22} />
-                </span>
-                {f.tag && (
-                  <span className="rounded-full border border-border bg-background px-3 py-1 text-[11px] font-medium text-muted-foreground">
-                    {f.tag}
+          {signanyFeatures.map((f) => (
+            <Link
+              key={f.id}
+              to="/features/$id"
+              params={{ id: f.id }}
+              className="card-soft card-soft-hover group p-7 flex flex-col justify-between h-full transition-all duration-300 border-border/80 hover:border-primary/50"
+            >
+              <div>
+                <div className="mb-6 flex items-start justify-between gap-4">
+                  <span className="flex h-13 w-13 items-center justify-center rounded-2xl bg-accent p-3.5 text-accent-foreground transition-colors group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-lg">
+                    <Icon name={f.icon} size={22} />
                   </span>
-                )}
+                  {f.tag && (
+                    <span className="rounded-full border border-border bg-background px-3 py-1 text-[11px] font-semibold text-muted-foreground group-hover:border-primary/30 group-hover:text-primary transition-colors">
+                      {f.tag}
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                  {f.title}
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                  {f.desc}
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-foreground">{f.title}</h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-            </article>
+
+              <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between">
+                <span className="text-xs font-bold text-primary group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                  Explore Feature <ArrowRight size={14} />
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

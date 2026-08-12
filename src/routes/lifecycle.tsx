@@ -57,27 +57,27 @@ const lifecycleStages = [
     icon: FileUp,
     badge: "10 Smart Field Types",
     color: "text-purple-500 bg-purple-500/10 border-purple-500/30",
-    desc: "Drag & drop PDF agreements, reorder pages, place 10 validated field types with aspect ratio presets, or import signers directly from Salesforce CRM.",
+    desc: "Upload agreements, place 10 smart field types, and import signers from Salesforce.",
   },
   {
     id: "signing",
     stepNum: "02",
-    title: "Recipient Signing & Fields",
+    title: "Recipient Signing",
     subtitle: "Interactive Signature Pad",
     icon: PenTool,
     badge: "Draw, Type & Upload",
     color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/30",
-    desc: "Recipients open the document on any device, draw or type signatures, auto-fill empty fields, and authenticate via UAE PASS.",
+    desc: "Sign on any device with Draw/Type signature pads and UAE PASS authentication.",
   },
   {
     id: "tracking",
     stepNum: "03",
-    title: "Dashboard & Status Tracking",
+    title: "Dashboard Tracking",
     subtitle: "Real-Time Monitoring",
     icon: LayoutDashboard,
     badge: "Live Status Feed",
     color: "text-blue-500 bg-blue-500/10 border-blue-500/30",
-    desc: "Track pending & completed agreements, monitor email open & view logs, manage 90-day expiry dates, and resend direct links via WhatsApp/SMS.",
+    desc: "Track real-time document status, manage 90-day expiry, and resend signer links.",
   },
   {
     id: "audit",
@@ -87,7 +87,7 @@ const lifecycleStages = [
     icon: ShieldCheck,
     badge: "Tamper-Proof Security",
     color: "text-amber-500 bg-amber-500/10 border-amber-500/30",
-    desc: "Generates a court-admissible audit certificate with SHA-256 hash checksums, IP & location logs, Attached or Separate PDF reports, and CRM sync.",
+    desc: "Generate SHA-256 audit reports with IP logs and court-admissible proof.",
   },
 ];
 
@@ -139,7 +139,7 @@ function LifecyclePage() {
             {/* MASTER 4-STAGE PIPELINE GRID */}
             <div className="max-w-6xl mx-auto mb-12 md:mb-16">
               <div className="rounded-[24px] sm:rounded-[32px] border border-border/80 bg-card p-4 sm:p-6 md:p-8 shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500" />
+                <div className="absolute inset-x-0 top-0 h-2 bg-[#9485f2]" />
 
                 {/* 4 Connected Pipeline Cards */}
                 <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 relative mb-6 md:mb-8">
@@ -597,52 +597,41 @@ function Stage3TrackingVisual() {
 
           {/* Document Data Table */}
           <div className="rounded-xl border border-border bg-muted/20 overflow-hidden text-xs">
-            <div className="grid grid-cols-[1fr_1.2fr_0.8fr_0.6fr_0.4fr] gap-2 p-2.5 bg-muted/60 text-[10px] font-bold uppercase tracking-wider text-muted-foreground border-b border-border">
+            <div className="grid grid-cols-[1.2fr_1.5fr_auto] gap-4 p-3 bg-muted/60 text-[10px] font-bold uppercase tracking-wider text-muted-foreground border-b border-border">
               <div>Doc ID / Name</div>
               <div>Signer Details</div>
-              <div>Status</div>
               <div className="text-right">Actions</div>
             </div>
 
             {/* Row 1 */}
-            <div className="grid grid-cols-[1fr_1.2fr_0.8fr_0.6fr_0.4fr] gap-2 p-3 items-center border-b border-border/60 bg-card/60">
+            <div className="grid grid-cols-[1.2fr_1.5fr_auto] gap-4 p-3 items-center border-b border-border/60 bg-card/60">
               <div>
                 <div className="font-mono text-[10px] font-bold text-primary">#DOC-94821</div>
                 <div className="text-[11px] font-bold text-foreground truncate">Sales_January_v2.pdf</div>
               </div>
               <div>
-                <div className="text-[11px] font-bold text-foreground">&nbsp;&nbsp;&nbsp;Sarah Chen</div>
-                <div className="text-[10px] text-muted-foreground truncate font-mono">&nbsp;sarah@acme798.com</div>
-              </div>
-              <div>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-500/10 text-amber-600">
-                  <Eye size={10} /> Sent
-                </span>
+                <div className="text-[11px] font-bold text-foreground">Sarah Chen</div>
+                <div className="text-[10px] text-muted-foreground truncate font-mono">sarah@acme798.com</div>
               </div>
               <div className="text-right">
-                <button className="p-1 rounded-lg border border-border hover:bg-muted text-muted-foreground hover:text-foreground">
+                <button className="p-1.5 rounded-lg border border-border hover:bg-muted text-muted-foreground hover:text-foreground">
                   <MoreVertical size={14} />
                 </button>
               </div>
             </div>
 
             {/* Row 2 */}
-            <div className="grid grid-cols-[1fr_1.2fr_0.8fr_0.6fr_0.4fr] gap-2 p-3 items-center bg-card/40">
+            <div className="grid grid-cols-[1.2fr_1.5fr_auto] gap-4 p-3 items-center bg-card/40">
               <div>
-                <div className="font-mono text-[10px] font-bold text-muted-foreground">#DOC-88319</div>
+                <div className="font-mono text-[10px] font-bold text-primary">#DOC-88319</div>
                 <div className="text-[11px] font-semibold text-foreground truncate">Enterprise_NDA_v2.pdf</div>
               </div>
               <div>
                 <div className="text-[11px] font-semibold text-foreground">Alex Miller</div>
                 <div className="text-[10px] text-muted-foreground truncate font-mono">alex@techcorp.io</div>
               </div>
-              <div>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/10 text-emerald-600">
-                  <Check size={10} /> Completed
-                </span>
-              </div>
               <div className="text-right">
-                <button className="p-1 rounded-lg border border-border hover:bg-muted text-muted-foreground hover:text-foreground">
+                <button className="p-1.5 rounded-lg border border-border hover:bg-muted text-muted-foreground hover:text-foreground">
                   <MoreVertical size={14} />
                 </button>
               </div>
@@ -738,7 +727,7 @@ function Stage4AuditVisual() {
           <span className="text-emerald-600 font-mono">100% Intact</span>
         </div>
         <div className="font-mono text-xs text-foreground bg-background p-2 rounded-lg border border-border/50 break-all font-semibold select-all">
-          e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+          e3b0c44298fc1c149afbf4c8996fb92427ae41e4934ca49599155
         </div>
       </div>
 

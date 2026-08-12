@@ -8,13 +8,14 @@ import { Switch } from "@/components/ui/switch";
 
 const signanyNav = [
   { name: "Features", href: "/#features" },
-  { name: "Workspace", href: "/#workspace" },
-  { name: "Permissions", href: "/#permissions" },
+  // { name: "Workspace", href: "/#workspace" },
+  // { name: "Permissions", href: "/#permissions" },
   { name: "API", href: "/#api" },
   { name: "Compliance", href: "/#compliance" },
   { name: "Pricing", href: "/#pricing" },
   { name: "Blogs", href: "/#blog" },
   { name: "FAQs", href: "/faqs" },
+  { name: "Hash Verification", href: "/verifyHash" },
 ];
 
 const salesforceNav = [
@@ -54,7 +55,7 @@ export function Header() {
 
   const nav = isSalesforce ? salesforceNav : signanyNav;
   const signUpLink = isSalesforce? SITE.salesforcePackageLink : SITE.appLink;
-  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/faqs") || pathname.startsWith("/lifecycle") || pathname.startsWith("/verify") || pathname.startsWith("/privacy") || pathname.startsWith("/terms");
+  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/features") || pathname.startsWith("/faqs") || pathname.startsWith("/lifecycle") || pathname.startsWith("/verify") || pathname.startsWith("/privacy") || pathname.startsWith("/terms");
 
   const handleToggle = (checked: boolean) => {
     setMode(checked ? "salesforce" : "signany");
