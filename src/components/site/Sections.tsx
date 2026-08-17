@@ -66,7 +66,7 @@ export function ComplianceSection() {
   const marqueeLoop = [...marqueeBadges, ...marqueeBadges, ...marqueeBadges];
 
   return (
-    <section id="compliance" className="relative overflow-hidden bg-cloud py-20 md:py-28">
+    <section id="compliance" className="relative overflow-hidden bg-cloud py-20">
       {/* Background Ambient Glows */}
       <div className="glow-orb top-10 left-[10%] h-72 w-72 bg-primary/10" />
       <div className="glow-orb bottom-10 right-[10%] h-80 w-80 bg-brand/10" />
@@ -179,7 +179,7 @@ export function PricingSection() {
   const signUpLink = isSalesforce ? SITE.salesforcePackageLink : SITE.appLink;
 
   return (
-    <section id="pricing" className="relative py-20 md:py-28">
+    <section id="pricing" className="relative py-20">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Pricing"
@@ -241,7 +241,7 @@ export function FAQSection() {
   const displayedFaqs = faqs.slice(0, 4);
 
   return (
-    <section id="faqs" className="bg-cloud py-20 md:py-28">
+    <section id="faqs" className="bg-cloud py-20">
       <div className="section-shell">
         <SectionHeading
           eyebrow="FAQs"
@@ -286,7 +286,7 @@ export function BlogSection() {
   const hasMore = blogs.length > 3;
 
   return (
-    <section id="blog" className="py-20 md:py-28 relative overflow-hidden bg-background">
+    <section id="blog" className="py-20 relative overflow-hidden bg-background">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Insights & Updates"
@@ -377,7 +377,7 @@ export function BlogSection() {
 
 export function DemoCTA() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-20">
       <div className="section-shell">
         <div className="surface-ink relative overflow-hidden rounded-[2rem] px-7 py-14 text-center md:px-16 md:py-20">
           <div className="glow-orb -top-16 right-10 h-72 w-72 bg-primary" />

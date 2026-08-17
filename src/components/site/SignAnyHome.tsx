@@ -132,7 +132,7 @@ function Hero() {
 }
 function KeyFeatures() {
   return (
-    <section id="features" className="bg-cloud py-20 md:py-28">
+    <section id="features" className="bg-cloud py-20">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Core capabilities"
@@ -182,7 +182,7 @@ function KeyFeatures() {
 
 function Workspace() {
   return (
-    <section id="workspace" className="py-20 md:py-28">
+    <section id="workspace" className="py-20">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Workspace & admin"
@@ -208,7 +208,7 @@ function Workspace() {
 
 function Permissions() {
   return (
-    <section id="permissions" className="relative overflow-hidden bg-cloud py-20 md:py-28">
+    <section id="permissions" className="relative overflow-hidden bg-cloud py-20 ">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Permission sets"
@@ -246,7 +246,7 @@ function Permissions() {
 
 function ApiSection() {
   return (
-    <section id="api" className="py-20 md:py-28">
+    <section id="api" className="py-20">
       <div className="section-shell">
         <SectionHeading
           eyebrow="API & integrations"

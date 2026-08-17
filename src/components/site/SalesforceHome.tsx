@@ -196,7 +196,7 @@ export function SalesforceHome() {
 
       <ProductCarousel />
 
-      <section id="sf-features" className="bg-cloud py-20 md:py-28">
+      <section id="sf-features" className="bg-cloud py-20">
         <div className="section-shell">
           <SectionHeading
             eyebrow="Capabilities"
@@ -218,7 +218,7 @@ export function SalesforceHome() {
         </div>
       </section>
 
-      <section id="sf-steps" className="py-20 md:py-28">
+      <section id="sf-steps" className="py-20">
         <div className="section-shell">
           <SectionHeading
             eyebrow="How it works"
