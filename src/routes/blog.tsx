@@ -61,7 +61,8 @@ function BlogPage() {
                 Stay up to date with the latest in digital signatures, enterprise security, and document workflow automation.
               </p>
 
-              {/* Search Bar */}
+            {/* Search Bar (only if blogs exist) */}
+            {blogs.length > 0 && (
               <div className="relative mt-8 max-w-xl mx-auto">
                 <Search
                   size={18}
@@ -75,114 +76,147 @@ function BlogPage() {
                   className="w-full rounded-2xl border border-border bg-card pl-11 pr-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                 />
               </div>
-            </div>
+            )}
+          </div>
 
-            {searchQuery === "" && featuredBlog && (
-              /* Featured Article Showcase */
-              <div className="mb-16">
-                <div className="group relative overflow-hidden rounded-[32px] border border-border/80 bg-card p-3 shadow-md hover:border-primary/40 transition-all duration-300">
-                  <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-                    <div className="h-64 sm:h-80 lg:h-96 rounded-[24px] overflow-hidden relative">
-                      <img
-                        src={featuredBlog.image}
-                        alt={featuredBlog.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
-                      <span className="absolute top-4 left-4 rounded-full bg-primary px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
-                        Featured Article
-                      </span>
-                    </div>
-                    <div className="p-4 sm:p-6 lg:p-8">
-                      <div className="flex items-center gap-3 mb-3 sm:mb-4 text-xs text-muted-foreground">
-                        <span className="font-bold text-primary uppercase tracking-wider text-[11px]">{featuredBlog.category}</span>
-                        <span>•</span>
-                        <span>{featuredBlog.date}</span>
-                        <span>•</span>
-                        <span className="flex items-center gap-1 font-medium"><Clock size={12} /> {featuredBlog.readTime}</span>
+          {blogs.length === 0 ? (
+            /* No blogs published empty state */
+            <div className="max-w-xl mx-auto text-center py-16 px-6 rounded-3xl border border-border/80 bg-card shadow-sm mb-20">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 border border-primary/20">
+                <Newspaper size={32} />
+              </div>
+              <h2 className="text-2xl font-bold text-foreground mb-2">No Blogs Published Yet</h2>
+              <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                We haven't published any articles yet. Check back soon for the latest news, expert guides, and product updates!
+              </p>
+            </div>
+          ) : filteredBlogs.length === 0 ? (
+            /* Search returned no results */
+            <div className="max-w-xl mx-auto text-center py-16 px-6 rounded-3xl border border-border/80 bg-card shadow-sm mb-20">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 border border-primary/20">
+                <Search size={32} />
+              </div>
+              <h2 className="text-2xl font-bold text-foreground mb-2">No Articles Found</h2>
+              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
+                We couldn't find any articles matching "<span className="font-semibold text-foreground">{searchQuery}</span>". Try searching for another topic or clear your search query.
+              </p>
+              <button
+                onClick={() => setSearchQuery("")}
+                className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-90 transition-opacity"
+              >
+                Clear Search
+              </button>
+            </div>
+          ) : (
+            <>
+              {searchQuery === "" && featuredBlog && (
+                /* Featured Article Showcase */
+                <div className="mb-16">
+                  <div className="group relative overflow-hidden rounded-[32px] border border-border/80 bg-card p-3 shadow-md hover:border-primary/40 transition-all duration-300">
+                    <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                      <div className="h-64 sm:h-80 lg:h-96 rounded-[24px] overflow-hidden relative">
+                        <img
+                          src={featuredBlog.image}
+                          alt={featuredBlog.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+                        <span className="absolute top-4 left-4 rounded-full bg-primary px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-sm">
+                          Featured Article
+                        </span>
                       </div>
-                      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4 group-hover:text-primary transition-colors leading-tight">
-                        {featuredBlog.title}
-                      </h2>
-                      <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
-                        {featuredBlog.excerpt}
-                      </p>
-                      <div className="flex items-center justify-between pt-4 border-t border-border/60">
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center text-xs">
-                            AR
-                          </div>
-                          <span className="text-xs font-semibold text-foreground">{featuredBlog.author}</span>
+                      <div className="p-4 sm:p-6 lg:p-8">
+                        <div className="flex items-center gap-3 mb-3 sm:mb-4 text-xs text-muted-foreground">
+                          <span className="font-bold text-primary uppercase tracking-wider text-[11px]">{featuredBlog.category}</span>
+                          <span>•</span>
+                          <span>{featuredBlog.date}</span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1 font-medium"><Clock size={12} /> {featuredBlog.readTime}</span>
                         </div>
-                        <Link
-                          to="/blog/$slug"
-                          params={{ slug: featuredBlog.slug }}
-                          className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline underline-offset-4"
-                        >
-                          Read Article <ArrowRight size={16} />
-                        </Link>
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4 group-hover:text-primary transition-colors leading-tight">
+                          {featuredBlog.title}
+                        </h2>
+                        <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
+                          {featuredBlog.excerpt}
+                        </p>
+                        <div className="flex items-center justify-between pt-4 border-t border-border/60">
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center text-xs">
+                              AR
+                            </div>
+                            <span className="text-xs font-semibold text-foreground">{featuredBlog.author}</span>
+                          </div>
+                          <Link
+                            to="/blog/$slug"
+                            params={{ slug: featuredBlog.slug }}
+                            className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline underline-offset-4"
+                          >
+                            Read Article <ArrowRight size={16} />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Articles Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-              {filteredBlogs.map((blog) => (
-                <article
-                  key={blog.id}
-                  className="group flex flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
-                >
-                  <Link to="/blog/$slug" params={{ slug: blog.slug }} className="block">
-                    <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
-                      <img
-                        src={blog.image}
-                        alt={blog.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                      <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
-                        {blog.category}
-                      </span>
-                    </div>
-                  </Link>
-
-                  <div className="flex flex-1 flex-col p-5">
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
-                      <span className="flex items-center gap-1 font-medium">
-                        <Clock size={12} /> {blog.readTime}
-                      </span>
-                      <span>•</span>
-                      <span>{blog.date}</span>
-                    </div>
-
-                    <Link to="/blog/$slug" params={{ slug: blog.slug }}>
-                      <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
-                        {blog.title}
-                      </h3>
-                    </Link>
-                    <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
-                      {blog.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
-                      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                        <User size={13} /> {blog.author}
+              {/* Articles Grid */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                {filteredBlogs.map((blog) => (
+                  <article
+                    key={blog.id}
+                    className="group flex flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                  >
+                    <Link to="/blog/$slug" params={{ slug: blog.slug }} className="block">
+                      <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
+                        <img
+                          src={blog.image}
+                          alt={blog.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                        <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
+                          {blog.category}
+                        </span>
                       </div>
-                      <Link
-                        to="/blog/$slug"
-                        params={{ slug: blog.slug }}
-                        className="text-xs font-bold text-primary hover:underline underline-offset-4"
-                      >
-                        Read More
+                    </Link>
+
+                    <div className="flex flex-1 flex-col p-5">
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                        <span className="flex items-center gap-1 font-medium">
+                          <Clock size={12} /> {blog.readTime}
+                        </span>
+                        <span>•</span>
+                        <span>{blog.date}</span>
+                      </div>
+
+                      <Link to="/blog/$slug" params={{ slug: blog.slug }}>
+                        <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
+                          {blog.title}
+                        </h3>
                       </Link>
+                      <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
+                        {blog.excerpt}
+                      </p>
+
+                      <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
+                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                          <User size={13} /> {blog.author}
+                        </div>
+                        <Link
+                          to="/blog/$slug"
+                          params={{ slug: blog.slug }}
+                          className="text-xs font-bold text-primary hover:underline underline-offset-4"
+                        >
+                          Read More
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+                  </article>
+                ))}
+              </div>
+            </>
+          )}
 
             {/* Book Demo CTA Card */}
             <div className="surface-ink p-10 md:p-14 rounded-3xl text-center relative overflow-hidden shadow-xl border border-ink-foreground/10">

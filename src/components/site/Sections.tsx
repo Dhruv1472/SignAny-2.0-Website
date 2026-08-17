@@ -295,58 +295,70 @@ export function BlogSection() {
           desc="Stay up to date with the latest in digital signatures, enterprise security, and document workflow automation."
         />
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {homeBlogs.map((b, idx) => (
-            <article
-              key={b.id}
-              className={`group relative flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg ${
-                idx === 2 ? "hidden lg:flex" : "flex"
-              }`}
-            >
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
-                <img
-                  src={b.image}
-                  alt={b.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
-                  {b.category}
-                </span>
-              </div>
-
-              <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
-                  <span className="flex items-center gap-1 font-medium">
-                    <Clock size={12} /> {b.readTime}
+        {blogs.length === 0 ? (
+          <div className="max-w-xl mx-auto text-center py-12 px-6 rounded-3xl border border-border/80 bg-card shadow-sm">
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 border border-primary/20">
+              <Newspaper size={30} />
+            </div>
+            <h3 className="text-xl font-bold text-foreground mb-2">No Blogs Published Yet</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              We haven't published any articles yet. Check back soon for the latest insights on digital signatures, enterprise security, and document workflow automation!
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {homeBlogs.map((b, idx) => (
+              <article
+                key={b.id}
+                className={`group relative flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg ${
+                  idx === 2 ? "hidden lg:flex" : "flex"
+                }`}
+              >
+                <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
+                  <img
+                    src={b.image}
+                    alt={b.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                  <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
+                    {b.category}
                   </span>
-                  <span>•</span>
-                  <span>{b.date}</span>
                 </div>
 
-                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
-                  {b.title}
-                </h3>
-                <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
-                  {b.excerpt}
-                </p>
-
-                <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
-                  <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                    <User size={13} /> {b.author}
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                    <span className="flex items-center gap-1 font-medium">
+                      <Clock size={12} /> {b.readTime}
+                    </span>
+                    <span>•</span>
+                    <span>{b.date}</span>
                   </div>
-                  <Link
-                    to="/blog/$slug"
-                    params={{ slug: b.slug }}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline underline-offset-4"
-                  >
-                    Read Article <ArrowRight size={13} />
-                  </Link>
+
+                  <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
+                    {b.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
+                    {b.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
+                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                      <User size={13} /> {b.author}
+                    </div>
+                    <Link
+                      to="/blog/$slug"
+                      params={{ slug: b.slug }}
+                      className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline underline-offset-4"
+                    >
+                      Read Article <ArrowRight size={13} />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        )}
 
         {hasMore && (
           <div className="mt-12 text-center">

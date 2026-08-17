@@ -20,11 +20,13 @@ import {
   AlertCircle,
   ChevronRight,
   ArrowUp,
-  Briefcase
+  Briefcase,
+  Download
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ProductModeProvider } from "@/lib/product-mode";
+import logo from "@/assets/SignAnyDarkLogo.png";
 
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
@@ -173,9 +175,391 @@ const countryDisclosures = [
   },
 ];
 
+// Generates the Privacy Policy PDF using jsPDF's native text API.
+async function generatePrivacyPolicyPDF() {
+  const { jsPDF } = await import("jspdf");
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  const timeStr = now.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const downloadStamp = `${dateStr} at ${timeStr}`;
+  const filename = `SignAny_2.0_Privacy_Policy_${now.toISOString().slice(0, 10)}.pdf`;
+
+  const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+
+  const PAGE_W = 210;
+  const PAGE_H = 297;
+  const ML = 15; // margin left
+  const MR = 15; // margin right
+  const MT = 14; // margin top
+  const MB = 14; // margin bottom
+  const CONTENT_W = PAGE_W - ML - MR;
+
+  let y = MT;
+
+  const newPageIfNeeded = (needed = 7) => {
+    if (y + needed > PAGE_H - MB) {
+      doc.addPage();
+      y = MT;
+    }
+  };
+
+  // ── helpers ─────────────────────────────────────────────────────────────────
+  const setFont = (style: "normal" | "bold", size: number, color = "#1e293b") => {
+    doc.setFont("helvetica", style);
+    doc.setFontSize(size);
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
+    doc.setTextColor(r, g, b);
+  };
+
+  const writeText = (
+    text: string,
+    size: number,
+    style: "normal" | "bold" = "normal",
+    color = "#1e293b",
+    indent = 0
+  ) => {
+    setFont(style, size, color);
+    const lines = doc.splitTextToSize(text, CONTENT_W - indent);
+    const lineSpacing = size * 0.48; // ~4.3mm for 9pt text - prevents vertical merging
+    lines.forEach((line: string) => {
+      newPageIfNeeded(lineSpacing);
+      doc.text(line, ML + indent, y);
+      y += lineSpacing;
+    });
+  };
+
+  const writeParagraph = (text: string, indent = 0) => {
+    writeText(text, 9, "normal", "#334155", indent);
+    y += 2;
+  };
+
+  const writeBullet = (label: string, body: string) => {
+    newPageIfNeeded(8);
+    const bulletSymbol = "• ";
+    setFont("bold", 9, "#0f172a");
+    const prefixWidth = doc.getTextWidth(bulletSymbol);
+    const labelStr = label ? label + " " : "";
+    const labelWidth = label ? doc.getTextWidth(labelStr) : 0;
+
+    doc.text(bulletSymbol, ML + 2, y);
+    if (label) {
+      doc.text(label, ML + 2 + prefixWidth, y);
+    }
+
+    const totalHeaderWidth = prefixWidth + labelWidth;
+    setFont("normal", 9, "#334155");
+
+    if (totalHeaderWidth < CONTENT_W * 0.5) {
+      const bodyLines = doc.splitTextToSize(body, CONTENT_W - 2 - totalHeaderWidth);
+      doc.text(bodyLines[0] ?? "", ML + 2 + totalHeaderWidth, y);
+      y += 4.5;
+      for (let i = 1; i < bodyLines.length; i++) {
+        newPageIfNeeded(5);
+        doc.text(bodyLines[i], ML + 2 + totalHeaderWidth, y);
+        y += 4.5;
+      }
+    } else {
+      y += 4.5;
+      const bodyLines = doc.splitTextToSize(body, CONTENT_W - 6);
+      bodyLines.forEach((line: string) => {
+        newPageIfNeeded(5);
+        doc.text(line, ML + 6, y);
+        y += 4.5;
+      });
+    }
+    y += 1.5;
+  };
+
+  const writeSectionHeading = (text: string) => {
+    newPageIfNeeded(14);
+    y += 3;
+    setFont("bold", 11, "#0f172a");
+    doc.text(text, ML, y);
+    y += 4.5;
+    doc.setDrawColor(0xe2, 0xe8, 0xf0);
+    doc.setLineWidth(0.3);
+    doc.line(ML, y, ML + CONTENT_W, y);
+    y += 4;
+  };
+
+  // ── DOCUMENT HEADER ─────────────────────────────────────────────────────────
+  // Title bar background
+  doc.setFillColor(0x0f, 0x17, 0x2a);
+  doc.rect(0, 0, PAGE_W, 22, "F");
+
+  // Left header title
+  setFont("bold", 14, "#ffffff");
+  doc.text("SignAny 2.0  —  Privacy Policy", ML, 10);
+  setFont("normal", 8, "#94a3b8");
+  doc.text("MV Clouds Private Limited  •  Official Electronic Signature Platform", ML, 16);
+
+  // Right header logo image
+  try {
+    const img = new Image();
+    img.src = logo;
+    await new Promise<void>((resolve) => {
+      if (img.complete) {
+        resolve();
+      } else {
+        img.onload = () => resolve();
+        img.onerror = () => resolve();
+      }
+    });
+    if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+      const imgH = 10;
+      const imgW = (img.naturalWidth / img.naturalHeight) * imgH;
+      doc.addImage(img, "PNG", PAGE_W - MR - imgW, 6, imgW, imgH);
+    } else {
+      setFont("bold", 13, "#818cf8");
+      doc.text("SignAny 2.0", PAGE_W - MR, 10, { align: "right" });
+      setFont("normal", 7, "#cbd5e1");
+      doc.text("MV CLOUDS PVT LTD", PAGE_W - MR, 16, { align: "right" });
+    }
+  } catch {
+    setFont("bold", 13, "#818cf8");
+    doc.text("SignAny 2.0", PAGE_W - MR, 10, { align: "right" });
+    setFont("normal", 7, "#cbd5e1");
+    doc.text("MV CLOUDS PVT LTD", PAGE_W - MR, 16, { align: "right" });
+  }
+
+  y = 28;
+
+  // Metadata row box
+  doc.setFillColor(0xf8, 0xfa, 0xfc);
+  doc.setDrawColor(0xcb, 0xd5, 0xe1);
+  doc.setLineWidth(0.3);
+  doc.roundedRect(ML, y, CONTENT_W, 14, 2, 2, "FD");
+
+  setFont("bold", 8, "#0f172a");
+  doc.text("Download Date & Time:", ML + 4, y + 5);
+  setFont("normal", 8, "#334155");
+  doc.text(downloadStamp, ML + 4 + doc.getTextWidth("Download Date & Time:") + 2, y + 5);
+
+  setFont("bold", 8, "#0f172a");
+  doc.text("Last Modified:", ML + 4, y + 10);
+  setFont("normal", 8, "#334155");
+  doc.text("7 August 2026", ML + 4 + doc.getTextWidth("Last Modified:") + 2, y + 10);
+
+  setFont("bold", 8, "#0f172a");
+  doc.text("Platform:", PAGE_W / 2 + 4, y + 5);
+  setFont("normal", 8, "#334155");
+  doc.text("SignAny 2.0  (esignany.com)", PAGE_W / 2 + 4 + doc.getTextWidth("Platform:") + 2, y + 5);
+
+  y += 20;
+
+  // ── SECTIONS ────────────────────────────────────────────────────────────────
+  writeSectionHeading("1. Purpose of This Notice");
+  writeParagraph('MV Clouds Private Limited ("MV Clouds," "we," "us," "our") operates SignAny 2.0 (the "Service"), an electronic signature and document management platform. This Privacy Policy explains what personal information we collect, how we use and share it, how long we keep it, and the choices and rights available to you. By using the Service, you acknowledge that we process your information as described here.');
+  
+  writeText("Data Controller vs. Data Processor Distinction", 9.5, "bold", "#0f172a");
+  y += 2;
+  writeParagraph('If a business or organisation has invited you to sign a document through SignAny 2.0, that business is typically the "data controller" for the content of that document and is responsible for the underlying transaction. We act as the "data processor" for document content in that scenario — questions about why a specific document was sent to you should generally go to the sender first.');
+  writeParagraph("This policy applies directly when you interact with MV Clouds Private Limited via SignAny 2.0.");
+
+  writeSectionHeading("2. Information We Collect");
+  writeText("Provided Directly by You", 9.5, "bold", "#0f172a");
+  y += 2;
+  writeBullet("Account & identity:", "Name, email address, password, company/organization name.");
+  writeBullet("Signature data:", "Typed signature text, drawn signature image, or uploaded signature image file.");
+  writeBullet("Document content:", "Uploaded files for signing or review, text, form fields, and annotations.");
+  writeBullet("Signer information:", "Names, email addresses, and signing roles of document recipients.");
+  writeBullet("Customer support:", "Messages, attachments, or feedback sent through support channels.");
+  y += 2;
+  writeText("Collected Automatically", 9.5, "bold", "#0f172a");
+  y += 2;
+  writeBullet("Device data:", "IP address, browser type, operating system, unique device identifiers.");
+  writeBullet("Usage data:", "Pages viewed, features used, click patterns, session duration, error logs.");
+  writeBullet("Approximate location:", "Derived from IP address (we do not collect precise GPS data).");
+  writeBullet("Audit trail data:", "Signing action timestamps, IP address at signing, device/browser used, signing order, consent confirmations, and cryptographic document hash/checksum.");
+  y += 2;
+  writeText("Information We DO NOT Collect", 9.5, "bold", "#0f172a");
+  y += 2;
+  writeParagraph("We do not collect biometric signature data such as pen pressure, stroke speed, or stylus angle. Signatures are captured only as typed text, drawn images, or uploaded image files.");
+  writeText("Information from Other Sources", 9.5, "bold", "#0f172a");
+  y += 2;
+  writeParagraph("If someone else sends you a document for signature, they provide us with your name and email address to complete that transaction. We combine this with any account info you separately provide.");
+
+  writeSectionHeading("3. How We Use Your Information");
+  writeParagraph("We process personal data strictly for defined purposes essential to operating an enterprise electronic signature service:");
+
+  // Table
+  newPageIfNeeded(15);
+  setFont("bold", 8.5, "#0f172a");
+  const col1W = 85;
+  const col2W = CONTENT_W - col1W;
+  doc.setFillColor(0xf1, 0xf5, 0xf9);
+  doc.rect(ML, y, CONTENT_W, 7, "F");
+  doc.text("Processing Purpose", ML + 3, y + 5);
+  doc.text("Categories of Information Used", ML + col1W + 3, y + 5);
+  y += 7;
+
+  usageTableData.forEach((row) => {
+    setFont("bold", 8, "#1e293b");
+    const pLines = doc.splitTextToSize(row.purpose, col1W - 6);
+    setFont("normal", 8, "#475569");
+    const iLines = doc.splitTextToSize(row.infoUsed, col2W - 6);
+    const lineCount = Math.max(pLines.length, iLines.length);
+    const rowHeight = lineCount * 4 + 3;
+
+    newPageIfNeeded(rowHeight);
+    doc.setDrawColor(0xe2, 0xe8, 0xf0);
+    doc.setLineWidth(0.2);
+    doc.rect(ML, y, CONTENT_W, rowHeight);
+    doc.line(ML + col1W, y, ML + col1W, y + rowHeight);
+
+    setFont("bold", 8, "#1e293b");
+    pLines.forEach((line: string, idx: number) => {
+      doc.text(line, ML + 3, y + 4 + idx * 4);
+    });
+
+    setFont("normal", 8, "#475569");
+    iLines.forEach((line: string, idx: number) => {
+      doc.text(line, ML + col1W + 3, y + 4 + idx * 4);
+    });
+
+    y += rowHeight;
+  });
+
+  y += 3;
+  writeText("Strict Zero-AI Training Commitment", 9.5, "bold", "#0f172a");
+  y += 2;
+  writeParagraph("We explicitly do not use your document content or uploaded files to train general-purpose artificial intelligence (AI) or machine learning (ML) models.");
+
+  writeSectionHeading("4. Legal Basis for Processing (EU/EEA & UK Users)");
+  writeParagraph("Where European Union GDPR or UK GDPR applies, we rely on the following legal bases to process your personal data:");
+  writeBullet("Performance of a Contract:", "To deliver the electronic signature service requested by you (account creation, document routing, transaction processing).");
+  writeBullet("Legal Obligation:", "To maintain cryptographic audit trails supporting signature validity under eIDAS, ESIGN Act, and electronic transaction laws.");
+  writeBullet("Legitimate Interests:", "To prevent fraud, secure platform infrastructure, and improve products without overriding your fundamental rights.");
+  writeBullet("Consent:", "For optional marketing communications and non-essential cookies, which you may freely withdraw at any time.");
+
+  writeSectionHeading("5. How We Share Your Information");
+  writeParagraph("We disclose personal information strictly to trusted entities under controlled conditions:");
+  writeBullet("Cloud Storage Providers (AWS S3):", "Securely hosting uploaded and completed signed documents with high-grade server encryption.");
+  writeBullet("Signing Transaction Participants:", "Limited to what is necessary to complete execution (e.g. recipients see document text and signer names).");
+  writeBullet("Sub-Processors & Service Providers:", "Email delivery, analytics, customer support, error monitoring, bound by strict confidentiality agreements.");
+  writeBullet("Legal & Regulatory Authorities:", "Where required to comply with statutory law, valid legal process, or to safeguard safety and rights.");
+  writeBullet("Corporate Successors:", "In the event of a merger, acquisition, or asset sale, with prior notice provided to affected users.");
+  writeParagraph("We NEVER sell your personal information or document contents to third parties, and we do NOT share document content with advertisers.");
+
+  writeSectionHeading("6. Document and Signature Retention");
+  writeBullet("Signed Records (1 Year):", "Signed documents and cryptographic audit trails are retained for 1 year to satisfy legal evidentiary standards supporting signature validity.");
+  writeBullet("Account Data (Active):", "Account information is maintained for as long as your registered account remains active and open.");
+  writeBullet("Deletion / Anonymisation (Secure):", "Upon expiry of retention or a valid request, data is permanently erased or anonymized using cryptographic measures.");
+
+  writeSectionHeading("7. Document Privacy & Data Handling Policy");
+  writeParagraph("At SignAny 2.0, we treat the content of your documents with the highest standard of confidentiality and security.");
+  writeBullet("Data Separation & Role:", "When you sign or send documents on behalf of a business, we act strictly as a Data Processor. The document content belongs entirely to you or the initiating organisation.");
+  writeBullet("Strict Access Controls:", "We enforce rigid technical controls limiting employee access to document content. Employees can only access document text or transaction metadata on an absolute \"need-to-know\" basis to resolve support issues explicitly requested by you.");
+  writeBullet("No AI Training:", "We explicitly do not use, read, or scan your document contents, uploaded files, or signature metadata to train general-purpose artificial intelligence (AI) or machine learning (ML) models.");
+  writeBullet("Infrastructure & Encryption:", "All documents are isolated securely in cloud storage and are encrypted at rest and in transit using advanced cryptographic protocols (AES-256 and TLS 1.3).");
+
+  writeSectionHeading("8. Cookies & Tracking Technologies");
+  writeParagraph("We use cookies and local browser storage mechanisms solely for operational efficiency:");
+  writeBullet("Essential Cookies:", "Required for authentication, security, session integrity, and enabling signature execution. Cannot be disabled without breaking service functionality.");
+  writeBullet("Analytics Cookies:", "Used to evaluate product usage patterns, optimize load times, and troubleshoot UI defects. We do NOT deploy third-party advertising cookies.");
+
+  writeSectionHeading("9. Your Choices & Account Controls");
+  writeBullet("Profile Information:", "You can review, edit, or update your registered account details at any time through your dashboard settings.");
+  writeBullet("Marketing Communications:", "Unsubscribe via the link in any marketing email. Transactional signature notifications will continue to arrive.");
+  writeBullet("Browser Cookies:", "Control cookies through your browser configuration settings.");
+  writeBullet("Account Closure:", "Initiate account deletion via in-app settings or by emailing info@esignany.com (subject to retention obligations).");
+
+  writeSectionHeading("10. Your Privacy Rights");
+  writeParagraph("Depending on your jurisdiction, you possess specific legal rights over your personal data:");
+  writeBullet("Access:", "Request copies of your personal data.");
+  writeBullet("Rectification:", "Correct inaccurate or incomplete data.");
+  writeBullet("Erasure / Right to be Forgotten:", "Delete data subject to legal retention obligations.");
+  writeBullet("Restriction of Processing:", "Restrict specific data processing activities.");
+  writeBullet("Data Portability:", "Receive your data in a structured, machine-readable format.");
+  writeBullet("Withdraw Consent:", "Revoke consent without affecting prior lawful processing.");
+  writeParagraph("To exercise any of these rights, submit your verified request to our DPO at info@esignany.com.");
+
+  writeSectionHeading("11. Notice to California Residents (CCPA / CPRA)");
+  writeParagraph("Under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA), California residents have specific statutory disclosures:");
+  writeBullet("Right to Know:", "Categories of personal information collected, used, and disclosed in the preceding 12 months.");
+  writeBullet("Right to Delete & Correct:", "Request deletion or correction of personal information held by us.");
+  writeBullet("No Sale / Share:", "We do not sell or share personal information for cross-context behavioral advertising.");
+  writeBullet("Non-Discrimination:", "You will not receive discriminatory treatment for exercising your CCPA rights.");
+  writeParagraph("Submit CCPA requests to: info@esignany.com");
+
+  writeSectionHeading("12. Children's Privacy");
+  writeParagraph("The Service is not directed to, and is not intended for use by, children under 16. We do not knowingly collect personal information from children under 16. If you believe a child has provided us with personal information, contact us at info@esignany.com and we will immediately delete it.");
+
+  writeSectionHeading("13. International Data Transfers & Storage");
+  writeText("Primary Data Hosting & Storage Location", 9.5, "bold", "#0f172a");
+  y += 2;
+  writeParagraph("SignAny 2.0 operates globally. By accessing or using our services, uploading documents, or completing electronic signatures, you acknowledge that your personal data, uploaded documents, and signature audit metadata are stored and processed in Amazon Web Services (AWS) data centers in the United States (us-east-1 region).");
+  writeBullet("Enterprise Encryption:", "All data in transit is encrypted using HTTPS/TLS 1.3, and all stored documents and database records are encrypted at rest using AES-256 server-side encryption.");
+  writeBullet("AWS Security Compliances:", "AWS infrastructure maintains compliance with ISO/IEC 27001, ISO 27017, ISO 27018, SOC 1, SOC 2, and SOC 3 international security standards.");
+  writeParagraph("Where required by applicable privacy laws (such as EU GDPR, Swiss RevFADP, UK GDPR, and UAE PDPL), cross-border transfers are governed by AWS Data Processing Addenda containing Standard Contractual Clauses (SCCs) and adherence to recognized Data Privacy Frameworks.");
+
+  writeSectionHeading("14. How We Protect Your Information");
+  writeBullet("Cryptographic Hashing:", "Audit trail integrity is maintained via SHA-256 document hashing to instantly detect any unauthorized tampering.");
+  writeBullet("RBAC & Isolation:", "Role-based access control ensures strict isolation of customer data across tenant environments.");
+  writeBullet("24/7 Security Operations:", "Continuous vulnerability scanning, intrusion monitoring, and automated threat mitigation.");
+
+  writeSectionHeading("15. Supplemental Country Disclosures");
+  countryDisclosures.forEach((cd) => {
+    writeBullet(`${cd.country} — ${cd.law}:`, cd.details);
+  });
+
+  writeSectionHeading("16. Changes to This Policy");
+  writeParagraph("We may amend this Privacy Policy to reflect changes in law, our practices, or the Service itself. Material changes will be communicated via email or an in-Service notification prior to taking effect. The \"Version Date\" at the top reflects the most recent update.");
+
+  writeSectionHeading("17. Contact Us");
+  writeText("MV Clouds Private Limited  —  Operator of SignAny 2.0", 9.5, "bold", "#0f172a");
+  y += 2;
+  writeText("Registered Address:", 9, "bold", "#0f172a");
+  y += 1;
+  writeParagraph("D - 404, The First Synthesis, B/H Keshavbaug Party Plot, Ahmedabad, Gujarat - 380015, India");
+  writeText("Privacy & Data Inquiries:", 9, "bold", "#0f172a");
+  y += 1;
+  writeParagraph("info@esignany.com  |  info@mvclouds.com");
+
+  // ── FOOTER on every page ─────────────────────────────────────────────────────
+  const totalPages = doc.getNumberOfPages();
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+    doc.setDrawColor(0xe2, 0xe8, 0xf0);
+    doc.setLineWidth(0.3);
+    doc.line(ML, PAGE_H - 10, ML + CONTENT_W, PAGE_H - 10);
+    setFont("normal", 7, "#94a3b8");
+    doc.text(
+      `SignAny 2.0 Privacy Policy  •  Downloaded: ${downloadStamp}  •  esignany.com`,
+      ML,
+      PAGE_H - 6
+    );
+    doc.text(`Page ${i} of ${totalPages}`, PAGE_W - MR, PAGE_H - 6, { align: "right" });
+  }
+
+  doc.save(filename);
+}
+
 function PrivacyPolicy() {
   const [activeSection, setActiveSection] = useState<string>("notice");
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    try {
+      setIsDownloading(true);
+      await generatePrivacyPolicyPDF();
+    } catch (err) {
+      console.error("PDF download error:", err);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -190,7 +574,7 @@ function PrivacyPolicy() {
 
       for (let i = sectionElements.length - 1; i >= 0; i--) {
         const sec = sectionElements[i];
-        if (sec.el && sec.el.offsetTop <= scrollPosition) {
+        if (sec && sec.el && sec.el.offsetTop <= scrollPosition) {
           setActiveSection(sec.id);
           break;
         }
@@ -241,12 +625,19 @@ function PrivacyPolicy() {
             <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
               MV Clouds Private Limited ("we", "us", "our") operates SignAny 2.0. This document explains how your information is collected, used, protected, and retained.
             </p>
-            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground bg-muted/40 border border-border px-4 py-2 rounded-xl">
-              <span><strong>Last Modified Date:</strong> 7 August 2026</span>
-              {/* <span className="hidden sm:inline">•</span>
-              <span><strong>Operator:</strong> MV Clouds Private Limited</span>
-              <span className="hidden sm:inline">•</span>
-              <span><strong>Platform:</strong> SignAny 2.0</span> */}
+            <div className="mt-6 flex items-center justify-center gap-4">
+              <div className="inline-flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground bg-muted/40 border border-border px-4 py-2 rounded-xl">
+                <span><strong>Last Modified Date:</strong> 7 August 2026</span>
+              </div>
+              <button
+                onClick={handleDownload}
+                disabled={isDownloading}
+                title="Download Privacy Policy as PDF"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border text-[11px] text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors duration-150 disabled:opacity-40 cursor-pointer"
+              >
+                <Download size={12} />
+                <span>{isDownloading ? "Preparing..." : "Download PDF"}</span>
+              </button>
             </div>
           </motion.div>
 

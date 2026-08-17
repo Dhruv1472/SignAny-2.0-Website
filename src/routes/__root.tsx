@@ -1,18 +1,15 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 
-import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-
 import { NotFoundView } from "../components/site/NotFoundView";
+import BookDemoHandler from "../components/ui/BookDemoHandler";
+import { FloatingLifecycleButton } from "../components/site/FloatingLifecycleButton";
 
 function NotFoundComponent() {
   return <NotFoundView />;
@@ -57,93 +54,19 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SignAny 2.0 | Secure eSignature Software" },
-      {
-        name: "description",
-        content:
-          "SignAny 2.0 is a secure electronic signature platform to send, sign and track legally binding documents on the web, in Salesforce, or via REST API.",
-      },
-      { name: "author", content: "MVClouds" },
-      { name: "robots", content: "index, follow" },
-      { property: "og:site_name", content: "SignAny 2.0" },
-      { property: "og:type", content: "website" },
-      { property: "og:locale", content: "en_US" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#0f1436" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap",
-      },
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
-    ],
-    scripts: [
-      {
-        src: "https://www.google.com/recaptcha/api.js?render=explicit",
-        async: true,
-        defer: true,
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "SignAny 2.0",
-          alternateName: "Signature Anywhere",
-          email: "info@esignany.com",
-          sameAs: [
-            "https://www.linkedin.com/showcase/esignany2-0/about/",
-            "https://www.instagram.com/esignany2.0/",
-          ],
-        }),
-      },
-    ],
-  }),
-
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-import BookDemoHandler from "../components/ui/BookDemoHandler";
-import { FloatingLifecycleButton } from "../components/site/FloatingLifecycleButton";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <BookDemoHandler />
       <FloatingLifecycleButton />
     </QueryClientProvider>
   );
 }
-
