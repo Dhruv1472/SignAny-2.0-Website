@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [
-    tanstackRouter({ target: "react", autoCodeSplitting: true }),
+    tanstackRouter({ target: "react", autoCodeSplitting: false }),
     tailwindcss(),
     react(),
   ],
@@ -28,5 +28,14 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist",
+    cssCodeSplit: false,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+        entryFileNames: "assets/[name]-[hash].js",
+        chunkFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash].[ext]",
+      },
+    },
   },
 }));

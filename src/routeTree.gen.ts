@@ -16,8 +16,8 @@ import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as LifecycleRouteImport } from './routes/lifecycle'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
+import { Route as UserGuideRouteImport } from './routes/user-guide'
 import { Route as VerifyHashRouteImport } from './routes/verifyHash'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as FeaturesIdRouteImport } from './routes/features_.$id'
@@ -57,14 +57,14 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   id: '/terms-and-conditions',
   path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserGuideRoute = UserGuideRouteImport.update({
+  id: '/user-guide',
+  path: '/user-guide',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerifyHashRoute = VerifyHashRouteImport.update({
@@ -91,8 +91,8 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/features/$id': typeof FeaturesIdRoute
@@ -105,8 +105,8 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/features/$id': typeof FeaturesIdRoute
@@ -120,8 +120,8 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/features_/$id': typeof FeaturesIdRoute
@@ -136,8 +136,8 @@ export interface FileRouteTypes {
     | '/features'
     | '/lifecycle'
     | '/privacy-policy'
-    | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/user-guide'
     | '/verifyHash'
     | '/blog/$slug'
     | '/features/$id'
@@ -150,8 +150,8 @@ export interface FileRouteTypes {
     | '/features'
     | '/lifecycle'
     | '/privacy-policy'
-    | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/user-guide'
     | '/verifyHash'
     | '/blog/$slug'
     | '/features/$id'
@@ -164,8 +164,8 @@ export interface FileRouteTypes {
     | '/features'
     | '/lifecycle'
     | '/privacy-policy'
-    | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/user-guide'
     | '/verifyHash'
     | '/blog_/$slug'
     | '/features_/$id'
@@ -179,8 +179,8 @@ export interface RootRouteChildren {
   FeaturesRoute: typeof FeaturesRoute
   LifecycleRoute: typeof LifecycleRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
+  UserGuideRoute: typeof UserGuideRoute
   VerifyHashRoute: typeof VerifyHashRoute
   BlogSlugRoute: typeof BlogSlugRoute
   FeaturesIdRoute: typeof FeaturesIdRoute
@@ -237,18 +237,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/terms-and-conditions': {
       id: '/terms-and-conditions'
       path: '/terms-and-conditions'
       fullPath: '/terms-and-conditions'
       preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/user-guide': {
+      id: '/user-guide'
+      path: '/user-guide'
+      fullPath: '/user-guide'
+      preLoaderRoute: typeof UserGuideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verifyHash': {
@@ -283,8 +283,8 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesRoute: FeaturesRoute,
   LifecycleRoute: LifecycleRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
+  UserGuideRoute: UserGuideRoute,
   VerifyHashRoute: VerifyHashRoute,
   BlogSlugRoute: BlogSlugRoute,
   FeaturesIdRoute: FeaturesIdRoute,
