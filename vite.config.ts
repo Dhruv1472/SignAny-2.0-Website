@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    allowedHosts: ["twister-broaden-egomaniac.ngrok-free.dev"],
     hmr: {
       overlay: false,
     },

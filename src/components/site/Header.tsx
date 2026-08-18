@@ -45,11 +45,14 @@ export function Header() {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      document.body.classList.add("mobile-menu-open");
     } else {
       document.body.style.overflow = "";
+      document.body.classList.remove("mobile-menu-open");
     }
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("mobile-menu-open");
     };
   }, [open]);
 
@@ -88,7 +91,7 @@ export function Header() {
     >
       <div className="section-shell flex h-16 items-center justify-between gap-4 md:h-20">
         <Link to="/" className="shrink-0" aria-label={`${SITE.name} home`}>
-          <img src={logo} alt="SignAny 2.0 logo" className="h-10 w-auto md:h-9" />
+          <img src={logo} alt="SignAny 2.0 logo" className="h-8 w-auto md:h-9" />
         </Link>
 
         <nav className="hidden items-center gap-6 xl:flex">
@@ -103,7 +106,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <ModeSwitch id="mode-desktop" />
           <a
             href="#book-demo"
@@ -121,7 +124,7 @@ export function Header() {
         </div>
 
         <button
-          className="p-2 text-foreground lg:hidden"
+          className="p-2 text-foreground xl:hidden"
           onClick={() => setOpen(!open)}
           aria-label="Toggle navigation menu"
           aria-expanded={open}
@@ -131,36 +134,43 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background lg:hidden">
-          <nav className="section-shell flex flex-col gap-1 py-4">
-            {nav.map((item) => (
+        <>
+          {/* Blur backdrop for mobile navigation overlay */}
+          <div
+            className="fixed inset-0 top-16 z-40 bg-background/40 backdrop-blur-md transition-all duration-300 xl:hidden md:top-20"
+            onClick={() => setOpen(false)}
+          />
+          <div className="relative z-50 border-t border-border bg-background/95 backdrop-blur-md xl:hidden">
+            <nav className="section-shell flex flex-col gap-1 py-4">
+              {nav.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {item.name}
+                </a>
+              ))}
+              <div className="py-3">
+                <ModeSwitch id="mode-mobile" className="w-full justify-between px-4 py-2.5" />
+              </div>
               <a
-                key={item.name}
-                href={item.href}
+                href="#book-demo"
                 onClick={() => setOpen(false)}
-                className="py-2 text-sm font-medium text-muted-foreground"
+                className="inline-flex items-center justify-center rounded-xl border border-border px-5 py-2.5 text-sm font-semibold"
               >
-                {item.name}
+                Book Demo
               </a>
-            ))}
-            <div className="py-3">
-              <ModeSwitch id="mode-mobile" className="w-full justify-between px-4 py-2.5" />
-            </div>
-            <a
-              href="#book-demo"
-              onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center rounded-xl border border-border px-5 py-2.5 text-sm font-semibold"
-            >
-              Book Demo
-            </a>
-            <a
-              href={SITE.appLink}
-              className="mt-2 inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
-            >
-              {buttonLabel}
-            </a>
-          </nav>
-        </div>
+              <a
+                href={SITE.appLink}
+                className="mt-2 inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+              >
+                {buttonLabel}
+              </a>
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );

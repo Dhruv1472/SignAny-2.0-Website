@@ -290,3 +290,9 @@
   stroke-dasharray: 1400;
   animation: draw-sign 7s ease-in-out infinite;
 }
+
+body.mobile-menu-open main {
+  filter: blur(4px);
+  pointer-events: none;
+  transition: filter 0.3s ease;
+}

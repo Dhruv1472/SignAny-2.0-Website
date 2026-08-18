@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Info, Check, Shield, Zap } from "lucide-react";
+import { ArrowRight, Info, Check, Shield, Zap, ChevronDown, ChevronUp } from "lucide-react";
 import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/Sections";
 import { SignaturePath } from "@/components/site/spinner";
@@ -9,6 +10,7 @@ import { useProductMode } from "@/lib/product-mode";
 
 export function SalesforceHome() {
   const { setMode } = useProductMode();
+  const [showAllFeatures, setShowAllFeatures] = useState(false);
 
   return (
     <>
@@ -205,16 +207,42 @@ export function SalesforceHome() {
             desc="A native package built for teams whose workflow already starts and ends in their CRM."
           />
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {salesforce.features.map((f) => (
-              <article key={f.title} className="card-soft card-soft-hover group p-7">
-                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-accent-foreground transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <Icon name={f.icon} size={22} />
-                </span>
-                <h3 className="text-lg font-semibold text-foreground">{f.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-              </article>
-            ))}
+            {salesforce.features.map((f, index) => {
+              const isMobileHidden = !showAllFeatures && index >= 3;
+              return (
+                <article
+                  key={f.title}
+                  className={`card-soft card-soft-hover group p-7 ${
+                    isMobileHidden ? "hidden sm:block" : "block"
+                  }`}
+                >
+                  <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-accent-foreground transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                    <Icon name={f.icon} size={22} />
+                  </span>
+                  <h3 className="text-lg font-semibold text-foreground">{f.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                </article>
+              );
+            })}
           </div>
+          {salesforce.features.length > 3 && (
+            <div className={`mt-10 flex justify-center ${salesforce.features.length <= 6 ? "sm:hidden" : ""}`}>
+              <button
+                onClick={() => setShowAllFeatures(!showAllFeatures)}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted cursor-pointer"
+              >
+                {showAllFeatures ? (
+                  <>
+                    View Less <ChevronUp size={16} />
+                  </>
+                ) : (
+                  <>
+                    View More <ChevronDown size={16} />
+                  </>
+                )}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
