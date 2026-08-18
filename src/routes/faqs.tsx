@@ -107,15 +107,15 @@ function FaqsPage() {
               {/* Search Bar */}
               <div className="relative mt-8 max-w-xl mx-auto">
                 <Search
-                  size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground"
+                  size={16}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground"
                 />
                 <input
                   type="text"
                   placeholder="Search questions (e.g. plans, security, Salesforce, API)..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-2xl border border-border bg-card pl-11 pr-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  className="w-full rounded-xl border border-border bg-card pl-10 pr-4 py-2.5 sm:py-3.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                 />
               </div>
             </div>
@@ -128,11 +128,11 @@ function FaqsPage() {
                     const CategoryIcon = category.icon;
                     return (
                       <section key={category.id} className="space-y-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                            <CategoryIcon size={20} />
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
+                            <CategoryIcon size={16} className="sm:w-5 sm:h-5" />
                           </div>
-                          <h2 className="text-2xl font-bold text-foreground">{category.title}</h2>
+                          <h2 className="text-lg sm:text-2xl font-bold text-foreground">{category.title}</h2>
                         </div>
 
                         <Accordion type="single" collapsible className="space-y-3">
@@ -140,12 +140,12 @@ function FaqsPage() {
                             <AccordionItem
                               key={idx}
                               value={`${category.id}-${idx}`}
-                              className="rounded-2xl border border-border/80 bg-card px-6 shadow-sm transition-shadow hover:shadow-md"
+                              className="rounded-xl sm:rounded-2xl border border-border/80 bg-card px-4 sm:px-6 shadow-sm transition-shadow hover:shadow-md"
                             >
-                              <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-4 text-base hover:text-primary transition-colors">
+                              <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-3 sm:py-4 text-sm sm:text-base hover:text-primary transition-colors">
                                 {faq.q}
                               </AccordionTrigger>
-                              <AccordionContent className="text-sm md:text-base leading-relaxed text-muted-foreground pb-5">
+                              <AccordionContent className="text-xs sm:text-sm md:text-base leading-relaxed text-muted-foreground pb-4 sm:pb-5">
                                 {faq.a}
                               </AccordionContent>
                             </AccordionItem>

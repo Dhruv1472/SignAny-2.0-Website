@@ -46,7 +46,7 @@ export function Footer() {
   const { setMode } = useProductMode();
   return (
     <footer className="bg-[#0e172a] text-white border-t border-white/10">
-      <div className="section-shell py-20">
+      <div className="section-shell pt-20 pb-10">
         <div className="grid sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand & Social */}
           <div className="lg:col-span-3">

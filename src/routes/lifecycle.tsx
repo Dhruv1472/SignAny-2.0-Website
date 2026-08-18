@@ -139,7 +139,7 @@ function LifecyclePage() {
             {/* MASTER 4-STAGE PIPELINE GRID */}
             <div className="max-w-6xl mx-auto mb-12 md:mb-16">
               <div className="rounded-[24px] sm:rounded-[32px] border border-border/80 bg-card p-4 sm:p-6 md:p-8 shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-x-0 top-0 h-2 bg-[#9485f2]" />
+                <div className="absolute inset-x-0 top-0 h-2 bg-[#9485f2] hidden sm:block" />
 
                 {/* 4 Connected Pipeline Cards */}
                 <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 relative mb-6 md:mb-8">

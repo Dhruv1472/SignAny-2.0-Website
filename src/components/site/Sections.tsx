@@ -2,6 +2,7 @@ import { Check, Sparkles, Clock3, Mail, ArrowRight, ShieldCheck, Lock, FileText,
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { compliances, salesforceCompliances, uaePass, plans, faqs, blogs, SITE } from "@/lib/site-data";
 import { useProductMode } from "@/lib/product-mode";
+import { Icon } from "@/components/site/Icon";
 
 const marqueeBadges = [
   { name: "ESIGN Act", desc: "US Federal Law", icon: FileCheck },
@@ -63,7 +64,7 @@ export function SectionHeading({
 export function ComplianceSection() {
   const { isSalesforce } = useProductMode();
   const currentCompliances = isSalesforce ? salesforceCompliances : compliances;
-  const marqueeLoop = [...marqueeBadges, ...marqueeBadges, ...marqueeBadges];
+  const marqueeLoop = [...currentCompliances, ...currentCompliances, ...currentCompliances];
 
   return (
     <section id="compliance" className="relative overflow-hidden bg-cloud py-20">
@@ -93,20 +94,19 @@ export function ComplianceSection() {
 
         <div className="animate-marquee hover:[animation-play-state:paused] flex w-max gap-5 py-2 cursor-pointer">
           {marqueeLoop.map((b, i) => {
-            const IconCmp = b.icon;
             return (
               <div
                 key={`m-${b.name}-${i}`}
                 className="group flex flex-col items-center text-center px-6 py-6 rounded-2xl bg-card border border-border/70 shadow-sm hover:shadow-lg hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 cursor-default min-w-[170px] md:min-w-[190px] relative"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-3 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all duration-300">
-                  <IconCmp size={22} strokeWidth={1.5} className="text-primary" />
+                  <Icon name={b.icon} size={22} className="text-primary" />
                 </div>
                 <h3 className="text-[15px] font-bold text-foreground mb-1 leading-tight">
                   {b.name}
                 </h3>
                 <p className="text-[12px] text-muted-foreground leading-relaxed">
-                  {b.desc}
+                  {b.country}
                 </p>
               </div>
             );
@@ -126,7 +126,7 @@ export function ComplianceSection() {
                 <div>
                   <div className="flex flex-wrap items-center gap-3 mb-2">
                     <h3 className="text-xl font-bold text-primary">{uaePass.name} Authentication</h3>
-                    <span className="rounded-full bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 text-xs font-bold uppercase tracking-wider dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/50 self-bottom">
+                    <span className="rounded-md md:rounded-full bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 text-xs font-bold uppercase tracking-wider dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/50 self-bottom">
                       {uaePass.status}
                     </span>
                   </div>

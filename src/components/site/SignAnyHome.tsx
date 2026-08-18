@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Check, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck, Check, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
 import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/Sections";
 import { SignaturePath } from "@/components/site/spinner";
@@ -37,7 +38,7 @@ function Hero() {
         <div className="animate-rise">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm">
             <Sparkles size={14} className="text-primary" />
-            Secure workflow automation for modern legal teams
+            Secure workflow automation for modern teams
           </span>
           <h1 className="text-4xl leading-[1.05] font-bold text-balance md:text-5xl lg:text-[4rem]">
             Send, sign and track documents{" "}
@@ -131,6 +132,9 @@ function Hero() {
   );
 }
 function KeyFeatures() {
+  const [showAll, setShowAll] = useState(false);
+  const displayedFeatures = showAll ? signanyFeatures : signanyFeatures.slice(0, 6);
+
   return (
     <section id="features" className="bg-cloud py-20">
       <div className="section-shell">
@@ -141,46 +145,72 @@ function KeyFeatures() {
           desc="From upload to signed and archived — SignAny 2.0 removes the manual steps between you and a completed agreement."
         />
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {signanyFeatures.map((f) => (
-            <Link
-              key={f.id}
-              to="/features/$id"
-              params={{ id: f.id }}
-              className="card-soft card-soft-hover group p-7 flex flex-col justify-between h-full transition-all duration-300 border-border/80 hover:border-primary/50"
-            >
-              <div>
-                <div className="mb-6 flex items-start justify-between gap-4">
-                  <span className="flex h-13 w-13 items-center justify-center rounded-2xl bg-accent p-3.5 text-accent-foreground transition-colors group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-lg">
-                    <Icon name={f.icon} size={22} />
-                  </span>
-                  {f.tag && (
-                    <span className="rounded-full border border-border bg-background px-3 py-1 text-[11px] font-semibold text-muted-foreground group-hover:border-primary/30 group-hover:text-primary transition-colors">
-                      {f.tag}
+          {displayedFeatures.map((f, index) => {
+            const isMobileHidden = !showAll && index >= 3;
+            return (
+              <Link
+                key={f.id}
+                to="/features/$id"
+                params={{ id: f.id }}
+                className={`card-soft card-soft-hover group p-7 flex-col justify-between h-full transition-all duration-300 border-border/80 hover:border-primary/50 ${
+                  isMobileHidden ? "hidden sm:flex" : "flex"
+                }`}
+              >
+                <div>
+                  <div className="mb-6 flex items-start justify-between gap-4">
+                    <span className="flex h-13 w-13 items-center justify-center rounded-2xl bg-accent p-3.5 text-accent-foreground transition-colors group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-lg">
+                      <Icon name={f.icon} size={22} />
                     </span>
-                  )}
+                    {f.tag && (
+                      <span className="rounded-full border border-border bg-background px-3 py-1 text-[11px] font-semibold text-muted-foreground group-hover:border-primary/30 group-hover:text-primary transition-colors">
+                        {f.tag}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                    {f.title}
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                    {f.desc}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                  {f.title}
-                </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground line-clamp-3">
-                  {f.desc}
-                </p>
-              </div>
 
-              <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between">
-                <span className="text-xs font-bold text-primary group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                  Explore Feature <ArrowRight size={14} />
-                </span>
-              </div>
-            </Link>
-          ))}
+                <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between">
+                  <span className="text-xs font-bold text-primary group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                    Explore Feature <ArrowRight size={14} />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
+        {signanyFeatures.length > 3 && (
+          <div className={`mt-10 flex justify-center ${signanyFeatures.length <= 6 ? "sm:hidden" : ""}`}>
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted cursor-pointer"
+            >
+              {showAll ? (
+                <>
+                  View Less <ChevronUp size={16} />
+                </>
+              ) : (
+                <>
+                  View More <ChevronDown size={16} />
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
 function Workspace() {
+  const [showAll, setShowAll] = useState(false);
+  const displayedFeatures = showAll ? workspaceFeatures : workspaceFeatures.slice(0, 6);
+
   return (
     <section id="workspace" className="py-20">
       <div className="section-shell">
@@ -191,16 +221,42 @@ function Workspace() {
           desc="Dashboards, audit trails, access control and configurable defaults keep every document accountable from the moment it is created."
         />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {workspaceFeatures.map((f) => (
-            <article key={f.title} className="card-soft card-soft-hover p-7 text-center">
-              <span className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-accent-foreground">
-                <Icon name={f.icon} size={22} />
-              </span>
-              <h3 className="text-base font-semibold text-foreground">{f.title}</h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-            </article>
-          ))}
+          {displayedFeatures.map((f, index) => {
+            const isMobileHidden = !showAll && index >= 3;
+            return (
+              <article
+                key={f.title}
+                className={`card-soft card-soft-hover p-7 text-center ${
+                  isMobileHidden ? "hidden md:block" : "block"
+                }`}
+              >
+                <span className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-accent-foreground">
+                  <Icon name={f.icon} size={22} />
+                </span>
+                <h3 className="text-base font-semibold text-foreground">{f.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+              </article>
+            );
+          })}
         </div>
+        {workspaceFeatures.length > 3 && (
+          <div className={`mt-10 flex justify-center ${workspaceFeatures.length <= 6 ? "md:hidden" : ""}`}>
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted cursor-pointer"
+            >
+              {showAll ? (
+                <>
+                  View Less <ChevronUp size={16} />
+                </>
+              ) : (
+                <>
+                  View More <ChevronDown size={16} />
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

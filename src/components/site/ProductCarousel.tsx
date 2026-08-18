@@ -52,7 +52,7 @@ export const ProductCarousel = () => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setCurrent((c) => (c + 1) % screens.length), 50000);
+    const t = setInterval(() => setCurrent((c) => (c + 1) % screens.length), 5000);
     return () => clearInterval(t);
   }, [current]);
 
@@ -84,7 +84,7 @@ export const ProductCarousel = () => {
             <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none z-0" />
 
             <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-6">
-              <div className="space-y-2 max-w-3xl">
+              <div className="space-y-2 max-w-3xl min-h-[120px] sm:min-h-[75px] lg:min-h-0">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={current}
@@ -100,7 +100,7 @@ export const ProductCarousel = () => {
               </div>
             </div>
 
-            <div className="relative z-10 bg-muted/20 rounded-[20px] overflow-hidden border border-border/60 shadow-xl sm:p-3 md:p-7 flex items-center justify-center min-h-0 md:min-h-[460px]">
+            <div className="relative z-10 bg-muted/20 rounded-[20px] overflow-hidden border border-border/60 shadow-xl sm:p-3 md:p-7 flex items-center justify-center h-[260px] sm:h-[360px] md:h-[500px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}
@@ -113,7 +113,7 @@ export const ProductCarousel = () => {
                   <img
                     src={screens[current].image}
                     alt={screens[current].title}
-                    className="w-full h-auto max-h-[520px] object-contain rounded-xl shadow-sm"
+                    className="h-full max-h-full object-contain rounded-xl shadow-sm"
                     loading="lazy"
                   />
                 </motion.div>
