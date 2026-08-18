@@ -13,12 +13,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as LifecycleRouteImport } from './routes/lifecycle'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
+import { Route as UserGuideRouteImport } from './routes/user-guide'
 import { Route as VerifyHashRouteImport } from './routes/verifyHash'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as FeaturesIdRouteImport } from './routes/features_.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +42,11 @@ const FaqsRoute = FaqsRouteImport.update({
   path: '/faqs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FeaturesRoute = FeaturesRouteImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LifecycleRoute = LifecycleRouteImport.update({
   id: '/lifecycle',
   path: '/lifecycle',
@@ -50,14 +57,14 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   id: '/terms-and-conditions',
   path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserGuideRoute = UserGuideRouteImport.update({
+  id: '/user-guide',
+  path: '/user-guide',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerifyHashRoute = VerifyHashRouteImport.update({
@@ -70,30 +77,39 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FeaturesIdRoute = FeaturesIdRouteImport.update({
+  id: '/features_/$id',
+  path: '/features/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
   '/faqs': typeof FaqsRoute
+  '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/features/$id': typeof FeaturesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
   '/faqs': typeof FaqsRoute
+  '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/features/$id': typeof FeaturesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -101,12 +117,14 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
   '/faqs': typeof FaqsRoute
+  '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
+  '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
   '/blog_/$slug': typeof BlogSlugRoute
+  '/features_/$id': typeof FeaturesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -115,36 +133,42 @@ export interface FileRouteTypes {
     | '/$'
     | '/blog'
     | '/faqs'
+    | '/features'
     | '/lifecycle'
     | '/privacy-policy'
-    | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/user-guide'
     | '/verifyHash'
     | '/blog/$slug'
+    | '/features/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
     | '/blog'
     | '/faqs'
+    | '/features'
     | '/lifecycle'
     | '/privacy-policy'
-    | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/user-guide'
     | '/verifyHash'
     | '/blog/$slug'
+    | '/features/$id'
   id:
     | '__root__'
     | '/'
     | '/$'
     | '/blog'
     | '/faqs'
+    | '/features'
     | '/lifecycle'
     | '/privacy-policy'
-    | '/sitemap.xml'
     | '/terms-and-conditions'
+    | '/user-guide'
     | '/verifyHash'
     | '/blog_/$slug'
+    | '/features_/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -152,12 +176,14 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   BlogRoute: typeof BlogRoute
   FaqsRoute: typeof FaqsRoute
+  FeaturesRoute: typeof FeaturesRoute
   LifecycleRoute: typeof LifecycleRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
+  UserGuideRoute: typeof UserGuideRoute
   VerifyHashRoute: typeof VerifyHashRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  FeaturesIdRoute: typeof FeaturesIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -190,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lifecycle': {
       id: '/lifecycle'
       path: '/lifecycle'
@@ -204,18 +237,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/terms-and-conditions': {
       id: '/terms-and-conditions'
       path: '/terms-and-conditions'
       fullPath: '/terms-and-conditions'
       preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/user-guide': {
+      id: '/user-guide'
+      path: '/user-guide'
+      fullPath: '/user-guide'
+      preLoaderRoute: typeof UserGuideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verifyHash': {
@@ -232,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/features_/$id': {
+      id: '/features_/$id'
+      path: '/features/$id'
+      fullPath: '/features/$id'
+      preLoaderRoute: typeof FeaturesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -240,23 +280,15 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   BlogRoute: BlogRoute,
   FaqsRoute: FaqsRoute,
+  FeaturesRoute: FeaturesRoute,
   LifecycleRoute: LifecycleRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
+  UserGuideRoute: UserGuideRoute,
   VerifyHashRoute: VerifyHashRoute,
   BlogSlugRoute: BlogSlugRoute,
+  FeaturesIdRoute: FeaturesIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

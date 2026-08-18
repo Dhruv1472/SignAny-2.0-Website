@@ -42,23 +42,28 @@ function BlogDetailPage() {
   };
 
   if (!blog) {
+    const noBlogsExist = blogs.length === 0;
     return (
       <ProductModeProvider>
         <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
           <Header />
           <main className="flex-1 pt-36 pb-20 flex flex-col items-center justify-center text-center px-4">
-            <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 border border-primary/20">
               <Newspaper size={32} />
             </div>
-            <h1 className="text-3xl font-bold mb-2">Article Not Found</h1>
-            <p className="text-muted-foreground max-w-md mb-6">
-              The blog article you are looking for may have been moved or unpublished.
+            <h1 className="text-3xl font-bold mb-2">
+              {noBlogsExist ? "No Blogs Published Yet" : "Article Not Found"}
+            </h1>
+            <p className="text-muted-foreground max-w-md mb-6 leading-relaxed">
+              {noBlogsExist
+                ? "There are currently no blog articles published on SignAny. Check back soon for the latest updates and insights!"
+                : "The blog article you are looking for may have been moved or unpublished."}
             </p>
             <Link
-              to="/blog"
+              to={noBlogsExist ? "/" : "/blog"}
               className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-90 transition-opacity"
             >
-              <ArrowLeft size={16} /> Back to All Articles
+              <ArrowLeft size={16} /> {noBlogsExist ? "Back to Home" : "Back to All Articles"}
             </Link>
           </main>
           <Footer />

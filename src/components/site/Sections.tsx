@@ -66,7 +66,7 @@ export function ComplianceSection() {
   const marqueeLoop = [...marqueeBadges, ...marqueeBadges, ...marqueeBadges];
 
   return (
-    <section id="compliance" className="relative overflow-hidden bg-cloud py-20 md:py-28">
+    <section id="compliance" className="relative overflow-hidden bg-cloud py-20">
       {/* Background Ambient Glows */}
       <div className="glow-orb top-10 left-[10%] h-72 w-72 bg-primary/10" />
       <div className="glow-orb bottom-10 right-[10%] h-80 w-80 bg-brand/10" />
@@ -179,7 +179,7 @@ export function PricingSection() {
   const signUpLink = isSalesforce ? SITE.salesforcePackageLink : SITE.appLink;
 
   return (
-    <section id="pricing" className="relative py-20 md:py-28">
+    <section id="pricing" className="relative py-20">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Pricing"
@@ -241,7 +241,7 @@ export function FAQSection() {
   const displayedFaqs = faqs.slice(0, 4);
 
   return (
-    <section id="faqs" className="bg-cloud py-20 md:py-28">
+    <section id="faqs" className="bg-cloud py-20">
       <div className="section-shell">
         <SectionHeading
           eyebrow="FAQs"
@@ -286,7 +286,7 @@ export function BlogSection() {
   const hasMore = blogs.length > 3;
 
   return (
-    <section id="blog" className="py-20 md:py-28 relative overflow-hidden bg-background">
+    <section id="blog" className="py-20 relative overflow-hidden bg-background">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Insights & Updates"
@@ -295,58 +295,70 @@ export function BlogSection() {
           desc="Stay up to date with the latest in digital signatures, enterprise security, and document workflow automation."
         />
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {homeBlogs.map((b, idx) => (
-            <article
-              key={b.id}
-              className={`group relative flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg ${
-                idx === 2 ? "hidden lg:flex" : "flex"
-              }`}
-            >
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
-                <img
-                  src={b.image}
-                  alt={b.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
-                  {b.category}
-                </span>
-              </div>
-
-              <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
-                  <span className="flex items-center gap-1 font-medium">
-                    <Clock size={12} /> {b.readTime}
+        {blogs.length === 0 ? (
+          <div className="max-w-xl mx-auto text-center py-12 px-6 rounded-3xl border border-border/80 bg-card shadow-sm">
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 border border-primary/20">
+              <Newspaper size={30} />
+            </div>
+            <h3 className="text-xl font-bold text-foreground mb-2">No Blogs Published Yet</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              We haven't published any articles yet. Check back soon for the latest insights on digital signatures, enterprise security, and document workflow automation!
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {homeBlogs.map((b, idx) => (
+              <article
+                key={b.id}
+                className={`group relative flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg ${
+                  idx === 2 ? "hidden lg:flex" : "flex"
+                }`}
+              >
+                <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
+                  <img
+                    src={b.image}
+                    alt={b.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                  <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
+                    {b.category}
                   </span>
-                  <span>•</span>
-                  <span>{b.date}</span>
                 </div>
 
-                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
-                  {b.title}
-                </h3>
-                <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
-                  {b.excerpt}
-                </p>
-
-                <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
-                  <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                    <User size={13} /> {b.author}
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                    <span className="flex items-center gap-1 font-medium">
+                      <Clock size={12} /> {b.readTime}
+                    </span>
+                    <span>•</span>
+                    <span>{b.date}</span>
                   </div>
-                  <Link
-                    to="/blog/$slug"
-                    params={{ slug: b.slug }}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline underline-offset-4"
-                  >
-                    Read Article <ArrowRight size={13} />
-                  </Link>
+
+                  <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
+                    {b.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
+                    {b.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
+                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                      <User size={13} /> {b.author}
+                    </div>
+                    <Link
+                      to="/blog/$slug"
+                      params={{ slug: b.slug }}
+                      className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline underline-offset-4"
+                    >
+                      Read Article <ArrowRight size={13} />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        )}
 
         {hasMore && (
           <div className="mt-12 text-center">
@@ -365,7 +377,7 @@ export function BlogSection() {
 
 export function DemoCTA() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-20">
       <div className="section-shell">
         <div className="surface-ink relative overflow-hidden rounded-[2rem] px-7 py-14 text-center md:px-16 md:py-20">
           <div className="glow-orb -top-16 right-10 h-72 w-72 bg-primary" />

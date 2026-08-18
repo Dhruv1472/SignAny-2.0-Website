@@ -19,23 +19,25 @@ const socialLinks = [
 ];
 
 const IndiaFlag = () => (
-  <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-0.5 border border-white/30 mt-0.5">
-    <svg className="w-full h-full rounded-full object-cover" viewBox="0 0 640 480">
-      <path fill="#f93" d="M0 0h640v160H0z"/>
-      <path fill="#fff" d="M0 160h640v160H0z"/>
-      <path fill="#128807" d="M0 320h640v160H0z"/>
-      <circle cx="320" cy="240" r="60" fill="none" stroke="#000080" strokeWidth="15"/>
+  <span className="w-6 h-4 shrink-0 mt-1 inline-flex items-center justify-center">
+    <svg className="w-full h-full block overflow-visible" viewBox="0 0 30 27" fill="none">
+      <path d="M 0 3 C 7.5 -1, 22.5 7, 30 3 V 10 C 22.5 14, 7.5 6, 0 10 Z" fill="#FF9933" />
+      <path d="M 0 10 C 7.5 6, 22.5 14, 30 10 V 17 C 22.5 21, 7.5 13, 0 17 Z" fill="#FFFFFF" />
+      <path d="M 0 17 C 7.5 13, 22.5 21, 30 17 V 24 C 22.5 28, 7.5 20, 0 24 Z" fill="#138808" />
+      <circle cx="15" cy="13.5" r="2.3" fill="none" stroke="#000080" strokeWidth="0.8" />
+      <path d="M 0 3 C 7.5 -1, 22.5 7, 30 3 V 24 C 22.5 28, 7.5 20, 0 24 Z" fill="none" strokeWidth="1" />
     </svg>
   </span>
 );
 
 const UAEFlag = () => (
-  <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm overflow-hidden p-0.5 border border-white/30 mt-0.5">
-    <svg className="w-full h-full rounded-full object-cover" viewBox="0 0 640 480">
-      <path fill="#00732f" d="M0 0h640v160H0z"/>
-      <path fill="#fff" d="M0 160h640v160H0z"/>
-      <path fill="#000" d="M0 320h640v160H0z"/>
-      <path fill="#f00" d="M0 0h200v480H0z"/>
+  <span className="w-6 h-4 shrink-0 mt-1 inline-flex items-center justify-center">
+    <svg className="w-full h-full block overflow-visible" viewBox="0 0 30 27" fill="none">
+      <path d="M 9 3 C 15 -1, 23 7, 30 3 V 10 C 23 14, 15 6, 9 10 Z" fill="#00732F" />
+      <path d="M 9 10 C 15 6, 23 14, 30 10 V 17 C 22.5 21, 7.5 13, 0 17 Z" fill="#FFFFFF" />
+      <path d="M 9 17 C 15 13, 23 21, 30 17 V 24 C 22.5 28, 7.5 20, 0 24 Z" fill="#000000" />
+      <path d="M 0 3 C 2.5 1.5, 6.5 4.5, 9 3 V 24 C 6.5 25.5, 2.5 22.5, 0 24 Z" fill="#FF0000" />
+      <path d="M 0 3 C 2.5 1.5, 6.5 4.5, 9 3 C 15 -1, 23 7, 30 3 V 24 C 23 28, 15 20, 9 24 C 6.5 25.5, 2.5 22.5, 0 24 Z" fill="none" strokeWidth="1" />
     </svg>
   </span>
 );
@@ -154,7 +156,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-16 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-white/30">
+        <div className="border-t border-white/10 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-white/30">
           <span><b>© {new Date().getFullYear()} SignAny 2.0. All rights reserved.</b></span>
           <div className="flex gap-8">
             <Link to="/privacy-policy" className="hover:text-white/60 transition-colors"><b>Privacy Policy</b></Link>
