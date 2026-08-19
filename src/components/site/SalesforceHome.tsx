@@ -7,6 +7,7 @@ import { SignaturePath } from "@/components/site/spinner";
 import { ProductCarousel } from "@/components/site/ProductCarousel";
 import { salesforce, SITE } from "@/lib/site-data";
 import { useProductMode } from "@/lib/product-mode";
+import { Link } from "@tanstack/react-router";
 
 export function SalesforceHome() {
   const { setMode } = useProductMode();
@@ -40,12 +41,12 @@ export function SalesforceHome() {
               >
                 Try Now <ArrowRight size={16} />
               </a>
-              <a
-                href="#book-demo"
+              <Link
+                to="/contact-us"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
               >
                 Book Demo
-              </a>
+              </Link>
             </div>
             <div className="mt-7 flex items-start gap-2.5 rounded-2xl border border-border bg-card px-4 py-3.5 text-sm text-muted-foreground">
               <Info size={16} className="mt-0.5 shrink-0 text-primary" />

@@ -58,12 +58,12 @@ function Hero() {
             >
               SignUp <ArrowRight size={16} />
             </a>
-            <a
-              href="#book-demo"
+            <Link
+              to="/contact-us"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
             >
               Book Demo
-            </a>
+            </Link>
           </div>
           <p className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
             <ShieldCheck size={16} className="text-primary" />

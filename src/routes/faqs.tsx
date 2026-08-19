@@ -177,12 +177,12 @@ function FaqsPage() {
                   <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
                     If you couldn't find an answer in our FAQs, you can contact our support team or book a 1-on-1 walkthrough.
                   </p>
-                  <a
-                    href="/#book-demo"
+                  <Link
+                    to="/contact-us"
                     className="block text-center w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 shadow-sm transition-all"
                   >
                     Contact Us
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="p-6 rounded-3xl bg-muted/40 border border-border/70">

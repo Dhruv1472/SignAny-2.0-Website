@@ -203,7 +203,7 @@ export const plans = [
   {
     name: "Free",
     price: "$0",
-    period: "forever",
+    period: "always free",
     tagline: "For individuals getting started with eSignatures.",
     cta: "SignUp",
     featured: false,

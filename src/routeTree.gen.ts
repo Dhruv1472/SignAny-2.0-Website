@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as LifecycleRouteImport } from './routes/lifecycle'
@@ -35,6 +36,11 @@ const SplatRoute = SplatRouteImport.update({
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactUsRoute = ContactUsRouteImport.update({
+  id: '/contact-us',
+  path: '/contact-us',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqsRoute = FaqsRouteImport.update({
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
+  '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
+  '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
+  '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
   '/lifecycle': typeof LifecycleRoute
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/blog'
+    | '/contact-us'
     | '/faqs'
     | '/features'
     | '/lifecycle'
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/blog'
+    | '/contact-us'
     | '/faqs'
     | '/features'
     | '/lifecycle'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/blog'
+    | '/contact-us'
     | '/faqs'
     | '/features'
     | '/lifecycle'
@@ -175,6 +187,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
   BlogRoute: typeof BlogRoute
+  ContactUsRoute: typeof ContactUsRoute
   FaqsRoute: typeof FaqsRoute
   FeaturesRoute: typeof FeaturesRoute
   LifecycleRoute: typeof LifecycleRoute
@@ -207,6 +220,13 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact-us': {
+      id: '/contact-us'
+      path: '/contact-us'
+      fullPath: '/contact-us'
+      preLoaderRoute: typeof ContactUsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faqs': {
@@ -279,6 +299,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   BlogRoute: BlogRoute,
+  ContactUsRoute: ContactUsRoute,
   FaqsRoute: FaqsRoute,
   FeaturesRoute: FeaturesRoute,
   LifecycleRoute: LifecycleRoute,

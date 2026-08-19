@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Newspaper, Clock, User, ArrowRight, ArrowUp, Send, Search } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
@@ -21,6 +21,7 @@ export const Route = createFileRoute("/blog")({
 });
 
 function BlogPage() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [email, setEmail] = useState("");
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -232,13 +233,11 @@ function BlogPage() {
                   onSubmit={(e) => {
                     e.preventDefault();
                     const trimmedEmail = email.trim();
-                    const searchParams = new URLSearchParams(window.location.search);
                     if (trimmedEmail) {
-                      searchParams.set("email", trimmedEmail);
+                      navigate({ to: "/contact-us", search: { email: trimmedEmail } as any });
+                    } else {
+                      navigate({ to: "/contact-us" });
                     }
-                    const searchStr = searchParams.toString() ? `?${searchParams.toString()}` : "";
-                    window.history.pushState(null, "", `${window.location.pathname}${searchStr}#book-demo`);
-                    window.dispatchEvent(new HashChangeEvent("hashchange"));
                   }}
                   className="flex flex-col sm:flex-row gap-3 items-center max-w-md mx-auto"
                 >

@@ -3,6 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { compliances, salesforceCompliances, uaePass, plans, faqs, blogs, SITE } from "@/lib/site-data";
 import { useProductMode } from "@/lib/product-mode";
 import { Icon } from "@/components/site/Icon";
+import { Link } from "@tanstack/react-router";
 
 const marqueeBadges = [
   { name: "ESIGN Act", desc: "US Federal Law", icon: FileCheck },
@@ -215,18 +216,31 @@ export function PricingSection() {
                   </li>
                 ))}
               </ul>
-              <a
-                href={p.name === "Enterprise" ? "#book-demo" : signUpLink}
-                target={p.name === "Enterprise" ? undefined : "_blank"}
-                rel={p.name === "Enterprise" ? undefined : "noopener noreferrer"}
-                className={`mt-7 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all hover:-translate-y-px ${
-                  p.featured
-                    ? "bg-primary text-primary-foreground shadow-sm hover:shadow-lg"
-                    : "border border-border bg-background text-foreground hover:bg-muted"
-                }`}
-              >
-                {p.cta} <ArrowRight size={15} />
-              </a>
+              {p.name === "Enterprise" ? (
+                <Link
+                  to="/contact-us"
+                  className={`mt-7 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all hover:-translate-y-px ${
+                    p.featured
+                      ? "bg-primary text-primary-foreground shadow-sm hover:shadow-lg"
+                      : "border border-border bg-background text-foreground hover:bg-muted"
+                  }`}
+                >
+                  {p.cta} <ArrowRight size={15} />
+                </Link>
+              ) : (
+                <a
+                  href={signUpLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`mt-7 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all hover:-translate-y-px ${
+                    p.featured
+                      ? "bg-primary text-primary-foreground shadow-sm hover:shadow-lg"
+                      : "border border-border bg-background text-foreground hover:bg-muted"
+                  }`}
+                >
+                  {p.cta} <ArrowRight size={15} />
+                </a>
+              )}
             </div>
           ))}
         </div>
@@ -234,8 +248,6 @@ export function PricingSection() {
     </section>
   );
 }
-
-import { Link } from "@tanstack/react-router";
 
 export function FAQSection() {
   const displayedFaqs = faqs.slice(0, 4);
@@ -396,12 +408,12 @@ export function DemoCTA() {
               >
                 SignUp <ArrowRight size={16} />
               </a>
-              <a
-                href="#book-demo"
+              <Link
+                to="/contact-us"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-ink-foreground/25 px-7 py-3.5 text-sm font-semibold text-ink-foreground transition-colors hover:bg-ink-foreground/10 sm:w-auto"
               >
                 <Mail size={16} /> Book a demo
-              </a>
+              </Link>
             </div>
             <p className="mt-5 text-xs text-ink-muted">
               Talk to us at{" "}
