@@ -50,10 +50,15 @@ const ease = [0.2, 0, 0, 1] as const;
 
 export const ProductCarousel = () => {
   const [current, setCurrent] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setCurrent((c) => (c + 1) % screens.length), 5000);
     return () => clearInterval(t);
+  }, [current]);
+
+  useEffect(() => {
+    setImageLoaded(false);
   }, [current]);
 
   return (
@@ -83,7 +88,7 @@ export const ProductCarousel = () => {
             {/* Header Background Gradient */}
             <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none z-0" />
 
-            <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-6">
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 md:mb-6">
               <div className="space-y-2 max-w-3xl min-h-[120px] sm:min-h-[75px] lg:min-h-0">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -99,27 +104,24 @@ export const ProductCarousel = () => {
                 </AnimatePresence>
               </div>
             </div>
-
-            <div className="relative z-10 bg-muted/20 rounded-[20px] overflow-hidden border border-border/60 shadow-xl sm:p-3 md:p-7 flex items-center justify-center h-[260px] sm:h-[360px] md:h-[500px]">
+            <div className="relative z-10 w-full aspect-[16/9] overflow-hidden rounded-xl">
               <AnimatePresence mode="wait">
-                <motion.div
+                <motion.img
                   key={current}
-                  initial={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 1.02, filter: "blur(4px)" }}
-                  transition={{ duration: 0.5, ease }}
-                  className="w-full h-full flex items-center justify-center"
-                >
-                  <img
-                    src={screens[current].image}
-                    alt={screens[current].title}
-                    className="h-full max-h-full object-contain rounded-xl shadow-sm"
-                    loading="lazy"
-                  />
-                </motion.div>
+                  src={screens[current].image}
+                  alt={screens[current].title}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: imageLoaded ? 1 : 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease }}
+                  onLoad={() => setImageLoaded(true)}
+                  className="w-full h-full object-contain"
+                />
               </AnimatePresence>
+              {!imageLoaded && (
+                <div className="absolute inset-0 bg-muted/40 animate-pulse rounded-xl" />
+              )}
             </div>
-
             <div className="relative z-10 grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-2.5 sm:gap-4 mt-6">
               {screens.map((screen, i) => (
                 <button

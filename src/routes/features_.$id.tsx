@@ -80,35 +80,6 @@ function FeatureDetailPage() {
                     {selectedFeature.tagline}
                   </p>
                 </div>
-
-                <Link
-                  to="/"
-                  className="inline-flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-foreground bg-card border border-border px-4 py-2.5 rounded-xl transition-all self-start md:self-auto"
-                >
-                  <ArrowLeft size={16} /> Back to Home
-                </Link>
-              </div>
-
-              {/* Feature Switcher Tabs */}
-              <div className="mt-10 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-                {signanyFeatures.map((f) => {
-                  const isSelected = f.id === selectedFeature.id;
-
-                  return (
-                    <button
-                      key={f.id}
-                      onClick={() => navigate({ to: "/features/$id", params: { id: f.id } })}
-                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap border ${
-                        isSelected
-                          ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                          : "bg-card border-border text-muted-foreground hover:bg-muted hover:text-foreground"
-                      }`}
-                    >
-                      <Icon name={f.icon} size={15} />
-                      {f.title}
-                    </button>
-                  );
-                })}
               </div>
             </div>
           </section>
@@ -240,11 +211,43 @@ function FeatureDetailPage() {
                 ))}
               </div>
             </div>
+            
+            {/* Feature Switcher Tabs */}
+            <div className="space-y-6">
+              <div className="border-b border-border pb-4">
+                <h3 className="text-2xl font-bold text-foreground">
+                  Explore other features
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Discover powerful document automation capabilities built into SignAny 2.0
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                {signanyFeatures.map((f) => {
+                  const isSelected = f.id === selectedFeature.id;
+
+                  return (
+                    <button
+                      key={f.id}
+                      onClick={() => navigate({ to: "/features/$id", params: { id: f.id } })}
+                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap border ${
+                        isSelected
+                          ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                          : "bg-card border-border text-muted-foreground hover:bg-muted hover:text-foreground"
+                      }`}
+                    >
+                      <Icon name={f.icon} size={15} />
+                      {f.title}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
             {/* Bottom Call-To-Action Banner */}
             <div className="surface-ink relative overflow-hidden rounded-2xl p-8 md:p-12 mt-16">
               <div className="relative z-10 max-w-2xl space-y-4">
-                <span className="inline-flex items-center gap-2 rounded-full bg-ink-foreground/10 px-3.5 py-1 text-xs font-bold text-ink-foreground">
+                <span className="inline-flex items-center gap-2 md:rounded-full rounded-sm bg-ink-foreground/10 px-3.5 py-1 text-xs font-bold text-ink-foreground">
                   Experience {selectedFeature.title} in action
                 </span>
                 <h3 className="text-2xl md:text-4xl font-bold text-ink-foreground">
@@ -261,12 +264,12 @@ function FeatureDetailPage() {
                   >
                     SignUp Free <ArrowRight size={16} />
                   </a>
-                  <a
-                    href="#book-demo"
+                  <Link
+                    to="/contact-us"
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-ink-foreground/20 bg-ink-foreground/5 px-7 py-3.5 text-sm font-bold text-ink-foreground transition-colors hover:bg-ink-foreground/10"
                   >
                     Book a Custom Demo
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

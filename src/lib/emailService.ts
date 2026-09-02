@@ -1,5 +1,5 @@
 // Business emails where you want to receive demo requests
-const BUSINESS_EMAILS = ["dhruv.k@mvclouds.com", "yash.s@mvclouds.com"];
+const BUSINESS_EMAILS = ["dhruv.k@mvclouds.com"];
 
 export const sendDemoRequest = async (formData: {
   firstName: string;
@@ -12,38 +12,35 @@ export const sendDemoRequest = async (formData: {
 }): Promise<boolean> => {
   try {
     const sendPromises = BUSINESS_EMAILS.map(async (businessEmail) => {
-      const formSubmitUrl = `https://formsubmit.co/${businessEmail}`;
+      // Use FormSubmit AJAX endpoint for JSON requests
+      const formSubmitUrl = `https://formsubmit.co/ajax/${businessEmail}`;
 
-      const data = new FormData();
-      data.append("name", `${formData.firstName} ${formData.lastName}`);
-      data.append("email", formData.email);
-      data.append(
-        "subject",
-        `SignAny 2.0 Demo Request from ${formData.firstName} ${formData.lastName}`
-      );
-      data.append("company", formData.company);
-      data.append("country", formData.country);
-      data.append("phone", formData.phone || "Not provided");
-      data.append("message", formData.message || "No additional message");
-
-      // FormSubmit settings
-      data.append("_captcha", "false");
-      data.append("_template", "table");
-      data.append(
-        "_subject",
-        `SignAny 2.0 Demo Request from ${formData.firstName} ${formData.lastName}`
-      );
+      const payload = {
+        Name: `${formData.firstName} ${formData.lastName}`,
+        Email: formData.email,
+        _subject: `SignAny 2.0 Demo Request from ${formData.firstName} ${formData.lastName}`,
+        Company: formData.company,
+        Country: formData.country,
+        Phone: formData.phone || "Not provided",
+        Message: formData.message || "No additional message",
+        _captcha: "false",
+        _template: "table",
+      };
 
       const response = await fetch(formSubmitUrl, {
         method: "POST",
-        body: data,
         headers: {
+          "Content-Type": "application/json",
           Accept: "application/json",
         },
+        body: JSON.stringify(payload),
       });
 
-      if (!response.ok) {
-        console.error(`FormSubmit error for ${businessEmail}:`, await response.text());
+      const resData = await response.json();
+      console.log(`FormSubmit response for ${businessEmail}:`, resData);
+
+      if (!response.ok || resData.success === "false") {
+        console.error(`FormSubmit error for ${businessEmail}:`, resData);
         return false;
       }
       return true;
@@ -52,7 +49,7 @@ export const sendDemoRequest = async (formData: {
     const results = await Promise.all(sendPromises);
     return results.every((res) => res === true);
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("Error sending email via FormSubmit:", error);
     return false;
   }
 };

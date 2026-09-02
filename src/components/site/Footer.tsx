@@ -120,7 +120,7 @@ export function Footer() {
               <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tdL000000SLsj" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Install AppExchange Package</a>
               <a href="/#compliance" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">Salesforce Security</a>
               <a href="/#pricing" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">Enterprise Pricing</a>
-              <a href="#book-demo" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors font-semibold text-white/80">Book a Demo</a>
+              <Link to="/contact-us" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors font-semibold text-white/80">Book a Demo</Link>
             </div>
           </div>
 

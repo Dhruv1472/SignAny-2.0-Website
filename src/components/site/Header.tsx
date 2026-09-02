@@ -58,7 +58,7 @@ export function Header() {
 
   const nav = isSalesforce ? salesforceNav : signanyNav;
   const signUpLink = isSalesforce? SITE.salesforcePackageLink : SITE.appLink;
-  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/features") || pathname.startsWith("/faqs") || pathname.startsWith("/lifecycle") || pathname.startsWith("/verify") || pathname.startsWith("/privacy") || pathname.startsWith("/terms");
+  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/features") || pathname.startsWith("/faqs") || pathname.startsWith("/lifecycle") || pathname.startsWith("/verify") || pathname.startsWith("/privacy") || pathname.startsWith("/terms") || pathname.startsWith("/contact-us");
 
   const handleToggle = (checked: boolean) => {
     setMode(checked ? "salesforce" : "signany");
@@ -108,12 +108,12 @@ export function Header() {
 
         <div className="hidden items-center gap-3 xl:flex">
           <ModeSwitch id="mode-desktop" />
-          <a
-            href="#book-demo"
+          <Link
+            to="/contact-us"
             className="inline-flex items-center rounded-xl border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
           >
             Book Demo
-          </a>
+          </Link>
           <a
             href={signUpLink}
             target="_blank"
@@ -155,13 +155,13 @@ export function Header() {
               <div className="py-3">
                 <ModeSwitch id="mode-mobile" className="w-full justify-between px-4 py-2.5" />
               </div>
-              <a
-                href="#book-demo"
+              <Link
+                to="/contact-us"
                 onClick={() => setOpen(false)}
                 className="inline-flex items-center justify-center rounded-xl border border-border px-5 py-2.5 text-sm font-semibold"
               >
                 Book Demo
-              </a>
+              </Link>
               <a
                 href={SITE.appLink}
                 className="mt-2 inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
