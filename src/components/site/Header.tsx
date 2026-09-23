@@ -2,39 +2,70 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/signany-logo.png";
-import { useProductMode } from "@/lib/product-mode";
 import { SITE } from "@/lib/site-data";
 import { Switch } from "@/components/ui/switch";
 
 const signanyNav = [
   { name: "Features", href: "/#features" },
-  // { name: "Workspace", href: "/#workspace" },
-  // { name: "Permissions", href: "/#permissions" },
   { name: "API", href: "/#api" },
   { name: "Compliance", href: "/#compliance" },
   { name: "Pricing", href: "/#pricing" },
   { name: "Blogs", href: "/#blog" },
   { name: "FAQs", href: "/faqs" },
-  { name: "Hash Verification", href: "/verifyHash" },
+  { name: "Hash Verification", href: "/hash-verification" },
 ];
 
 const salesforceNav = [
-  { name: "Overview", href: "/#sf-overview" },
-  { name: "Capabilities", href: "/#sf-features" },
-  // { name: "How it works", href: "/#sf-steps" },
-  { name: "Compliance", href: "/#compliance" },
-  { name: "Pricing", href: "/#pricing" },
-  { name: "Blogs", href: "/#blog" },
+  { name: "Overview", href: "/salesforce#sf-overview" },
+  { name: "Capabilities", href: "/salesforce#sf-features" },
+  { name: "Compliance", href: "/salesforce#compliance" },
+  { name: "Pricing", href: "/salesforce#pricing" },
+  { name: "Blogs", href: "/salesforce#blog" },
   { name: "FAQs", href: "/faqs" },
 ];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { isSalesforce, setMode } = useProductMode();
-  const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  const isSalesforce = pathname === "/salesforce";
+  const nav = isSalesforce ? salesforceNav : signanyNav;
   const buttonLabel = isSalesforce ? "Start Free Trial" : "SignUp";
+  const signUpLink = isSalesforce ? SITE.salesforcePackageLink : SITE.appLink;
+  const navigate = useNavigate();
+
+  const handleToggle = (checked: boolean) => {
+    navigate({ to: checked ? "/salesforce" : "/" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const ModeSwitch = ({ id, className = "" }: { id: string; className?: string }) => (
+    <div className={`flex items-center gap-2.5 rounded-full border border-border bg-muted/60 px-3.5 py-2 ${className}`}>
+      <label
+        htmlFor={id}
+        className="cursor-pointer text-xs font-semibold tracking-tight text-muted-foreground"
+      >
+        Salesforce App
+      </label>
+      <Switch
+        id={id}
+        checked={isSalesforce}
+        onCheckedChange={handleToggle}
+        aria-label="Switch between SignAny 2.0 and the native Salesforce app"
+      />
+    </div>
+  );
+  const isSubPage =
+    pathname.startsWith("/blog") ||
+    pathname.startsWith("/blogs") ||
+    pathname.startsWith("/features") ||
+    pathname.startsWith("/faqs") ||
+    pathname.startsWith("/lifecycle") ||
+    pathname.startsWith("/verify") ||
+    pathname.startsWith("/privacy") ||
+    pathname.startsWith("/terms") ||
+    pathname.startsWith("/contact-us");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -55,33 +86,6 @@ export function Header() {
       document.body.classList.remove("mobile-menu-open");
     };
   }, [open]);
-
-  const nav = isSalesforce ? salesforceNav : signanyNav;
-  const signUpLink = isSalesforce? SITE.salesforcePackageLink : SITE.appLink;
-  const isSubPage = pathname.startsWith("/blog") || pathname.startsWith("/blogs") || pathname.startsWith("/features") || pathname.startsWith("/faqs") || pathname.startsWith("/lifecycle") || pathname.startsWith("/verify") || pathname.startsWith("/privacy") || pathname.startsWith("/terms") || pathname.startsWith("/contact-us");
-
-  const handleToggle = (checked: boolean) => {
-    setMode(checked ? "salesforce" : "signany");
-    if (pathname !== "/") navigate({ to: "/" });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const ModeSwitch = ({ id, className = "" }: { id: string; className?: string }) => (
-    <div className={`flex items-center gap-2.5 rounded-full border border-border bg-muted/60 px-3.5 py-2 ${className}`}>
-      <label
-        htmlFor={id}
-        className="cursor-pointer text-xs font-semibold tracking-tight text-muted-foreground"
-      >
-        Salesforce App
-      </label>
-      <Switch
-        id={id}
-        checked={isSalesforce}
-        onCheckedChange={handleToggle}
-        aria-label="Switch between SignAny 2.0 and the native Salesforce app"
-      />
-    </div>
-  );
 
   return (
     <header
@@ -107,6 +111,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 xl:flex">
+          {/* Product mode toggle */}
           <ModeSwitch id="mode-desktop" />
           <Link
             to="/contact-us"
@@ -163,7 +168,7 @@ export function Header() {
                 Book Demo
               </Link>
               <a
-                href={SITE.appLink}
+                href={signUpLink}
                 className="mt-2 inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
               >
                 {buttonLabel}

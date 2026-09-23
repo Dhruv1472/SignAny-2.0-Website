@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShieldCheck,
@@ -18,17 +18,9 @@ import Footer from "@/components/site/Footer";
 import { ProductModeProvider } from "@/lib/product-mode";
 
 export const Route = createFileRoute("/verifyHash")({
-  head: () => ({
-    meta: [
-      { title: "Verify Document Hash & Authenticity | SignAny 2.0" },
-      {
-        name: "description",
-        content:
-          "Verify the cryptographic integrity of signed documents. Compare SHA-256 checksum hashes to ensure documents are 100% authentic and tamper-proof.",
-      },
-    ],
-  }),
-  component: VerifyHashPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/hash-verification", replace: true });
+  },
 });
 
 async function computeFileHash(file: File): Promise<string> {
@@ -38,7 +30,7 @@ async function computeFileHash(file: File): Promise<string> {
   return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-function VerifyHashPage() {
+export function VerifyHashPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [inputHash, setInputHash] = useState("");
   const [computedHash, setComputedHash] = useState("");
