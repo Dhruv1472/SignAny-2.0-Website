@@ -1,9 +1,10 @@
 import { Check, Sparkles, Clock3, Mail, ArrowRight, ShieldCheck, Lock, FileText, Globe, Scale, Landmark, BookOpen, FileCheck, Newspaper, Clock, User } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { compliances, salesforceCompliances, plans, faqs, blogs, SITE } from "@/lib/site-data";
-import { useProductMode } from "@/lib/product-mode";
 import { Icon } from "@/components/site/Icon";
 import { Link } from "@tanstack/react-router";
+
+type SiteMode = "signany" | "salesforce";
 
 const marqueeBadges = [
   { name: "ESIGN Act", desc: "US Federal Law", icon: FileCheck },
@@ -62,8 +63,8 @@ export function SectionHeading({
   );
 }
 
-export function ComplianceSection() {
-  const { isSalesforce } = useProductMode();
+export function ComplianceSection({ mode = "signany" }: { mode?: SiteMode }) {
+  const isSalesforce = mode === "salesforce";
   const currentCompliances = isSalesforce ? salesforceCompliances : compliances;
   const marqueeLoop = [...currentCompliances, ...currentCompliances, ...currentCompliances];
 
@@ -152,8 +153,8 @@ export function ComplianceSection() {
   );
 }
 
-export function PricingSection() {
-  const { isSalesforce } = useProductMode();
+export function PricingSection({ mode = "signany" }: { mode?: SiteMode }) {
+  const isSalesforce = mode === "salesforce";
   const signUpLink = isSalesforce ? SITE.salesforcePackageLink : SITE.appLink;
 
   return (

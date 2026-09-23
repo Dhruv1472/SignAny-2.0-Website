@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 import logo from "@/assets/SignAnyDarkLogo.png";
 import mvLogo from "@/assets/mvclouds-logo.webp";
-import { useProductMode } from "@/lib/product-mode";
 
 const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -43,7 +42,6 @@ const UAEFlag = () => (
 );
 
 export function Footer() {
-  const { setMode } = useProductMode();
   return (
     <footer className="bg-[#0e172a] text-white border-t border-white/10">
       <div className="section-shell pt-20 pb-10">
@@ -98,16 +96,16 @@ export function Footer() {
           <div className="lg:col-span-3">
             <h4 className="font-bold text-sm mb-6 uppercase tracking-widest text-[#806cf0]">SignAny 2.0</h4>
             <div className="flex flex-col gap-3 text-sm text-white/60">
-              <a href="/#features" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Core Features</a>
-              <a href="/#workspace" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Workspace & Audit</a>
-              <a href="/#permissions" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Role Permissions</a>
-              <a href="/#api" onClick={() => setMode("signany")} className="hover:text-white transition-colors">REST API Docs</a>
-              <a href="/#compliance" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Trust & Compliance</a>
-              <a href="/#pricing" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Pricing Plans</a>
-              <Link to="/hash-verification" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Verify Document Hash</Link>
-              <Link to="/blog" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Blog & Insights</Link>
-              <Link to="/faqs" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Full FAQs</Link>
-              <Link to="/lifecycle" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Document Lifecycle</Link>
+              <a href="/#features" className="hover:text-white transition-colors">Core Features</a>
+              <a href="/#workspace" className="hover:text-white transition-colors">Workspace &amp; Audit</a>
+              <a href="/#permissions" className="hover:text-white transition-colors">Role Permissions</a>
+              <a href="/#api" className="hover:text-white transition-colors">REST API Docs</a>
+              <a href="/#compliance" className="hover:text-white transition-colors">Trust &amp; Compliance</a>
+              <a href="/#pricing" className="hover:text-white transition-colors">Pricing Plans</a>
+              <Link to="/hash-verification" className="hover:text-white transition-colors font-semibold text-white/80">Verify Document Hash</Link>
+              <Link to="/blog" className="hover:text-white transition-colors font-semibold text-white/80">Blog &amp; Insights</Link>
+              <Link to="/faqs" className="hover:text-white transition-colors font-semibold text-white/80">Full FAQs</Link>
+              <Link to="/lifecycle" className="hover:text-white transition-colors font-semibold text-white/80">Document Lifecycle</Link>
             </div>
           </div>
 
@@ -115,12 +113,12 @@ export function Footer() {
           <div className="lg:col-span-3">
             <h4 className="font-bold text-sm mb-6 uppercase tracking-widest text-[#806cf0]">SignAny Salesforce</h4>
             <div className="flex flex-col gap-3 text-sm text-white/60">
-              <a href="/#sf-overview" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">Salesforce Overview</a>
-              <a href="/#sf-features" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">App Capabilities</a>
+              <a href="/salesforce#sf-overview" className="hover:text-white transition-colors">Salesforce Overview</a>
+              <a href="/salesforce#sf-features" className="hover:text-white transition-colors">App Capabilities</a>
               <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tdL000000SLsj" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Install AppExchange Package</a>
-              <a href="/#compliance" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">Salesforce Security</a>
-              <a href="/#pricing" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors">Enterprise Pricing</a>
-              <Link to="/contact-us" onClick={() => setMode("salesforce")} className="hover:text-white transition-colors font-semibold text-white/80">Book a Demo</Link>
+              <a href="/salesforce#compliance" className="hover:text-white transition-colors">Salesforce Security</a>
+              <a href="/salesforce#pricing" className="hover:text-white transition-colors">Enterprise Pricing</a>
+              <Link to="/contact-us" className="hover:text-white transition-colors font-semibold text-white/80">Book a Demo</Link>
             </div>
           </div>
 
