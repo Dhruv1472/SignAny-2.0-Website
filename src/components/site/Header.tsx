@@ -15,7 +15,7 @@ const signanyNav = [
   { name: "Pricing", href: "/#pricing" },
   { name: "Blogs", href: "/#blog" },
   { name: "FAQs", href: "/faqs" },
-  { name: "Hash Verification", href: "/verifyHash" },
+  { name: "Hash Verification", href: "/hash-verification" },
 ];
 
 const salesforceNav = [

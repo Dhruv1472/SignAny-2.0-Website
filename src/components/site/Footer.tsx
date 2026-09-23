@@ -14,7 +14,7 @@ const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number; className?
 const socialLinks = [
   { name: "WhatsApp", href: "https://wa.me/919558019600?text=Hello%2C%20I%E2%80%99m%20interested%20in%20Sign%20Any%202.0%20Can%20we%20discuss%20further%3F", icon: WhatsAppIcon },
   { name: "LinkedIn", href: "https://www.linkedin.com/showcase/esignany2-0/about/", icon: Linkedin },
-  { name: "Instagram", href: "https://www.instagram.com/esignany2.0/", icon: Instagram },
+  { name: "Instagram", href: "https://www.instagram.com/esignany/", icon: Instagram },
   { name: "Facebook", href: "https://www.facebook.com/people/Esignany20/61577536805628/", icon: Facebook },
 ];
 
@@ -104,7 +104,7 @@ export function Footer() {
               <a href="/#api" onClick={() => setMode("signany")} className="hover:text-white transition-colors">REST API Docs</a>
               <a href="/#compliance" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Trust & Compliance</a>
               <a href="/#pricing" onClick={() => setMode("signany")} className="hover:text-white transition-colors">Pricing Plans</a>
-              <Link to="/verifyHash" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Verify Document Hash</Link>
+              <Link to="/hash-verification" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Verify Document Hash</Link>
               <Link to="/blog" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Blog & Insights</Link>
               <Link to="/faqs" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Full FAQs</Link>
               <Link to="/lifecycle" onClick={() => setMode("signany")} className="hover:text-white transition-colors font-semibold text-white/80">Document Lifecycle</Link>

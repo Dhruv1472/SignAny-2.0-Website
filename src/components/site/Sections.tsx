@@ -1,6 +1,6 @@
 import { Check, Sparkles, Clock3, Mail, ArrowRight, ShieldCheck, Lock, FileText, Globe, Scale, Landmark, BookOpen, FileCheck, Newspaper, Clock, User } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { compliances, salesforceCompliances, uaePass, plans, faqs, blogs, SITE } from "@/lib/site-data";
+import { compliances, salesforceCompliances, plans, faqs, blogs, SITE } from "@/lib/site-data";
 import { useProductMode } from "@/lib/product-mode";
 import { Icon } from "@/components/site/Icon";
 import { Link } from "@tanstack/react-router";
@@ -116,29 +116,6 @@ export function ComplianceSection() {
       </div>
 
       <div className="section-shell relative z-10 max-w-5xl mx-auto">
-        {/* UAE PASS Highlight Box (Web App Mode) */}
-        {!isSalesforce && (
-          <div className="relative mb-12 overflow-hidden rounded-3xl border border-border/80 bg-card p-6 shadow-md">
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 justify-between w-full">
-              <div className="flex items-start gap-4">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20">
-                  <Clock3 size={18} />
-                </span>
-                <div>
-                  <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <h3 className="text-xl font-bold text-primary">{uaePass.name} Authentication</h3>
-                    <span className="rounded-md md:rounded-full bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 text-xs font-bold uppercase tracking-wider dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/50 self-bottom">
-                      {uaePass.status}
-                    </span>
-                  </div>
-                  <p className="text-xs leading-relaxed text-foreground/90 font-medium">
-                    {uaePass.desc}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Security & Audit Guarantee Banner */}
         <div className="mt-12 grid gap-4 sm:grid-cols-3 rounded-2xl border border-border/70 bg-card/60 p-6 backdrop-blur-sm">

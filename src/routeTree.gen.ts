@@ -15,6 +15,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as HashVerificationRouteImport } from './routes/hash-verification'
 import { Route as LifecycleRouteImport } from './routes/lifecycle'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
@@ -51,6 +52,11 @@ const FaqsRoute = FaqsRouteImport.update({
 const FeaturesRoute = FeaturesRouteImport.update({
   id: '/features',
   path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HashVerificationRoute = HashVerificationRouteImport.update({
+  id: '/hash-verification',
+  path: '/hash-verification',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LifecycleRoute = LifecycleRouteImport.update({
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
+  '/hash-verification': typeof HashVerificationRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
+  '/hash-verification': typeof HashVerificationRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
+  '/hash-verification': typeof HashVerificationRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/faqs'
     | '/features'
+    | '/hash-verification'
     | '/lifecycle'
     | '/privacy-policy'
     | '/terms-and-conditions'
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/faqs'
     | '/features'
+    | '/hash-verification'
     | '/lifecycle'
     | '/privacy-policy'
     | '/terms-and-conditions'
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/faqs'
     | '/features'
+    | '/hash-verification'
     | '/lifecycle'
     | '/privacy-policy'
     | '/terms-and-conditions'
@@ -190,6 +202,7 @@ export interface RootRouteChildren {
   ContactUsRoute: typeof ContactUsRoute
   FaqsRoute: typeof FaqsRoute
   FeaturesRoute: typeof FeaturesRoute
+  HashVerificationRoute: typeof HashVerificationRoute
   LifecycleRoute: typeof LifecycleRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
@@ -241,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/features'
       fullPath: '/features'
       preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hash-verification': {
+      id: '/hash-verification'
+      path: '/hash-verification'
+      fullPath: '/hash-verification'
+      preLoaderRoute: typeof HashVerificationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lifecycle': {
@@ -302,6 +322,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactUsRoute: ContactUsRoute,
   FaqsRoute: FaqsRoute,
   FeaturesRoute: FeaturesRoute,
+  HashVerificationRoute: HashVerificationRoute,
   LifecycleRoute: LifecycleRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
