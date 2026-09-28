@@ -15,8 +15,10 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as HashVerificationRouteImport } from './routes/hash-verification'
 import { Route as LifecycleRouteImport } from './routes/lifecycle'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SalesforceRouteImport } from './routes/salesforce'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as UserGuideRouteImport } from './routes/user-guide'
 import { Route as VerifyHashRouteImport } from './routes/verifyHash'
@@ -53,6 +55,11 @@ const FeaturesRoute = FeaturesRouteImport.update({
   path: '/features',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HashVerificationRoute = HashVerificationRouteImport.update({
+  id: '/hash-verification',
+  path: '/hash-verification',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LifecycleRoute = LifecycleRouteImport.update({
   id: '/lifecycle',
   path: '/lifecycle',
@@ -61,6 +68,11 @@ const LifecycleRoute = LifecycleRouteImport.update({
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalesforceRoute = SalesforceRouteImport.update({
+  id: '/salesforce',
+  path: '/salesforce',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
@@ -96,8 +108,10 @@ export interface FileRoutesByFullPath {
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
+  '/hash-verification': typeof HashVerificationRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/salesforce': typeof SalesforceRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
@@ -111,8 +125,10 @@ export interface FileRoutesByTo {
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
+  '/hash-verification': typeof HashVerificationRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/salesforce': typeof SalesforceRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
@@ -127,8 +143,10 @@ export interface FileRoutesById {
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
+  '/hash-verification': typeof HashVerificationRoute
   '/lifecycle': typeof LifecycleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/salesforce': typeof SalesforceRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/user-guide': typeof UserGuideRoute
   '/verifyHash': typeof VerifyHashRoute
@@ -144,8 +162,10 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/faqs'
     | '/features'
+    | '/hash-verification'
     | '/lifecycle'
     | '/privacy-policy'
+    | '/salesforce'
     | '/terms-and-conditions'
     | '/user-guide'
     | '/verifyHash'
@@ -159,8 +179,10 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/faqs'
     | '/features'
+    | '/hash-verification'
     | '/lifecycle'
     | '/privacy-policy'
+    | '/salesforce'
     | '/terms-and-conditions'
     | '/user-guide'
     | '/verifyHash'
@@ -174,8 +196,10 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/faqs'
     | '/features'
+    | '/hash-verification'
     | '/lifecycle'
     | '/privacy-policy'
+    | '/salesforce'
     | '/terms-and-conditions'
     | '/user-guide'
     | '/verifyHash'
@@ -190,8 +214,10 @@ export interface RootRouteChildren {
   ContactUsRoute: typeof ContactUsRoute
   FaqsRoute: typeof FaqsRoute
   FeaturesRoute: typeof FeaturesRoute
+  HashVerificationRoute: typeof HashVerificationRoute
   LifecycleRoute: typeof LifecycleRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SalesforceRoute: typeof SalesforceRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UserGuideRoute: typeof UserGuideRoute
   VerifyHashRoute: typeof VerifyHashRoute
@@ -243,6 +269,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hash-verification': {
+      id: '/hash-verification'
+      path: '/hash-verification'
+      fullPath: '/hash-verification'
+      preLoaderRoute: typeof HashVerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lifecycle': {
       id: '/lifecycle'
       path: '/lifecycle'
@@ -255,6 +288,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy-policy'
       fullPath: '/privacy-policy'
       preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salesforce': {
+      id: '/salesforce'
+      path: '/salesforce'
+      fullPath: '/salesforce'
+      preLoaderRoute: typeof SalesforceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms-and-conditions': {
@@ -302,8 +342,10 @@ const rootRouteChildren: RootRouteChildren = {
   ContactUsRoute: ContactUsRoute,
   FaqsRoute: FaqsRoute,
   FeaturesRoute: FeaturesRoute,
+  HashVerificationRoute: HashVerificationRoute,
   LifecycleRoute: LifecycleRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SalesforceRoute: SalesforceRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UserGuideRoute: UserGuideRoute,
   VerifyHashRoute: VerifyHashRoute,

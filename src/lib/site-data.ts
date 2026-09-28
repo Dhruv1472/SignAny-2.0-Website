@@ -165,6 +165,7 @@ export const compliances = [
   { name: "eIDAS (AES)", country: "Europe", icon: "Globe" },
   { name: "GDPR", country: "Europe, UK", icon: "ShieldCheck" },
   { name: "GLBA", country: "US, Europe, UK", icon: "Lock" },
+  { name: "UAE Pass Authentication", country: "UAE", icon: "UserCheck" },
   { name: "UK ECA 2000", country: "UK", icon: "FileText" },
   { name: "ETA", country: "Singapore", icon: "Landmark" },
   { name: "PDPA", country: "Singapore", icon: "Fingerprint" },
@@ -190,14 +191,6 @@ export const salesforceCompliances = [
   { name: "AU Electronic Transactions Act 1999", country: "Australia", icon: "BookOpen" },
   { name: "Electronic Communications Act 2000", country: "UK", icon: "FileText" },
 ];
-
-
-export const uaePass = {
-  name: "UAE PASS",
-  country: "UAE",
-  status: "Coming soon — approval in progress",
-  desc: "UAE PASS signer authentication is built into SignAny 2.0 and is currently going through the official approval process. We will confirm availability as soon as we receive sign-off from the UAE PASS team.",
-};
 
 export const plans = [
   {

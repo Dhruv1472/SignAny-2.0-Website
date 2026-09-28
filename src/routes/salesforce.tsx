@@ -3,15 +3,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUp } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { SignAnyHome } from "@/components/site/SignAnyHome";
+import { SalesforceHome } from "@/components/site/SalesforceHome";
 import { ComplianceSection, PricingSection, FAQSection, BlogSection, DemoCTA } from "@/components/site/Sections";
 import { faqs, plans } from "@/lib/site-data";
 
-const title = "SignAny 2.0 | Secure eSignature Software for Teams & Salesforce";
+const title = "SignAny for Salesforce | Native eSignature App for Salesforce CRM";
 const description =
-  "Send, sign and track legally binding documents with SignAny 2.0. Smart fields, 5 signers, audit trails, REST API, Salesforce app and 15+ compliance frameworks. Free plan available.";
+  "Send, sign and track documents without leaving Salesforce. SignAny's native AppExchange package brings eSignatures, multi-step approvals, audit trails, and global compliance directly into your Salesforce org.";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/salesforce")({
   head: () => ({
     meta: [
       { title },
@@ -19,25 +19,25 @@ export const Route = createFileRoute("/")({
       {
         name: "keywords",
         content:
-          "electronic signature software, eSignature, digital signature, Salesforce eSignature app, esign API, UAE PASS signature, document signing platform",
+          "Salesforce eSignature, Salesforce digital signature, AppExchange eSign, Salesforce signing app, native Salesforce document signing, Salesforce CRM esign",
       },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "/salesforce" },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "/salesforce" }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          name: "SignAny 2.0",
+          name: "SignAny for Salesforce",
           applicationCategory: "BusinessApplication",
-          operatingSystem: "Web, Salesforce",
+          operatingSystem: "Salesforce",
           description,
           offers: plans.map((p) => ({
             "@type": "Offer",
@@ -62,10 +62,10 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: HomeRoute,
+  component: SalesforceRoute,
 });
 
-function HomeRoute() {
+function SalesforceRoute() {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
@@ -78,9 +78,9 @@ function HomeRoute() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <SignAnyHome />
-        <ComplianceSection />
-        <PricingSection />
+        <SalesforceHome />
+        <ComplianceSection mode="salesforce" />
+        <PricingSection mode="salesforce" />
         <BlogSection />
         <FAQSection />
         <DemoCTA />

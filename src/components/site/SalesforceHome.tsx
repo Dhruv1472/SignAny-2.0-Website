@@ -6,11 +6,9 @@ import { SectionHeading } from "@/components/site/Sections";
 import { SignaturePath } from "@/components/site/spinner";
 import { ProductCarousel } from "@/components/site/ProductCarousel";
 import { salesforce, SITE } from "@/lib/site-data";
-import { useProductMode } from "@/lib/product-mode";
 import { Link } from "@tanstack/react-router";
 
 export function SalesforceHome() {
-  const { setMode } = useProductMode();
   const [showAllFeatures, setShowAllFeatures] = useState(false);
 
   return (
@@ -52,13 +50,12 @@ export function SalesforceHome() {
               <Info size={16} className="mt-0.5 shrink-0 text-primary" />
               <span>
                 {salesforce.note}{" "}
-                <button
-                  type="button"
-                  onClick={() => setMode("signany")}
+                <Link
+                  to="/"
                   className="font-semibold text-primary underline underline-offset-4"
                 >
                   Switch to SignAny 2.0
-                </button>
+                </Link>
               </span>
             </div>
           </div>
@@ -279,13 +276,12 @@ export function SalesforceHome() {
               ))}
             </ul>
             <div className="mt-7 flex justify-center sm:justify-start">
-              <button
-                type="button"
-                onClick={() => setMode("signany")}
+              <Link
+                to="/"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-px w-full sm:w-auto text-center"
               >
                 Explore SignAny 2.0 <ArrowRight size={15} />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
