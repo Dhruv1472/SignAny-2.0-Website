@@ -65,7 +65,7 @@ export const ProductCarousel = () => {
     <section id="how-it-works" className="pb-24 pt-12 md:pb-28">
       <div className="section-shell">
         <motion.div
-          className="text-center max-w-4xl mx-auto mb-12"
+          className="text-center max-w-5xl mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -78,8 +78,7 @@ export const ProductCarousel = () => {
             Experience <span className="text-primary">SignAny 2.0</span> Live
           </h2>
           <p className="text-muted-foreground text-base md:text-lg text-pretty leading-relaxed">
-            Take a closer look at how SignAny 2.0 helps you prepare documents quickly, collect signatures efficiently, and track progress in real time through a simple and intuitive dashboard. Manage your entire signing workflow from a single place with clarity and control.
-          </p>
+            SignAny 2.0 adds eSignature capabilities to Salesforce, helping teams handle electronic signing within their existing Salesforce workflow. Connect your Salesforce environment with SignAny 2.0, send documents to recipients, monitor signature progress, trigger automated reminders, and maintain a record of signing activity. The integration keeps your eSignature process connected to Salesforce.</p>
         </motion.div>
 
         <div className="relative max-w-5xl mx-auto">

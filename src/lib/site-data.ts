@@ -67,32 +67,32 @@ export const workspaceFeatures: Feature[] = [
   {
     icon: "LayoutDashboard",
     title: "Live dashboard & metrics",
-    desc: "Document status overview, average completion days, monthly sending trend, department-wise distribution and plan usage in one view.",
+    desc: "Monitor document status, completion times, sending trends, and usage from one digital signature dashboard.",
   },
   {
     icon: "Table2",
     title: "All Documents workspace",
-    desc: "Search by Doc ID, name, sender or email, filter by status and date, and export every record straight to CSV.",
+    desc: "Search by Doc ID, name, sender, or email, filter by status/date, and export records to CSV.",
   },
   {
     icon: "Activity",
     title: "Full audit trail",
-    desc: "Signer-level status, timestamps and a complete document activity log, with an audit report attached on completion.",
+    desc: "Keep track of signer activity, timestamps, and document events with an electronic signature audit trail.",
   },
   {
     icon: "Bell",
     title: "Expiring soon alerts",
-    desc: "See everything expiring today or in the next 7 days so follow-ups happen before a deal stalls.",
+    desc: "Keep your eSignature workflow on track with timely notifications for documents expiring today or within 7 days.",
   },
   {
     icon: "Share2",
     title: "Access & ownership control",
-    desc: "Share documents with people or teams as Editor or Viewer, transfer ownership, and revoke access at any time.",
+    desc: "Create and manage permissions, ownership, and team access to documents in your digital signature workspace",
   },
   {
     icon: "MailCheck",
     title: "Branded email templates",
-    desc: "Customise signing, status update, reminder, completed and void emails, plus your own terms and consent text for signers.",
+    desc: "Send signing emails, reminders, status updates, and completion messages customized to your brand.",
   },
 ];
 
@@ -101,28 +101,28 @@ export const permissionSets = [
     name: "Admin",
     icon: "ShieldCheck",
     summary:
-      "Full control of the workspace — configuration, integrations, users and every document.",
+      "Full control of the workspace - configuration, integrations, users and every document.",
     points: [
-      "Configure document, field and signature-pad defaults for the whole workspace",
-      "Manage integrations: Gmail, Outlook, Zoho Mail and the Salesforce CRM connector",
-      "Invite, activate and deactivate members and reassign document ownership",
-      "Edit email templates, terms & conditions and consent requirements",
+      "Configure document, field, and signature pad defaults for the entire workspace",
+      "Manage integrations: Gmail, Outlook, Zoho Mail, and the Salesforce CRM connector",
+      "Invite, activate, and deactivate members, and reassign document ownership",
+      "Edit email templates, terms and conditions, and consent requirements",
       "Enable UAE PASS authentication by default and enforce compliance settings",
-      "View organisation-wide dashboards, usage, credits and audit reports",
+      "View organization-wide dashboards, usage, credits, and audit reports",
     ],
   },
   {
     name: "Member",
     icon: "UserCheck",
     summary:
-      "Everything needed to prepare, send and track documents — without workspace-level settings.",
+      "Everything needed to prepare, send, and track documents without access to workspace-level settings.",
     points: [
-      "Upload, prepare and send documents to up to 5 signers",
-      "Place fields, set expiry, reminders and schedule sends",
-      "Track their own documents, resend, update signers and download completed files",
+      "Upload, prepare, and send documents to up to 5 signers",
+      "Place fields, set expiry dates and reminders, and schedule sends",
+      "Track their own documents, resend documents, update signers, and download completed files",
       "Share documents with people or teams as Editor or Viewer",
       "View personal dashboard metrics and remaining credits",
-      "Cannot change workspace settings, integrations or member permissions",
+      "Cannot change workspace settings, integrations, or member permissions",
     ],
   },
 ];
@@ -131,22 +131,22 @@ export const apiCapabilities = [
   {
     icon: "Code2",
     title: "REST API for any system",
-    desc: "Create envelopes, add signers, place fields, send and download completed documents programmatically from your own product.",
+    desc: "Create envelopes, add signers, place fields, send documents, and download completed files programmatically from your own product.",
   },
   {
     icon: "Plug",
     title: "CRM & portal ready",
-    desc: "Use SignAny 2.0 inside Salesforce, your customer portal, HR system or any in-house app — no rip-and-replace required.",
+    desc: "Use SignAny 2.0 with Salesforce, customer portals, HR systems, or in-house applications without replacing your existing tools.",
   },
   {
     icon: "Webhook",
     title: "Status callbacks",
-    desc: "Receive document and signer status updates so your records stay in sync without polling.",
+    desc: "Receive document and signer status updates to keep your records synchronized without continuous polling.",
   },
   {
     icon: "KeyRound",
     title: "Secure token access",
-    desc: "Scoped API credentials issued and revoked by workspace admins, with every call written to the audit trail.",
+    desc: "Use scoped API credentials managed by workspace admins, with every API call recorded in the audit trail.",
   },
 ];
 
@@ -156,7 +156,7 @@ export const integrations = [
   { name: "Outlook", type: "Send-from email" },
   { name: "Zoho Mail", type: "Send-from email" },
   { name: "REST API", type: "Custom integration" },
-  { name: "UAE PASS", type: "Identity (coming soon)" },
+  { name: "UAE PASS", type: "Identity" },
 ];
 
 export const compliances = [
@@ -196,13 +196,12 @@ export const plans = [
   {
     name: "Free",
     price: "$0",
-    period: "always free",
-    tagline: "For individuals getting started with eSignatures.",
+    period: "Free to get started",
+    tagline: "For individuals and teams getting started with eSignatures.",
     cta: "SignUp",
     featured: false,
     features: [
-      "5 documents per month",
-      "Invite additional users to your workspace",
+      "Send up to 5 documents per month",
       "Up to 5 signers per document",
       "Sequential or simultaneous signing",
       "Mobile signing & audit trail",
@@ -237,7 +236,7 @@ export const plans = [
     features: [
       "Customised document volume and user count",
       "Salesforce CRM connector & REST API access",
-      "UAE PASS authentication (coming soon)",
+      "UAE PASS authentication",
       "Advanced compliance configuration",
       "Custom branding and email templates",
       "Dedicated onboarding and support",
@@ -288,44 +287,81 @@ export const faqs = [
   },
 ];
 
+export const salesforceFaqs = [
+  {
+    q: "How do I send documents for signature in Salesforce?",
+    a: "SignAny 2.0 integrates with Salesforce so users can send documents for electronic signature from their Salesforce workflow and track signing activity.",
+  },
+  {
+    q: "What is Salesforce eSignature?",
+    a: "Salesforce eSignature lets businesses send documents for electronic signing while keeping the signing process connected to their Salesforce workflow.",
+  },
+  {
+    q: "How does eSignature work in Salesforce?",
+    a: "Connect an eSignature solution with Salesforce, send documents to recipients, collect signatures, and monitor signing status from the connected workflow.",
+  },
+  {
+    q: "What is an electronic signature date?",
+    a: "The electronic signature date records when a signer completed the signing action and can form part of the document's audit record.",
+  },
+  {
+    q: "What should I do if my eSignature is not working in Salesforce?",
+    a: "Check the Salesforce connection, user permissions, document status, recipient details, and signing link. If the issue continues, contact your eSignature provider's support team.",
+  },
+  {
+    q: "Can I use eSignature in Salesforce?",
+    a: "Yes. SignAny 2.0 connects with Salesforce to support electronic signing workflows, including sending documents, collecting signatures, and tracking signing activity.",
+  },
+  {
+    q: "How can I add an email signature in Salesforce?",
+    a: "Salesforce email signatures are separate from electronic document signatures. Email signature settings can be configured within Salesforce for emails sent by users.",
+  },
+  {
+    q: "How do I change my email signature in Salesforce?",
+    a: "You can update your personal email signature through your Salesforce user settings. This changes the signature added to your Salesforce emails, not an electronic document signature.",
+  },
+];
+
+
+
 /* ---------------- Native Salesforce App (existing edition) ---------------- */
 
 export const salesforce = {
   badge: "Native Salesforce App",
-  title: "SignAny inside your Salesforce org",
+  title: "Sign Documents Directly Faster",
   subtitle:
-    "The managed package edition of SignAny for native Salesforce users. Send documents from any record, keep signed files on the object they belong to, and never leave your org.",
+    "SignAny 2.0 brings eSignature capabilities directly into Salesforce, allowing teams to manage document signing within their existing workflows. Connect SignAny 2.0 with your Salesforce environment, send documents for signature, track signing status, automate reminders, and keep a record of signing activity.",
   note: "This edition is a focused, native Salesforce package with a limited function set compared with the full SignAny 2.0 web application.",
   features: [
     {
       icon: "Cloud",
-      title: "Installed as a managed package",
-      desc: "Install directly into your Salesforce org and assign the SignAny permission set to your users in minutes.",
+      title: "Salesforce Managed Package",
+      desc: "Install SignAny 2.0 in your Salesforce org and assign user permissions without complex setup.",
     },
     {
       icon: "FileSignature",
-      title: "Send from any record",
-      desc: "Trigger a signature request from Opportunity, Contract, Account, Case or any custom object using a simple action button.",
+      title: "Send from Salesforce Records",
+      desc: "Start signature requests from Opportunities, Contracts, Accounts, Cases, or custom Salesforce objects.",
     },
     {
       icon: "Users",
       title: "Multi-signer workflow",
-      desc: "Add multiple signers, choose sequential or simultaneous signing, and place signature and text fields before sending.",
+      desc: "Add multiple signers, choose signing order, and place signature or text fields before sending.",
     },
     {
       icon: "Database",
-      title: "Signed files stored in Salesforce",
-      desc: "The completed document and its audit certificate are attached back to the originating record automatically.",
+      title: "Signed Files in Salesforce",
+      desc: "Keep completed documents and audit certificates connected to their originating Salesforce records.",
     },
     {
       icon: "PenTool",
-      title: "Signature pad",
-      desc: "Signers can draw or type their signature with live preview, on desktop or mobile.",
+      title: "Salesforce Signature Pad",
+      desc: "Let recipients draw or type signatures with a responsive signing experience across desktop and mobile.",
     },
     {
       icon: "ShieldCheck",
-      title: "Compliant by design",
-      desc: "ESIGN Act, UETA, eIDAS (AES Level 2), UK ECA 2000, Singapore ETA and AU ETA 1999 aligned.",
+      title: "Compliance & Audit Trail",
+      desc: "ESIGN Act, UETA, eIDAS (AES Level 2), UK ECA 2000, Singapore ETA, and AU ETA 1999 are aligned.",
     },
   ],
   limits: [
@@ -335,10 +371,10 @@ export const salesforce = {
     "REST API and non-Salesforce portals are covered by SignAny 2.0",
   ],
   steps: [
-    { title: "Install the package", desc: "Add the SignAny managed package to your sandbox or production org." },
-    { title: "Complete Prerequisites", desc: "Configure your Connected App and initial org settings." },
-    { title: "Add the action", desc: "Drop the Send for Signature action onto the objects your team works from." },
-    { title: "Send and track", desc: "Send, monitor signer status and receive the signed file back on the record." },
+    { title: "Install the package", desc: "Install the SignAny managed package in your sandbox or production org." },
+    { title: "Complete Prerequisites", desc: "Configure your Connected App and required org settings." },
+    { title: "Add the action", desc: "Add the Send for Signature action to the Salesforce objects your team uses." },
+    { title: "Send and track", desc: "Send documents for signature, track signer status, and receive the completed file on the record." },
   ],
 };
 

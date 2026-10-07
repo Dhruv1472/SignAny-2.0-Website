@@ -115,14 +115,48 @@ const getCaptchaSettingsValue = () =>
     ts: String(Date.now()),
   });
 
+const contactTitle = "Contact SignAny 2.0 | eSignature Support & Sales";
+const contactDescription =
+  "Contact SignAny 2.0 for eSignature product questions, Salesforce integration support, pricing information, or help choosing the right document signing solution.";
+const contactKeywords =
+  "SignAny 2.0 contact, SignAny support, Signature software demo, Salesforce eSignature demo";
+
 export const Route = createFileRoute("/contact-us")({
   head: () => ({
     meta: [
-      { title: "Contact Us & Book a Demo — SignAny 2.0" },
+      { title: contactTitle },
+      { name: "description", content: contactDescription },
+      { name: "keywords", content: contactKeywords },
+      { property: "og:title", content: contactTitle },
+      { property: "og:description", content: contactDescription },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://esignany.com/contact-us" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: contactTitle },
+      { name: "twitter:description", content: contactDescription },
+    ],
+    links: [{ rel: "canonical", href: "https://esignany.com/contact-us" }],
+    scripts: [
       {
-        name: "description",
-        content:
-          "Schedule a personalized live demo of SignAny 2.0 or reach out to our team to discuss your document generation and eSignature workflow requirements.",
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://esignany.com/",
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Contact Us",
+              "item": "https://esignany.com/contact-us",
+            },
+          ],
+        }),
       },
     ],
   }),

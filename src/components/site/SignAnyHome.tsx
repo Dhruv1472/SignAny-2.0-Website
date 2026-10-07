@@ -38,17 +38,14 @@ function Hero() {
         <div className="animate-rise">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm">
             <Sparkles size={14} className="text-primary" />
-            Secure workflow automation for modern teams
+            Write, Draw, or Upload Your Signature in Seconds
           </span>
-          <h1 className="text-4xl leading-[1.05] font-bold text-balance md:text-5xl lg:text-[4rem]">
-            Send, sign and track documents{" "}
-            <span className="text-gradient-brand">faster, smarter, securely</span>
+          <h1 className="text-4xl font-bold leading-tight text-balance md:text-5xl lg:text-[4rem] lg:leading-[1.15]">
+            Digital Signature Creator,{" "}
+            <span className="text-gradient-brand">for Secure Document Signing</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted-foreground">
-            SignAny 2.0 is an electronic signature platform for teams that need speed and proof.
-            Prepare documents with smart fields, route up to five signers, automate reminders, and
-            keep a complete audit trail — with 15+ global compliance frameworks behind every
-            signature.
+            SignAny 2.0 is a digital signature creator online for fast, secure signing with evidence. Create documents using smart fields, send them to up to five signers, automate reminders, and track every action, with support for 15+ global compliance frameworks.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a
@@ -142,7 +139,7 @@ function KeyFeatures() {
           eyebrow="Core capabilities"
           title="Everything you need to run"
           highlight="digital signatures"
-          desc="From upload to signed and archived — SignAny 2.0 removes the manual steps between you and a completed agreement."
+          desc="A complete digital signature creation tool for preparing documents, collecting signatures, managing signing activity, and tracking every step from one workspace."
         />
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {displayedFeatures.map((f, index) => {
@@ -216,9 +213,9 @@ function Workspace() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Workspace & admin"
-          title="Visibility and control for"
-          highlight="the whole team"
-          desc="Dashboards, audit trails, access control and configurable defaults keep every document accountable from the moment it is created."
+          title="Manage Every Signing Workflow"
+          highlight=" from One Workspace"
+          desc="Get a clear view of documents, signing activity, team access, and workspace performance from one centralized dashboard."
         />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {displayedFeatures.map((f, index) => {
@@ -268,9 +265,9 @@ function Permissions() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Permission sets"
-          title="Two clear roles:"
-          highlight="Admin and Member"
-          desc="SignAny 2.0 keeps access simple. Admins own configuration and governance; Members get everything they need to move documents forward."
+          title="Simple Roles. Clear Access."
+          highlight="Better Control."
+          desc="SignAny 2.0 separates workspace administration from everyday signing tasks, giving each team member the right level of access."
         />
         <div className="grid gap-6 lg:grid-cols-2">
           {permissionSets.map((p) => (
@@ -308,7 +305,7 @@ function ApiSection() {
           eyebrow="API & integrations"
           title="Bring signing into"
           highlight="any CRM or portal"
-          desc="SignAny 2.0 ships with a REST API and ready-made connectors, so your team signs where they already work instead of switching tools."
+          desc="With SignAny 2.0, teams can sign documents within their existing tools via a REST API and ready-made connectors."
         />
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="grid gap-5 sm:grid-cols-2">
@@ -327,8 +324,7 @@ function ApiSection() {
             <div className="relative z-10">
               <h3 className="text-xl font-semibold text-ink-foreground">Connected out of the box</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                Send from your own mailbox, push signed files into your CRM, and authenticate
-                signers with regional identity providers.
+                Send documents from your own mailbox, push signed files into your CRM, and authenticate signers with supported identity providers.
               </p>
               <ul className="mt-6 space-y-3">
                 {integrations.map((i) => (
