@@ -1,6 +1,6 @@
 import { Check, Sparkles, Clock3, Mail, ArrowRight, ShieldCheck, Lock, FileText, Globe, Scale, Landmark, BookOpen, FileCheck, Newspaper, Clock, User } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { compliances, salesforceCompliances, plans, faqs, blogs, SITE } from "@/lib/site-data";
+import { compliances, salesforceCompliances, plans, faqs, blogs, SITE, salesforceFaqs } from "@/lib/site-data";
 import { Icon } from "@/components/site/Icon";
 import { Link } from "@tanstack/react-router";
 
@@ -44,7 +44,7 @@ export function SectionHeading({
         </span>
       )}
       <h2
-        className={`text-3xl font-bold tracking-tight text-balance md:text-5xl ${
+        className={`text-3xl font-bold leading-tight tracking-tight text-balance md:text-5xl md:leading-tight lg:leading-[1.15] ${
           light ? "text-ink-foreground" : "text-foreground"
         }`}
       >
@@ -77,12 +77,12 @@ export function ComplianceSection({ mode = "signany" }: { mode?: SiteMode }) {
       <div className="section-shell relative z-10">
         <SectionHeading
           eyebrow="Compliance & Global Acts"
-          title="Legally binding signatures across"
-          highlight={isSalesforce ? "global frameworks" : "15+ compliance acts"}
+          title= {isSalesforce ? "Compliance-Ready" : "Legally binding signatures across"}
+          highlight={isSalesforce ? "eSignatures for Salesforce" : "15+ compliance acts"}
           desc={
             isSalesforce
-              ? "The SignAny Salesforce edition adheres to global electronic transaction acts and strict enterprise data protection standards."
-              : "SignAny 2.0 is engineered against the electronic transaction laws and data protection acts that govern your market — ensuring every signature holds full court-admissible validity."
+              ? "SignAny 2.0 supports electronic signing aligned with 7+ global frameworks, including ESIGN Act, UETA, eIDAS, AES Level 2, UK ECA 2000, Singapore ETA, and Australia ETA 1999."
+              : "SignAny 2.0 supports electronic signing requirements across 15+ compliance frameworks, helping businesses maintain secure, traceable, and legally recognized signing workflows."
           }
         />
       </div>
@@ -162,9 +162,9 @@ export function PricingSection({ mode = "signany" }: { mode?: SiteMode }) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Pricing"
-          title="Simple plans that scale"
-          highlight="with your team"
-          desc="Start free, upgrade when your volume grows, and build a bespoke package when your organisation needs more."
+          title={isSalesforce ? "eSignature Plans Built" : "Plans That Grow"}
+          highlight={isSalesforce ? "for Salesforce teams" : "With Your Signing Needs"}
+          desc={isSalesforce ? "Choose a Salesforce eSignature plan based on your signing volume, users, and integration requirements." : "Start free, upgrade when your volume grows, and build a bespoke package when your organisation needs more."}
         />
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -227,8 +227,9 @@ export function PricingSection({ mode = "signany" }: { mode?: SiteMode }) {
   );
 }
 
-export function FAQSection() {
-  const displayedFaqs = faqs.slice(0, 4);
+export function FAQSection({ mode = "signany" }: { mode?: SiteMode } = {}) {
+  const isSalesforce = mode === "salesforce";
+  const displayedFaqs = (isSalesforce ? salesforceFaqs : faqs).slice(0, 4);
 
   return (
     <section id="faqs" className="bg-cloud py-20">
@@ -237,7 +238,11 @@ export function FAQSection() {
           eyebrow="FAQs"
           title="Frequently Asked"
           highlight="Questions"
-          desc="Get quick answers to common questions about features, security, pricing, and how Sign Any 2.0 helps you sign and manage documents with ease."
+          desc={
+            isSalesforce
+              ? "Get quick answers to common questions about SignAny 2.0 for Salesforce, electronic signatures, and CRM integration workflows."
+              : "Get quick answers to common questions about features, security, pricing, and how Sign Any 2.0 helps you sign and manage documents with ease."
+          }
         />
         <div className="mx-auto max-w-3xl">
           <Accordion type="single" collapsible className="space-y-3">
@@ -291,9 +296,15 @@ export function BlogSection() {
               <Newspaper size={30} />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-2">No Blogs Published Yet</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               We haven't published any articles yet. Check back soon for the latest insights on digital signatures, enterprise security, and document workflow automation!
             </p>
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-90 transition-opacity"
+            >
+              Visit Blog <ArrowRight size={15} />
+            </Link>
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -373,11 +384,10 @@ export function DemoCTA() {
           <div className="glow-orb -top-16 right-10 h-72 w-72 bg-primary" />
           <div className="relative z-10 mx-auto max-w-2xl">
             <h2 className="text-3xl font-bold text-balance text-ink-foreground md:text-4xl">
-              Ready to close documents in minutes, not days?
+              Ready to close documents faster?
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink-muted md:text-lg">
-              Create a free account and send your first 5 documents this month, or book a walkthrough
-              with our team to see SignAny 2.0 mapped to your workflow.
+              Start your free SignAny account and send your first 5 documents this month, or book a walkthrough of SignAny 2.0.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a

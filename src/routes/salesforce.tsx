@@ -5,11 +5,11 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { SalesforceHome } from "@/components/site/SalesforceHome";
 import { ComplianceSection, PricingSection, FAQSection, BlogSection, DemoCTA } from "@/components/site/Sections";
-import { faqs, plans } from "@/lib/site-data";
+import { salesforceFaqs, plans } from "@/lib/site-data";
 
-const title = "SignAny for Salesforce | Native eSignature App for Salesforce CRM";
+const title = "Salesforce Digital Signature | Sign Documents in Salesforce";
 const description =
-  "Send, sign and track documents without leaving Salesforce. SignAny's native AppExchange package brings eSignatures, multi-step approvals, audit trails, and global compliance directly into your Salesforce org.";
+  "Sign documents directly from Salesforce with SignAny 2.0. Create, send, track, and manage digital signatures while keeping documents and signature activity connected to Salesforce.";
 
 export const Route = createFileRoute("/salesforce")({
   head: () => ({
@@ -19,16 +19,25 @@ export const Route = createFileRoute("/salesforce")({
       {
         name: "keywords",
         content:
-          "Salesforce eSignature, Salesforce digital signature, AppExchange eSign, Salesforce signing app, native Salesforce document signing, Salesforce CRM esign",
+          "Salesforce e-signature, electronic signature requirements, Salesforce Digital Signature",
       },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
+      { property: "og:title", content: "Salesforce Digital Signature | SignAny 2.0" },
+      {
+        property: "og:description",
+        content:
+          "Sign, send, and track documents directly from Salesforce with SignAny 2.0. Manage digital signatures and document activity within your Salesforce workflow.",
+      },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/salesforce" },
-      { name: "twitter:title", content: title },
-      { name: "twitter:description", content: description },
+      { property: "og:url", content: "https://esignany.com/salesforce" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Salesforce Digital Signature | SignAny 2.0" },
+      {
+        name: "twitter:description",
+        content:
+          "Sign, send, and track documents directly from Salesforce with SignAny 2.0. Manage digital signatures and document activity within your Salesforce workflow.",
+      },
     ],
-    links: [{ rel: "canonical", href: "/salesforce" }],
+    links: [{ rel: "canonical", href: "https://esignany.com/salesforce" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -53,7 +62,7 @@ export const Route = createFileRoute("/salesforce")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: faqs.map((f) => ({
+          mainEntity: salesforceFaqs.map((f) => ({
             "@type": "Question",
             name: f.q,
             acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -81,8 +90,8 @@ function SalesforceRoute() {
         <SalesforceHome />
         <ComplianceSection mode="salesforce" />
         <PricingSection mode="salesforce" />
-        <BlogSection />
-        <FAQSection />
+        {/* <BlogSection /> */}
+        <FAQSection mode="salesforce" />
         <DemoCTA />
       </main>
 

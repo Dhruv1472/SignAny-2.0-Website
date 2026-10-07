@@ -42,7 +42,7 @@ export function NotFoundView() {
               <p className="text-[clamp(4.5rem,12vw,8.5rem)] font-black leading-none tracking-tight text-foreground/80">
                 404
               </p>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.05] text-balance">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight text-balance">
                 The page you are looking for is{" "}
                 <span className="text-gradient-brand">missing.</span>
               </h1>

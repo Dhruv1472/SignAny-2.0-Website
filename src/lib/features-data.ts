@@ -30,7 +30,7 @@ export const signanyFeatures: FeatureDetail[] = [
     tagline: "Upload multiple files, configure up to 5 signers, and place smart fields with custom rules",
     tag: "Document Setup",
     icon: "FileUp",
-    desc: "Upload multiple files, reorder documents, assign up to 5 unique signers, import contacts from Salesforce, and drag-and-drop 10 precision smart field types.",
+    desc: "Drag-and-drop to position 10 precision smart fields, upload multiple files, reorder documents, and add up to 5 signers.",
     overview: "SignAny 2.0 provides a comprehensive document setup workspace. Upload multiple files into a single envelope, re-arrange reading order, import signer records from Salesforce, and place 10 precision field types with custom aspect ratios, validation rules, required toggles, and typography settings.",
     capabilities: [
       {
@@ -86,7 +86,7 @@ export const signanyFeatures: FeatureDetail[] = [
     tagline: "Centralized document tracking, quick action management, CSV export, and signer resending",
     tag: "Workspace & Management",
     icon: "Table2",
-    desc: "Search by Doc ID or email, filter by status, export CSV reports, update signer expiry up to 90 days, and resend links via SMS or WhatsApp.",
+    desc: "Find documents by ID or email, filter by status, export reports, adjust signer deadlines up to 90 days, and resend signing links.",
     overview: "The All Documents workspace centralizes your document pipeline. Perform 9 quick actions (View Details, Preview, Download, Manage Access, Transfer Ownership, Update Expiry up to 90 days, Send Now, Reschedule, Delete), deactivate documents at any time, search by Doc ID, and export filtered data to CSV.",
     capabilities: [
       {
@@ -142,7 +142,7 @@ export const signanyFeatures: FeatureDetail[] = [
     tagline: "Live document status overview, plan credit metrics, expiring soon alerts, and completion trends",
     tag: "Dashboard Metrics",
     icon: "LayoutDashboard",
-    desc: "Document status charts, remaining vs. used credit tracking, 7-day expiration alerts, monthly sending trends, and average completion duration.",
+    desc: "With clear dashboard metrics, you can monitor document status, credit usage, 7-day sign expiration alerts, sending trends, and average completion times.",
     overview: "The Dashboard provides executive visibility into your organization's document performance. Track pending vs. completed template metrics, monitor plan credit consumption, catch documents expiring today or in the next 7 days, and analyze department-wise sending trends.",
     capabilities: [
       {
@@ -198,7 +198,7 @@ export const signanyFeatures: FeatureDetail[] = [
     tagline: "Configurable governance rules, UAE Pass integration, expiry types, and custom reminder schedules",
     tag: "Admin & Settings",
     icon: "Settings",
-    desc: "Configure general settings, UAE Pass authentication, attached or separate audit PDF behavior, 1-90 day One-Time or Recurring expiry, and custom reminder schedules.",
+    desc: "You can manage workspace settings, security settings, PDF preferences and one-time or recurring document expiration from one place.",
     overview: "The Admin Panel empowers administrators to enforce company-wide governance. Set default document behavior (send audit report on every signature, default simultaneous sending, UAE Pass digital signature requirement), choose attached vs. separate Audit PDF creation, and configure One-Time vs. Recurring expiry up to 90 days.",
     capabilities: [
       {
@@ -254,7 +254,7 @@ export const signanyFeatures: FeatureDetail[] = [
     tagline: "Seamless review & signing with Draw, Type, and Image Upload pad options plus auto-scroll field navigation",
     tag: "Sign Page",
     icon: "TabletSmartphone",
-    desc: "Signers review documents, use Signature Pad with Draw (pen size/erase/undo), Type (custom fonts), or Upload (JPG/PNG up to 2MB), auto-fill empty fields, and use Next Field navigation.",
+    desc: "Let signers review documents and create signatures by drawing, typing, or uploading a JPG (up to 2MB) or PNG signature directly on any device with auto-fill empty.",
     overview: "The Sign Page delivers an effortless signing experience on any mobile phone, tablet, or desktop browser. Signers review the agreement, access a 3-mode Signature Pad (Draw with pen size & undo/redo, Type with font styles, or Upload PNG/JPG up to 2MB), replace signatures across all boxes, auto-fill empty signature fields, and navigate with Next Field auto-scroll.",
     capabilities: [
       {
@@ -310,7 +310,7 @@ export const signanyFeatures: FeatureDetail[] = [
     tagline: "Integrate with Gmail, Outlook, Zoho Mail, and native Salesforce CRM Package",
     tag: "Integrations & CRM",
     icon: "Share2",
-    desc: "Connect Gmail, Outlook, and Zoho Mail for custom Send From email dispatch, and use native Salesforce CRM integration for object & record data import.",
+    desc: "Connect Gmail, Outlook, or Zoho Mail for email sending, while Salesforce integration keeps electronic signing connected to your existing CRM workflow.",
     overview: "Connect SignAny 2.0 directly to your communication and CRM infrastructure. Send signing emails from your integrated Gmail, Outlook, or Zoho Mail accounts, and leverage the native Salesforce CRM Package Connector to map Salesforce object fields and auto-fill recipient data.",
     capabilities: [
       {
@@ -366,7 +366,7 @@ export const signanyFeatures: FeatureDetail[] = [
     tagline: "Capture IP addresses, location metadata, and UTC activity timestamps for complete legal proof",
     tag: "Audit & Activity",
     icon: "ShieldCheck",
-    desc: "Track IP addresses, location metadata, and exact UTC timestamps for sending, opening, signing, voiding, and completing documents.",
+    desc: "Keep track of IP addresses, location metadata, and UTC timestamps when you open, sign, void, and complete documents.",
     overview: "Every document transaction in SignAny 2.0 is captured in a detailed Audit Report & Activity Log. The system tracks recipient IP addresses, geographical location data, user-agent details, and UTC timestamps for every email dispatch, view, signature capture, void, and completion event.",
     capabilities: [
       {

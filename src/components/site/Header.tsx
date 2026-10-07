@@ -20,7 +20,7 @@ const salesforceNav = [
   { name: "Capabilities", href: "/salesforce#sf-features" },
   { name: "Compliance", href: "/salesforce#compliance" },
   { name: "Pricing", href: "/salesforce#pricing" },
-  { name: "Blogs", href: "/salesforce#blog" },
+  { name: "Blogs", href: "/blog" },
   { name: "FAQs", href: "/faqs" },
 ];
 

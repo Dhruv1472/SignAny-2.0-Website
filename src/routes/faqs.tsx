@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { HelpCircle, Search, ArrowUp, ShieldCheck, CreditCard, Wrench, MessageCircle, Sparkles } from "lucide-react";
+import { HelpCircle, Search, ArrowUp, ShieldCheck, CreditCard, Wrench, MessageCircle, Cloud } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import { ProductModeProvider } from "@/lib/product-mode";
@@ -39,24 +39,75 @@ const categories = [
   },
   {
     id: "technical",
-    title: "Technical & Salesforce",
+    title: "Technical",
     icon: Wrench,
     questions: [
-      { q: "Does SignAny 2.0 offer a Salesforce Native App?", a: "Yes! SignAny 2.0 includes a dedicated Salesforce App Exchange package that lets you trigger Send for Signature actions directly from any Opportunity, Contact, or custom Salesforce object." },
       { q: "Does SignAny 2.0 have a REST API?", a: "Yes, our developer-friendly REST API allows you to embed signature workflows directly into your own web applications, client portals, or backend pipelines." },
       { q: "Which web browsers are supported?", a: "We support all modern browsers including Chrome, Firefox, Safari, and Microsoft Edge across desktop, tablet, and mobile devices." },
     ],
   },
+  {
+    id: "salesforce",
+    title: "Salesforce",
+    icon: Cloud,
+    questions: [
+      { q: "How do I send documents for signature in Salesforce?", a: "SignAny 2.0 integrates with Salesforce so users can send documents for electronic signature from their Salesforce workflow and track signing activity." },
+      { q: "What is Salesforce eSignature?", a: "Salesforce eSignature lets businesses send documents for electronic signing while keeping the signing process connected to their Salesforce workflow." },
+      { q: "How does eSignature work in Salesforce?", a: "Connect an eSignature solution with Salesforce, send documents to recipients, collect signatures, and monitor signing status from the connected workflow." },
+      { q: "What is an electronic signature date?", a: "The electronic signature date records when a signer completed the signing action and can form part of the document's audit record." },
+      { q: "What should I do if my eSignature is not working in Salesforce?", a: "Check the Salesforce connection, user permissions, document status, recipient details, and signing link. If the issue continues, contact your eSignature provider's support team." },
+      { q: "Can I use eSignature in Salesforce?", a: "Yes. SignAny 2.0 connects with Salesforce to support electronic signing workflows, including sending documents, collecting signatures, and tracking signing activity." },
+      { q: "How can I add an email signature in Salesforce?", a: "Salesforce email signatures are separate from electronic document signatures. Email signature settings can be configured within Salesforce for emails sent by users." },
+      { q: "How do I change my email signature in Salesforce?", a: "You can update your personal email signature through your Salesforce user settings. This changes the signature added to your Salesforce emails, not an electronic document signature." },
+    ],
+  },
 ];
+
+const faqTitle = "SignAny 2.0 FAQs | eSignature, Security & Pricing Questions";
+const faqDescription =
+  "Get answers to your questions about SignAny 2.0 eSignatures, document signing, security, compliance, Salesforce integration, pricing, and API capabilities.";
+const faqKeywords =
+  "eSignature FAQs, electronic signature FAQs, digital signature FAQs, eSignature software FAQs, SignAny 2.0 FAQs, e-signature questions";
+const faqOgTitle = "Digital Signature FAQs | SignAny 2.0";
+const faqOgDescription =
+  "Get answers to common questions about SignAny 2.0, including eSignatures, document signing, security, Salesforce integration, pricing, compliance, and API capabilities.";
 
 export const Route = createFileRoute("/faqs")({
   head: () => ({
     meta: [
-      { title: "Frequently Asked Questions — SignAny 2.0" },
+      { title: faqTitle },
+      { name: "description", content: faqDescription },
+      { name: "keywords", content: faqKeywords },
+      { property: "og:title", content: faqOgTitle },
+      { property: "og:description", content: faqOgDescription },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://esignany.com/faqs" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: faqOgTitle },
+      { name: "twitter:description", content: faqOgDescription },
+    ],
+    links: [{ rel: "canonical", href: "https://esignany.com/faqs" }],
+    scripts: [
       {
-        name: "description",
-        content:
-          "Find detailed answers to common questions about SignAny 2.0 plans, pricing, security, compliance, Salesforce integration, and API access.",
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://esignany.com/",
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "FAQs",
+              "item": "https://esignany.com/faqs",
+            },
+          ],
+        }),
       },
     ],
   }),

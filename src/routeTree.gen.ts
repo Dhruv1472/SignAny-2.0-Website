@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BlogsRouteImport } from './routes/blogs'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as FeaturesRouteImport } from './routes/features'
@@ -38,6 +39,11 @@ const SplatRoute = SplatRouteImport.update({
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogsRoute = BlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactUsRoute = ContactUsRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
+  '/blogs': typeof BlogsRoute
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
+  '/blogs': typeof BlogsRoute
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/blog': typeof BlogRoute
+  '/blogs': typeof BlogsRoute
   '/contact-us': typeof ContactUsRoute
   '/faqs': typeof FaqsRoute
   '/features': typeof FeaturesRoute
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/blog'
+    | '/blogs'
     | '/contact-us'
     | '/faqs'
     | '/features'
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/blog'
+    | '/blogs'
     | '/contact-us'
     | '/faqs'
     | '/features'
@@ -193,6 +204,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/blog'
+    | '/blogs'
     | '/contact-us'
     | '/faqs'
     | '/features'
@@ -211,6 +223,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
   BlogRoute: typeof BlogRoute
+  BlogsRoute: typeof BlogsRoute
   ContactUsRoute: typeof ContactUsRoute
   FaqsRoute: typeof FaqsRoute
   FeaturesRoute: typeof FeaturesRoute
@@ -246,6 +259,13 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact-us': {
@@ -339,6 +359,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   BlogRoute: BlogRoute,
+  BlogsRoute: BlogsRoute,
   ContactUsRoute: ContactUsRoute,
   FaqsRoute: FaqsRoute,
   FeaturesRoute: FeaturesRoute,

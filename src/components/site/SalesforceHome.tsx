@@ -24,9 +24,9 @@ export function SalesforceHome() {
               <Icon name="Cloud" size={14} className="text-primary" />
               {salesforce.badge}
             </span>
-            <h1 className="text-4xl leading-[1.05] font-bold text-balance md:text-5xl lg:text-[3.75rem]">
-              {salesforce.title.split("Salesforce")[0]}
-              <span className="text-gradient-brand">Salesforce org</span>
+            <h1 className="text-4xl font-bold leading-tight text-balance md:text-5xl lg:text-[3.75rem] lg:leading-[1.15]">
+              {salesforce.title}
+              <span className="text-gradient-brand"> with Salesforce eSignature</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted-foreground">
               {salesforce.subtitle}
@@ -202,7 +202,7 @@ export function SalesforceHome() {
             eyebrow="Capabilities"
             title="Signing that lives"
             highlight="inside Salesforce"
-            desc="A native package built for teams whose workflow already starts and ends in their CRM."
+            desc="Salesforce users can now send, manage, and track electronic signatures without having to leave their CRM workflow."
           />
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {salesforce.features.map((f, index) => {
@@ -248,8 +248,8 @@ export function SalesforceHome() {
         <div className="section-shell">
           <SectionHeading
             eyebrow="How it works"
-            title="Live in your org in"
-            highlight="four steps"
+            title="How SignAny 2.0 Works "
+            highlight="With Salesforce"
           />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {salesforce.steps.map((s, i) => (

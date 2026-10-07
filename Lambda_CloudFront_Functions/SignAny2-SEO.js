@@ -28,6 +28,14 @@ function handler(event) {
     "/userguide": "/prerender/userguide.html",
     "/blog": "/prerender/blog.html",
     "/blog/index.html": "/prerender/blog.html",
+    "/salesforce": "/prerender/salesforce.html",
+    "/salesforce/index.html": "/prerender/salesforce.html",
+    "/contact-us": "/prerender/contact-us.html",
+    "/contact-us/index.html": "/prerender/contact-us.html",
+    "/hash-verification": "/prerender/hash-verification.html",
+    "/hash-verification/index.html": "/prerender/hash-verification.html",
+    "/verifyHash": "/prerender/hash-verification.html",
+    "/verifyHash/index.html": "/prerender/hash-verification.html",
 
     // Feature pages
     "/features/document-setup": "/prerender/features/document-setup.html",
