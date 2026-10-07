@@ -81,7 +81,7 @@ function HomeRoute() {
         <SignAnyHome />
         <ComplianceSection />
         <PricingSection />
-        <BlogSection />
+        {/* <BlogSection /> */}
         <FAQSection />
         <DemoCTA />
       </main>
