@@ -10,7 +10,7 @@ const signanyNav = [
   { name: "API", href: "/#api" },
   { name: "Compliance", href: "/#compliance" },
   { name: "Pricing", href: "/#pricing" },
-  { name: "Blogs", href: "/#blog" },
+  // { name: "Blogs", href: "/#blog" },
   { name: "FAQs", href: "/faqs" },
   { name: "Hash Verification", href: "/hash-verification" },
 ];
@@ -20,7 +20,7 @@ const salesforceNav = [
   { name: "Capabilities", href: "/salesforce#sf-features" },
   { name: "Compliance", href: "/salesforce#compliance" },
   { name: "Pricing", href: "/salesforce#pricing" },
-  { name: "Blogs", href: "/blog" },
+  // { name: "Blogs", href: "/blog" },
   { name: "FAQs", href: "/faqs" },
 ];
 

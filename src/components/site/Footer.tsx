@@ -103,7 +103,7 @@ export function Footer() {
               <a href="/#compliance" className="hover:text-white transition-colors">Trust &amp; Compliance</a>
               <a href="/#pricing" className="hover:text-white transition-colors">Pricing Plans</a>
               <Link to="/hash-verification" className="hover:text-white transition-colors font-semibold text-white/80">Verify Document Hash</Link>
-              <Link to="/blog" className="hover:text-white transition-colors font-semibold text-white/80">Blog &amp; Insights</Link>
+              {/* <Link to="/blog" className="hover:text-white transition-colors font-semibold text-white/80">Blog &amp; Insights</Link> */}
               <Link to="/faqs" className="hover:text-white transition-colors font-semibold text-white/80">Full FAQs</Link>
               <Link to="/lifecycle" className="hover:text-white transition-colors font-semibold text-white/80">Document Lifecycle</Link>
             </div>
