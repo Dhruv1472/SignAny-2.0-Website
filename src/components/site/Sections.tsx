@@ -1,8 +1,18 @@
+import { useState, useEffect } from "react";
 import { Check, Sparkles, Clock3, Mail, ArrowRight, ShieldCheck, Lock, FileText, Globe, Scale, Landmark, BookOpen, FileCheck, Newspaper, Clock, User } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { compliances, salesforceCompliances, plans, faqs, blogs, SITE, salesforceFaqs } from "@/lib/site-data";
+import { compliances, salesforceCompliances, plans, faqs, SITE, salesforceFaqs } from "@/lib/site-data";
 import { Icon } from "@/components/site/Icon";
 import { Link } from "@tanstack/react-router";
+import {
+  fetchAllBlogPosts,
+  formatBlogDate,
+  getBlogText,
+  getBlogImageUrl,
+  getBlogImageAlt,
+  getBlogExcerpt,
+} from "@/lib/prismic";
+import type { PrismicDocument } from "@prismicio/client";
 
 type SiteMode = "signany" | "salesforce";
 
@@ -277,8 +287,29 @@ export function FAQSection({ mode = "signany" }: { mode?: SiteMode } = {}) {
 }
 
 export function BlogSection() {
-  const homeBlogs = blogs.slice(0, 3);
-  const hasMore = blogs.length > 3;
+  const [posts, setPosts] = useState<PrismicDocument[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    fetchAllBlogPosts()
+      .then((docs) => {
+        if (active) {
+          setPosts(docs);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to load blog posts on home page:", err);
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const homeBlogs = posts.slice(0, 3);
+  const hasMore = posts.length > 3;
 
   return (
     <section id="blog" className="py-20 relative overflow-hidden bg-background">
@@ -290,7 +321,24 @@ export function BlogSection() {
           desc="Stay up to date with the latest in digital signatures, enterprise security, and document workflow automation."
         />
 
-        {blogs.length === 0 ? (
+        {loading ? (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                className="flex flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm animate-pulse"
+              >
+                <div className="aspect-video w-full rounded-2xl bg-muted" />
+                <div className="flex flex-1 flex-col p-5 gap-3">
+                  <div className="h-3 w-24 rounded-full bg-muted" />
+                  <div className="h-5 w-3/4 rounded-lg bg-muted" />
+                  <div className="h-4 w-full rounded-lg bg-muted" />
+                  <div className="h-4 w-5/6 rounded-lg bg-muted" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : posts.length === 0 ? (
           <div className="max-w-xl mx-auto text-center py-12 px-6 rounded-3xl border border-border/80 bg-card shadow-sm">
             <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 border border-primary/20">
               <Newspaper size={30} />
@@ -308,60 +356,83 @@ export function BlogSection() {
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {homeBlogs.map((b, idx) => (
-              <article
-                key={b.id}
-                className={`group relative flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg ${
-                  idx === 2 ? "hidden lg:flex" : "flex"
-                }`}
-              >
-                <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
-                  <img
-                    src={b.image}
-                    alt={b.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                  <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
-                    {b.category}
-                  </span>
-                </div>
+            {homeBlogs.map((b, idx) => {
+              const title = getBlogText(b, "blog_title") || getBlogText(b, "title");
+              const excerpt = getBlogExcerpt(b);
+              const imageUrl = getBlogImageUrl(b);
+              const imageAlt = getBlogImageAlt(b);
+              const date = formatBlogDate(b.data?.publish_date ?? b.first_publication_date);
+              const author = getBlogText(b, "author_name") || "SignAny Team";
+              const category = getBlogText(b, "catogary") || getBlogText(b, "category");
+              const readTime = getBlogText(b, "reading_time");
+              const slug = b.uid || b.id;
 
-                <div className="flex flex-1 flex-col p-5">
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
-                    <span className="flex items-center gap-1 font-medium">
-                      <Clock size={12} /> {b.readTime}
-                    </span>
-                    <span>•</span>
-                    <span>{b.date}</span>
-                  </div>
-
-                  <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
-                    {b.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
-                    {b.excerpt}
-                  </p>
-
-                  <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
-                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                      <User size={13} /> {b.author}
+              return (
+                <article
+                  key={b.id}
+                  className={`group relative flex-col overflow-hidden rounded-3xl border border-border/80 bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg ${
+                    idx === 2 ? "hidden lg:flex" : "flex"
+                  }`}
+                >
+                  <Link to="/blog/$slug" params={{ slug }} className="block">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
+                      <img
+                        src={
+                          imageUrl ||
+                          "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=600"
+                        }
+                        alt={imageAlt}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                      {category && (
+                        <span className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary border border-border/50">
+                          {category}
+                        </span>
+                      )}
                     </div>
-                    <Link
-                      to="/blog/$slug"
-                      params={{ slug: b.slug }}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline underline-offset-4"
-                    >
-                      Read Article <ArrowRight size={13} />
+                  </Link>
+
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
+                      {readTime && (
+                        <span className="flex items-center gap-1 font-medium">
+                          <Clock size={12} /> {readTime} min read
+                        </span>
+                      )}
+                      {readTime && <span>•</span>}
+                      <span>{date}</span>
+                    </div>
+
+                    <Link to="/blog/$slug" params={{ slug }} className="block">
+                      <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-snug mb-2 line-clamp-2">
+                        {title}
+                      </h3>
                     </Link>
+                    <p className="text-sm text-muted-foreground line-clamp-3 mb-6 leading-relaxed flex-1">
+                      {excerpt}
+                    </p>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-auto">
+                      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                        <User size={13} /> {author}
+                      </div>
+                      <Link
+                        to="/blog/$slug"
+                        params={{ slug }}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline underline-offset-4"
+                      >
+                        Read Article <ArrowRight size={13} />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         )}
 
-        {hasMore && (
+        {!loading && hasMore && (
           <div className="mt-12 text-center">
             <Link
               to="/blog"

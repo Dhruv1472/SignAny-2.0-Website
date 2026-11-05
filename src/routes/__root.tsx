@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
+  HeadContent,
   Outlet,
   createRootRouteWithContext,
   useRouter,
@@ -64,6 +65,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <HeadContent />
       <Outlet />
       <BookDemoHandler />
       <FloatingLifecycleButton />
