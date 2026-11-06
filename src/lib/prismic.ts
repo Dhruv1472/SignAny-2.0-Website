@@ -60,13 +60,31 @@ export function getBlogImageAlt(doc: PrismicDocument): string {
 
 type RichTextBlock = { type?: string; text?: string };
 
+export function stripHtmlTags(input: string): string {
+  if (!input || typeof input !== "string") return "";
+  return input
+    .replace(/^```(?:html|xml|htm)?\s*\n?/i, "")
+    .replace(/\n?```$/i, "")
+    .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, " ")
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export function richTextToPlainText(value: unknown): string {
   if (!Array.isArray(value)) return "";
   return value
     .map((block) => {
       if (!block || typeof block !== "object") return "";
       const text = (block as RichTextBlock).text;
-      return typeof text === "string" ? text.trim() : "";
+      return typeof text === "string" ? stripHtmlTags(text) : "";
     })
     .filter(Boolean)
     .join(" ")
