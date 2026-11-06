@@ -390,3 +390,110 @@ body.mobile-menu-open main {
   margin: 2.5rem 0;
 }
 
+/* ── Blog Post Tables & HTML Content ──────────────────────────────────────── */
+
+.blog-post-body .blog-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04);
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-post-body table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.blog-post-body > table {
+  margin: 2rem 0;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.blog-post-body thead {
+  background-color: color-mix(in oklch, var(--muted) 75%, transparent);
+  color: var(--foreground);
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-post-body thead th,
+.blog-post-body th {
+  padding: 0.875rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: inherit;
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-post-body thead tr[style*="background"],
+.blog-post-body thead tr[style*="Background"],
+.blog-post-body thead th[style*="background"],
+.blog-post-body thead th[style*="Background"] {
+  color: inherit;
+}
+
+.blog-post-body tbody tr {
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+  transition: background-color 0.15s ease;
+}
+
+.blog-post-body tbody tr:last-child {
+  border-bottom: none;
+}
+
+.blog-post-body tbody tr:nth-child(even) {
+  background-color: color-mix(in oklch, var(--muted) 25%, transparent);
+}
+
+.blog-post-body tbody tr:hover {
+  background-color: color-mix(in oklch, var(--muted) 50%, transparent);
+}
+
+.blog-post-body tbody td,
+.blog-post-body td {
+  padding: 0.875rem 1.25rem;
+  vertical-align: top;
+  color: color-mix(in oklch, var(--foreground) 90%, transparent);
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+}
+
+.blog-post-body tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.blog-post-body tfoot {
+  background-color: color-mix(in oklch, var(--muted) 50%, transparent);
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+}
+
+.blog-post-body tfoot td {
+  padding: 0.875rem 1.25rem;
+}
+
+.blog-post-body caption {
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  font-style: italic;
+  text-align: left;
+  caption-side: bottom;
+}
+
+.blog-post-body .blog-html-block {
+  margin: 1.5rem 0;
+  max-width: 100%;
+}
+
